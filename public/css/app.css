@@ -1,0 +1,6 @@
+@font-face {font-family: 'roboto';src: url('../fonts/roboto_regular.ttf');}  
+* {font-family: 'roboto';}
+.bg-pattern{background-image:url(../images/subtle_pattern.jpg);background-repeat:repeat}
+.btn{border-radius: 25px;}
+.form-control{border-radius: 25px;}
+.mt-50{margin-top: 50%}
