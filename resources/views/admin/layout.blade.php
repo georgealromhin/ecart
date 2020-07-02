@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{asset('css/sweetalert2.min.css') }}">
     <link rel="stylesheet" href="{{asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{asset('css/sidebar.css') }}">
 
     <script type="text/javascript" src="{{asset('js/jquery.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/popper.min.js')}}"></script>
@@ -18,11 +19,11 @@
     
 </head>
 <body class="bg-pattern">
-    <div class="container">
-        @section('content')
+
+    @section('content')
         
-        @show
-    </div>
+        
+    @show
 
 
  
