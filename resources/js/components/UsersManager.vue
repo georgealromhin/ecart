@@ -2,7 +2,7 @@
     <div>
         <div class="row">
             <div class="col-md-6"><h3> <i class="fas fa-user-cog"></i> Users Manager</h3></div>
-            <div class="col-md-6"><a href="add_user" class="btn btn-primary float-right"> <i class="fas fa-user-plus"></i> Add User</a></div>
+            <div class="col-md-6"><a href="add_user" class="btn btn-primary btn-sm float-right"> <i class="fas fa-user-plus"></i> Add User</a></div>
         </div>
         
         
@@ -24,7 +24,7 @@
 </i> </td>
             <td>{{user.username}}</td>
             <td>{{user.role}}</td>
-            <td><a href="delete_user" class="text-danger" v-if="user.role != 'main'"> <i class="fas fa-trash"></i> Delete</a></td>
+            <td><a <a v-bind:href="'delete_user/'+ user.id" class="text-danger" v-if="user.role != 'main'"> <i class="fas fa-trash"></i> Delete</a></td>
             </tr>
         </tbody>
 

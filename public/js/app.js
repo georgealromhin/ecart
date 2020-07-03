@@ -37663,7 +37663,7 @@ var render = function() {
                       "a",
                       {
                         staticClass: "text-danger",
-                        attrs: { href: "delete_user" }
+                        attrs: { href: "delete_user/" + user.id }
                       },
                       [
                         _c("i", { staticClass: "fas fa-trash" }),
@@ -37697,7 +37697,7 @@ var staticRenderFns = [
         _c(
           "a",
           {
-            staticClass: "btn btn-primary float-right",
+            staticClass: "btn btn-primary btn-sm float-right",
             attrs: { href: "add_user" }
           },
           [_c("i", { staticClass: "fas fa-user-plus" }), _vm._v(" Add User")]

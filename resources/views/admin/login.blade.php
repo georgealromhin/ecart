@@ -9,7 +9,7 @@
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6">
-            <div class="card rounded mt-50 shadow-sm">
+            <div class="card rounded mt-5 shadow-sm">
                 <div class="card-header h5 text-center">Admin Login</div>
                 <div class="card-body">
                     <form action="{{url('login')}}" method="POST">
