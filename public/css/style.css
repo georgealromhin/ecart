@@ -1,0 +1,11 @@
+@font-face {font-family: 'roboto';src: url('../fonts/roboto_regular.ttf');}  
+* {font-family: 'roboto';}
+.bg-pattern{background-image:url(../images/subtle_pattern.jpg);background-repeat:repeat}
+.btn{border-radius: 25px;}
+.form-control{border-radius: 25px;}
+.mt-50{margin-top: 50%}
+.dropdown-item:hover{background-color: #0080FF;color: #FFFFFF;}
+.bg-primary{background-color: #0080FF !important;}
+.btn-primary{background-color: #0080FF !important;}
+.btn-primary:hover{background-color: #0D47A1 !important;}
+.bg-active{background-color:#0D47A1 !important;}

@@ -25,7 +25,7 @@ class LoginController extends Controller
             'inputPassword' => 'required',
         ]);
 
-        $userData = array('username'=>$request->inputUsername, 'password'=>$request->inputPassword);
+        $userData = array('username'=>$request->input('inputUsername'), 'password'=>$request->input('inputPassword'));
         $rememberMe = false;
         if($request->remember == 'on'){
             $rememberMe = true;

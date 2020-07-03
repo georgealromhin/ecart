@@ -7,6 +7,7 @@
     @include('admin.sidebar')
 
     <div id="page-content-wrapper">
+        @include('admin.navbar')
         <div class="container">
             
         </div>

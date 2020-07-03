@@ -12,7 +12,9 @@
             <div class="card rounded mt-50 shadow-sm">
                 <div class="card-header h5 text-center">Admin Login</div>
                 <div class="card-body">
-                    <form action="{{url('login')}}" action="post">
+                    <form action="{{url('login')}}" method="POST">
+                        @csrf
+
                         <div class="form-group">
                         <label for="inputUsername">Username</label>
                         <input type="text" class="form-control" id="inputUsername" name="inputUsername" placeholder="Enter Username" required>
@@ -36,11 +38,18 @@
         <p class="text-center">{{config('app.name')}} © {{ date('Y') }} </p>
     </footer>
 </div>
-@if ($message = Session::get('error'))
 
-<script type="text/javascript">
-    Swal.fire('Error', '{{$message}}', 'error');
-</script>
-@endif
 @endsection
 
+
+@section('script')
+
+    @if ($message = Session::get('error'))
+
+        <script type="text/javascript">
+            Swal.fire('Error', '{{$message}}', 'error');
+        </script>
+
+    @endif
+
+@endsection

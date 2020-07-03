@@ -19,7 +19,11 @@ Route::get('/', function () {
 
 // admin 
 Route::get('admin', 'Admin\Auth\LoginController@index');
-Route::get('login', 'Admin\Auth\LoginController@login');
+Route::post('login', 'Admin\Auth\LoginController@login');
+Route::get('logout', 'Admin\Auth\LogoutController@logout');
+
+Route::get('users_manager', 'Admin\UsersManagerController@index');
+Route::get('users', 'Admin\UsersManagerController@getUsers');
 
 
 Route::get('dashboard', 'Admin\DashboardController@index');
