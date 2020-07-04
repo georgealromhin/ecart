@@ -2010,6 +2010,34 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         _this.users = response.data;
       });
+    },
+    deleteUser: function deleteUser(user_id) {
+      var _this2 = this;
+
+      Swal.fire('error', 'error', 'error');
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes'
+      }).then(function (result) {
+        if (result.value) {
+          fetch('delete_user/' + user_id, {
+            method: 'delete'
+          }).then(function (res) {
+            return res.json;
+          }).then(function (data) {
+            Swal.fire('Deleted!', 'User has been deleted.', 'success');
+
+            _this2.fetchUsers();
+          })["catch"](function (error) {
+            return console.lgo(error);
+          });
+        }
+      });
     }
   }
 });
@@ -37660,10 +37688,14 @@ var render = function() {
               _c("td", [
                 user.role != "main"
                   ? _c(
-                      "a",
+                      "button",
                       {
-                        staticClass: "text-danger",
-                        attrs: { href: "delete_user/" + user.id }
+                        staticClass: "btn btn-outline-danger btn-sm",
+                        on: {
+                          click: function($event) {
+                            return _vm.deleteUser(user.id)
+                          }
+                        }
                       },
                       [
                         _c("i", { staticClass: "fas fa-trash" }),

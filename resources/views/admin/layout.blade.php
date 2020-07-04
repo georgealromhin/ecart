@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{{asset('css/sweetalert2.min.css') }}">
     <link rel="stylesheet" href="{{asset('css/style.css') }}">
     <link rel="stylesheet" href="{{asset('css/sidebar.css') }}">
-    {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <style rel="stylesheet">
         body{padding-top: 56px;}
     </style>

@@ -24,7 +24,7 @@
 </i> </td>
             <td>{{user.username}}</td>
             <td>{{user.role}}</td>
-            <td><a <a v-bind:href="'delete_user/'+ user.id" class="text-danger" v-if="user.role != 'main'"> <i class="fas fa-trash"></i> Delete</a></td>
+            <td> <button @click="deleteUser(user.id)" class="btn btn-outline-danger btn-sm" v-if="user.role != 'main'"> <i class="fas fa-trash"></i> Delete</button></td>
             </tr>
         </tbody>
 
@@ -46,6 +46,27 @@ export default {
            fetch('users').then(res => res.json()).then(response =>{
             this.users = response.data;
            })
+       },
+       deleteUser(user_id){
+           Swal.fire('error','error', 'error');
+           Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+                }).then((result) => {
+                if (result.value) {
+                    fetch('delete_user/'+user_id ,{
+                        method: 'delete'
+                    }).then(res => res.json).then(
+                        data => { Swal.fire('Deleted!', 'User has been deleted.', 'success');
+                        this.fetchUsers();
+                    }).catch(error => console.lgo(error));
+                }
+            })
        } 
     }
 }
