@@ -10,11 +10,8 @@
     <link rel="stylesheet" href="{{asset('css/sweetalert2.min.css') }}">
     <link rel="stylesheet" href="{{asset('css/style.css') }}">
     <link rel="stylesheet" href="{{asset('css/sidebar.css') }}">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <style rel="stylesheet">
-        body{padding-top: 56px;}
-    </style>
-    @section('style')
+    <style rel="stylesheet">body{padding-top: 56px;}</style>
+    @section('header')
         
         
     @show
@@ -39,9 +36,7 @@
     <script type="text/javascript" src="{{asset('js/app.js')}}"></script>   
 </body>
 </html>
-<script  type="text/javascript">
-$("#menu-toggle").click(function(a){a.preventDefault(),$("#wrapper").toggleClass("toggled")});
-</script>
+<script type="text/javascript">$("#menu-toggle").click(function(a){a.preventDefault(),$("#wrapper").toggleClass("toggled")});</script>
 @section('script')
         
         

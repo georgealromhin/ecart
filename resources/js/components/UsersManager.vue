@@ -4,7 +4,7 @@
             <div class="col-md-6"><h3> <i class="fas fa-user-cog"></i> Users Manager</h3></div>
             <div class="col-md-6"><a href="add_user" class="btn btn-primary btn-sm float-right"> <i class="fas fa-user-plus"></i> Add User</a></div>
         </div>
-        
+
         
         <table class="table table-striped table-bordered bg-light shadow-sm mt-2">
         <thead>
@@ -32,6 +32,7 @@
     </div>
 </template>
 <script>
+
 export default {
     data(){
         return{
@@ -40,6 +41,7 @@ export default {
     },
     created(){
         this.fetchUsers();
+        
     },
     methods:{
        fetchUsers(){
@@ -59,12 +61,12 @@ export default {
                 confirmButtonText: 'Yes'
                 }).then((result) => {
                 if (result.value) {
-                    fetch('delete_user/'+user_id ,{
+                    fetch('api/delete_user/'+user_id ,{
                         method: 'delete'
                     }).then(res => res.json).then(
                         data => { Swal.fire('Deleted!', 'User has been deleted.', 'success');
                         this.fetchUsers();
-                    }).catch(error => console.lgo(error));
+                    }).catch(err => console.lgo('error:' + err));
                 }
             })
        } 

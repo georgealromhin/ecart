@@ -18,12 +18,14 @@ class UsersManagerController extends Controller
         }
         return abort(404);
     }
+
     public function addUserView(){
         if(Auth::check()){
             return view('admin.add_user');
         }
         return abort(404);
     }
+
     public function addUser(Request $request){
         if(Auth::check()){
             $validatedData = $request->validate([
@@ -44,18 +46,20 @@ class UsersManagerController extends Controller
         }
         return abort(404);
     }
+
     public function deleteUser($user_id){
        
-        if(Auth::check()){
+        //if(Auth::check()){
             $user = User::findOrFail($user_id);
             
             if($user->delete()){
                 return back()->with('success', 'User deleted');
             }
             return back()->with('error', 'Error deleting user');
-        }
-        return abort(404);
+       // }
+        //return abort(404);
     }
+
     public function getUsers(){
         if(Auth::check()){
             $users = User::get();
@@ -63,4 +67,5 @@ class UsersManagerController extends Controller
         }
         return abort(404);
     }
+
 }

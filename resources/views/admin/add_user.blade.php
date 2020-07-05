@@ -18,7 +18,7 @@
                             <div class="card shadow-sm">
                                 <div class="card-header">Add new user</div>
                                 <div class="card-body">
-                                    <form action="add_new_user" method="POST">
+                                    <form action="add_new_user" method="POST" id="addUserForm">
                                         @csrf
                                         <div class="form-group">
                                           <label for="name">Name</label>
@@ -39,7 +39,7 @@
                                               <option value="subsidiary">Subsidiary</option>
                                             </select>
                                           </div>
-                                          <button type="submit" class="btn btn-primary w-100">Add</button>
+                                          <button type="submit" class="btn btn-primary w-100" id="addBtn">Add</button>
                                     </form>
                                     @if($errors->any())
                                     <p class="text-danger text-center mt-2">
@@ -66,18 +66,18 @@
 @endsection
 
 @section('script')
-@if ($message = Session::get('error'))
 
-<script type="text/javascript">
-    Swal.fire('Error', '{{$message}}', 'error');
-</script>
+    @if ($message = Session::get('error'))
+        <script type="text/javascript">
+            Swal.fire('Error', '{{$message}}', 'error');
+        </script>
+    @endif
 
-@endif
-@if ($message = Session::get('success'))
+    @if ($message = Session::get('success'))
+        <script type="text/javascript">
+            Swal.fire('Success', '{{$message}}', 'success');
+        </script>
+    @endif
+    <script type="text/javascript">$('#addUserForm').submit(function(){ $('#addBtn').hide(); });</script>
 
-<script type="text/javascript">
-    Swal.fire('Success', '{{$message}}', 'success');
-</script>
-
-@endif
 @endsection

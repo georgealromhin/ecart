@@ -31,4 +31,5 @@ Vue.component('users-manager', require('./components/UsersManager.vue').default)
 
 const app = new Vue({
     el: '#app',
+
 });

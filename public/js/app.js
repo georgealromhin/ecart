@@ -2025,7 +2025,7 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonText: 'Yes'
       }).then(function (result) {
         if (result.value) {
-          fetch('delete_user/' + user_id, {
+          fetch('api/delete_user/' + user_id, {
             method: 'delete'
           }).then(function (res) {
             return res.json;
@@ -2033,8 +2033,8 @@ __webpack_require__.r(__webpack_exports__);
             Swal.fire('Deleted!', 'User has been deleted.', 'success');
 
             _this2.fetchUsers();
-          })["catch"](function (error) {
-            return console.lgo(error);
+          })["catch"](function (err) {
+            return console.lgo('error:' + err);
           });
         }
       });
