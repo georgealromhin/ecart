@@ -21,7 +21,7 @@ $factory->define(User::class, function (Faker $faker) {
     return [
         'name' => 'root',
         'username' => 'root',
-        'password' => bcrypt('root'), // password
+        'password' => bcrypt('root'), 
         'created_at' => now(),
         'edited_at' => now(),
     ];

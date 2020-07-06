@@ -18,12 +18,12 @@
     
 </head>
 <body class="bg-pattern">
-<div id="app">
-    @section('content')
-        
-        
-    @show
-</div>
+    <div id="app">
+        @section('content')
+            
+            
+        @show
+    </div>
    
 
 

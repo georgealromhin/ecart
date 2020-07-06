@@ -13,10 +13,10 @@ class CategoryController extends Controller
 {
     //
     public function show(){
-        //if(Auth::check()){
-            return new CategoryResourceCollection(Category::paginate(5));
-        //}
-        //return abort(404);
+        if(Auth::check()){
+            return new CategoryResourceCollection(Category::paginate(10));
+        }
+        return abort(404);
        
     }
 }

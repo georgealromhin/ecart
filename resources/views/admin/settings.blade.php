@@ -2,10 +2,8 @@
 @section('title', 'User Manager')
 @section('header')
 
-<style>p{
-    margin: auto;
-    padding: 10px;
-  }</style>
+<style>p{margin: auto;padding: 10px;}</style>
+
 @endsection
 
 @section('content')
@@ -16,7 +14,9 @@
         <div id="page-content-wrapper">
             @include('admin.navbar')
             <div class="container mt-5">
-
+                <div class="row">
+                    <div class="col-md-6"><h3> <i class="fas fa-cog"></i> Settings</h3></div>
+                </div>
               <div class="card shadow-sm mt-3">
                 <div class="card-body">
                     <form action="{{url('change_name')}}" method="POST">
@@ -65,8 +65,8 @@
                             </div>
                             <div class="col-md-8">
                                 <div class="row">
-                                    <div class="col-md-6"><input type="text" name="current_password" id="current_password" class="form-control w-100" required placeholder="Current Password"></div>
-                                    <div class="col-md-6"><input type="text" name="new_password" id="new_password" class="form-control w-100" required placeholder="New Password"></div>
+                                    <div class="col-md-6"><input type="password" name="current_password" id="current_password" class="form-control w-100" required placeholder="Current Password"></div>
+                                    <div class="col-md-6"><input type="password" name="new_password" id="new_password" class="form-control w-100" required placeholder="New Password"></div>
                                 </div>
                             </div>
                             <div class="col-md-2">
@@ -76,6 +76,42 @@
                       </form>
                 </div>
               </div>
+              <div class="text-center">
+                   <!-- Button trigger modal -->
+        <button type="button" class="btn btn-outline-danger text-center mt-5" data-toggle="modal" data-target="#deleteModalCenter">
+            Delete Account 
+        </button>
+              </div>
+       
+        
+        <!-- Modal -->
+        <div class="modal fade" id="deleteModalCenter" tabindex="-1" role="dialog" aria-labelledby="deleteModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalTitle"> <i class="fas fa-exclamation-triangle text-warning"></i> Are you sure ?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+
+                <form action="{{url('delete_account')}}" method="POST">
+                    @csrf
+
+                    <div class="modal-body">
+                        <p> <i class="fas fa-info-circle text-info"></i> You won't be able to revert this! </p>
+                        <input type="password" name="password" id="password" class="form-control w-100" placeholder="Password" required>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                        </div>
+                </form>
+                
+            </div>
+            </div>
+        </div>
+
               @if($errors->any())
               <p class="text-danger text-center mt-2">
                   Error: {{ implode('', $errors->all(':message')) }}

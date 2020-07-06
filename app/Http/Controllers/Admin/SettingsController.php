@@ -65,4 +65,37 @@ class SettingsController extends Controller
         }
         return abort(404);
     }
+
+    public function deleteAccount(Request $request){
+        if(Auth::check()){
+            $validatedData = $request->validate([
+                'password' => 'required',
+            ]);
+            if(Hash::check($request->password, Auth::user()->password)){
+                $user = new User();
+                $user_id = Auth::user()->id;
+                if(Auth::user()->role == 'main'){
+                    $user_count = $user->where('role', 'main')->count();
+                    if($user_count > 1){
+                                              
+                        $this->deleteUser($user_id);
+                        return redirect('admin');
+                    }
+                }else{
+                    $this->deleteUser($user_id);
+                    return redirect('admin');
+                }
+                return back()->with('error', 'This is the only main account in the system');
+            }
+            return back()->with('error', 'Wrong Password');
+        }
+        return abort(404);
+    }
+
+    public function deleteUser($user_id){
+        $user = new User();
+        $objUser = $user->find($user_id);
+        $objUser->delete();
+        
+    }
 }

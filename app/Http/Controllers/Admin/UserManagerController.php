@@ -37,7 +37,7 @@ class UserManagerController extends Controller
                 $user = new User();
                 $user->name = $request->input('name');
                 $user->username = $request->input('username');
-                $user->password = $request->input('password');
+                $user->password = bcrypt($request->input('password'));
                 $user->role = $request->input('role');
                 if($user->save()){
                     return back()->with('success', 'User added successfully');

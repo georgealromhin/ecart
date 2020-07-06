@@ -12,8 +12,6 @@
 
         <a class="list-group-item list-group-item-action bg-primary text-light @if(Request::url() === url('/shop_info')) bg-active @endif " href="{{url('/shop_info')}}"><i class="fas fa-info-circle"></i> Shop info</a>
         
-        <a class="list-group-item list-group-item-action bg-primary text-light @if(Request::url() === url('/coupons')) bg-active @endif " href="{{url('/coupons')}}"><i class="fas fa-ticket-alt"></i> Coupons</a>
-
     </div>
 
   </div>
