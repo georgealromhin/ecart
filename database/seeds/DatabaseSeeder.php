@@ -11,12 +11,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
-            'id' => 1,
-            'name' => 'root',
-            'username' => 'root',
-            'password' => bcrypt('root'),
-            'role' => 'main',
+        // DB::table('users')->insert([
+        //     'id' => 1,
+        //     'name' => 'root',
+        //     'username' => 'root',
+        //     'password' => bcrypt('root'),
+        //     'role' => 'main',
+        // ]);
+
+        DB::table('categories')->insert([
+            'name' => 'category33',
+            'status' => 'visible',
         ]);
     }
 }

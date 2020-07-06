@@ -12,11 +12,16 @@ use App\Http\Resources\CategoryResource;
 class CategoryController extends Controller
 {
     //
-    public function show(){
+    public function index(){
         if(Auth::check()){
-            return new CategoryResourceCollection(Category::paginate(10));
+            return view('admin.categories');
         }
         return abort(404);
-       
+    }
+    public function show(){
+        if(Auth::check()){
+            return new CategoryResourceCollection(Category::whereIn('status', ['visible', 'hidden'])->paginate(5));
+        }
+        return abort(404);
     }
 }

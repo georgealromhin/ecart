@@ -10,7 +10,9 @@ use Illuminate\Support\Facades\Hash;
 
 class SettingsController extends Controller
 {
-    //
+    /*
+        * index = view
+    */
     public function index(){
         if(Auth::check()){
             return view('admin.settings');
