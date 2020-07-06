@@ -9,12 +9,12 @@ use App\User;
 use App\Http\Resources\UserResourceCollection;
 use App\Http\Resources\UserResource;
 
-class UsersManagerController extends Controller
+class UserManagerController extends Controller
 {
     //
     public function index(){
         if(Auth::check()){
-            return view('admin.users_manager');
+            return view('admin.user_manager', [ 'users' => $this->getUsers() ]);
         }
         return abort(404);
     }
@@ -49,21 +49,21 @@ class UsersManagerController extends Controller
 
     public function deleteUser($user_id){
        
-        //if(Auth::check()){
+        if(Auth::check()){
             $user = User::findOrFail($user_id);
             
             if($user->delete()){
                 return back()->with('success', 'User deleted');
             }
             return back()->with('error', 'Error deleting user');
-       // }
-        //return abort(404);
+        }
+        return abort(404);
     }
 
     public function getUsers(){
         if(Auth::check()){
-            $users = User::get();
-            return new UserResourceCollection($users);
+            $users = User::orderBy('id', 'asc')->get();
+            return $users;
         }
         return abort(404);
     }

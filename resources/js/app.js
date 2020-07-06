@@ -21,7 +21,6 @@ window.Vue = require('vue');
 
 Vue.component('categories-component', require('./components/Categories.vue').default);
 Vue.component('items-component', require('./components/Items.vue').default);
-Vue.component('users-manager', require('./components/UsersManager.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

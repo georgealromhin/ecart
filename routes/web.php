@@ -22,11 +22,11 @@ Route::get('admin', 'Admin\Auth\LoginController@index');
 Route::post('login', 'Admin\Auth\LoginController@login');
 Route::get('logout', 'Admin\Auth\LogoutController@logout');
 
-Route::get('users_manager', 'Admin\UsersManagerController@index');
-Route::get('users', 'Admin\UsersManagerController@getUsers');
-Route::get('add_user', 'Admin\UsersManagerController@addUserView');
-Route::post('add_new_user', 'Admin\UsersManagerController@addUser');
-Route::delete('delete_user/{user_id}', 'Admin\UsersManagerController@deleteUser');
+Route::get('user_manager', 'Admin\UserManagerController@index');
+Route::get('users', 'Admin\UserManagerController@getUsers');
+Route::get('add_user', 'Admin\UserManagerController@addUserView');
+Route::post('add_new_user', 'Admin\UserManagerController@addUser');
+Route::get('delete_user/{user_id}', 'Admin\UserManagerController@deleteUser');
 
 
 Route::get('dashboard', 'Admin\DashboardController@index');
