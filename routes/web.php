@@ -29,6 +29,13 @@ Route::post('add_new_user', 'Admin\UserManagerController@addUser');
 Route::get('delete_user/{user_id}', 'Admin\UserManagerController@deleteUser');
 
 
+Route::get('settings', 'Admin\SettingsController@index');
+Route::post('change_name', 'Admin\SettingsController@changeName');
+Route::post('change_username', 'Admin\SettingsController@changeUsername');
+Route::post('change_password', 'Admin\SettingsController@changePassword');
+
+
+
 Route::get('dashboard', 'Admin\DashboardController@index');
 
 

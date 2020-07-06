@@ -49,7 +49,7 @@
                   <div class="dropdown-menu bg-light shadow dropdown-menu-right" aria-labelledby="navbarDropdown">
 
 
-                      <a class="dropdown-item" href="{{url('users_manager')}}"> <i class="fas fa-user-cog"></i>  Users Manager</a>
+                      <a class="dropdown-item" href="{{url('user_manager')}}"> <i class="fas fa-user-cog"></i>  User Manager</a>
 
                       <a class="dropdown-item" href="{{url('settings')}}"> <i class="fas fa-cog"></i>  Settings</a>
 

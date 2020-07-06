@@ -13,7 +13,7 @@
         <div id="page-content-wrapper">
             @include('admin.navbar')
             <div class="container mt-5">
-                <div id="app">
+                
                     @if (Auth::user()->role == 'main')
                     <div class="row">
                         <div class="col-md-6"><h3> <i class="fas fa-user-cog"></i> User Manager</h3></div>
@@ -51,7 +51,7 @@
                     @else
                         <h3 class="text-center"> <i class="fas fa-exclamation-triangle"></i> Unauthorized </h3>
                     @endif
-                </div>
+                
                 
             </div>
         </div>

@@ -45,8 +45,7 @@
                                     <p class="text-danger text-center mt-2">
                                         Error: {{ implode('', $errors->all(':message')) }}
                                     </p>
-    
-@endif
+                                    @endif
                                 </div>
                             </div>
                         </div>

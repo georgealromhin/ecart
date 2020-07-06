@@ -34,7 +34,7 @@ class LoginController extends Controller
             //Mail::to('ex@gmail.com')->send(new LoginMail($userData['username']));
             return redirect('dashboard');
         }else{
-            return back()->with('error', 'Wrong email or password');
+            return back()->with('error', 'Wrong username or password');
         }
     }
 }

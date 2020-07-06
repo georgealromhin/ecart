@@ -29,8 +29,8 @@ class UserManagerController extends Controller
     public function addUser(Request $request){
         if(Auth::check()){
             $validatedData = $request->validate([
-                'name' => 'required|max:25',
-                'username' => 'required|unique:users|max:25',
+                'name' => 'required|max:50',
+                'username' => 'required|unique:users|max:50',
                 'password' => 'required|min:8',
                 'role' => 'required',
             ]);
