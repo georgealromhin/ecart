@@ -12,7 +12,7 @@
 
         <div id="page-content-wrapper">
             @include('admin.navbar')
-            <div class="container mt-5">
+            <div class="container mt-5 mb-5">
                 <categories-component></categories-component>
             </div>
         </div>
@@ -29,7 +29,6 @@
         $('#changeUsernameBtn').prop("disabled", false);;
     });
 
-    
 </script>
 @if ($message = Session::get('error'))
         <script type="text/javascript">

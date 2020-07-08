@@ -33,13 +33,14 @@
                             @foreach ($users as $user)
                             <tr>
                                 <th scope="row">{{$user->id}}</th>
-                                <td>{{$user->name}}</td>
+                                <td>{{$user->name}} @if ($user->role == 'main')
+                                    <i class="fas fa-star text-warning"></i>
+                                @endif </td>
                                 <td>{{$user->username}}</td>
                                 <td>{{$user->role}}</td>
                                 <td>
                                     @if ($user->role != 'main')
                                     <a href="#" class="text-danger" onclick="deleteUser({{$user->id}})"> <i class="fas fa-trash"></i> Delete</a> 
-
                                     @endif
                                 </td>
                               </tr>

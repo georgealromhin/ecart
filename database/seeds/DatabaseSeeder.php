@@ -18,10 +18,5 @@ class DatabaseSeeder extends Seeder
         //     'password' => bcrypt('root'),
         //     'role' => 'main',
         // ]);
-
-        DB::table('categories')->insert([
-            'name' => 'category33',
-            'status' => 'visible',
-        ]);
     }
 }

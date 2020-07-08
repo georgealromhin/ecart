@@ -42,4 +42,9 @@ Route::post('delete_account', 'Admin\SettingsController@deleteAccount');
 Route::get('dashboard', 'Admin\DashboardController@index');
 
 Route::get('categories', 'Admin\CategoryController@index');
-Route::get('all_categories', 'Admin\CategoryController@show');
+Route::get('all_categories', 'Admin\CategoryController@getCategories');
+Route::get('category/{id}', 'Admin\CategoryController@getCategory');
+Route::get('change_status/{status}/{id}', 'Admin\CategoryController@changeStatus');
+Route::post('add_category', 'Admin\CategoryController@addCategory');
+Route::put('edit_category/{id}', 'Admin\CategoryController@editCategory');
+Route::delete('delete_category/{id}', 'Admin\CategoryController@deleteCategory');
