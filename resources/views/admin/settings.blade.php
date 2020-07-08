@@ -70,7 +70,7 @@
                                 </div>
                             </div>
                             <div class="col-md-2">
-                                <button type="submit" id="changeNameBtn" class="btn btn-primary float-right">Change</button>
+                                <button type="submit" id="changePasswordBtn" class="btn btn-primary float-right">Change</button>
                             </div>
                         </div>
                       </form>

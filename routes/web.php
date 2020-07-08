@@ -48,3 +48,8 @@ Route::get('change_status/{status}/{id}', 'Admin\CategoryController@changeStatus
 Route::post('add_category', 'Admin\CategoryController@addCategory');
 Route::put('edit_category/{id}', 'Admin\CategoryController@editCategory');
 Route::delete('delete_category/{id}', 'Admin\CategoryController@deleteCategory');
+
+
+Route::get('products', 'Admin\ProductController@index');
+Route::get('all_products', 'Admin\ProductController@getProducts');
+Route::post('add_product', 'Admin\ProductController@addProduct');
