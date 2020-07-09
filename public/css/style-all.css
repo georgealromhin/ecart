@@ -1,0 +1,22 @@
+@font-face {font-family: 'roboto';src: url('../fonts/roboto_regular.ttf');}  
+* {font-family: 'roboto';}
+body {padding-top: 56px;}
+.btn{border-radius: 25px;}
+.form-control{border-radius: 25px;}
+
+
+.bg-primary{background-color: #0080FF !important;}
+.btn-primary:hover{background-color: #0D47A1 !important;}
+
+.bg-danger{background-color: #FF2645 !important;}
+.btn-danger:hover{background-color: #CC0000 !important;}
+
+
+.btn-back-to-top{display:none;position:fixed;width:40px;height:40px;bottom:40px;right:40px;background-color:#000;opacity:.5;justify-content:center;align-items:center;z-index:1000;border-radius:25px;transition:all .4s;-webkit-transition:all .4s;-o-transition:all .4s;-moz-transition:all .3s}.symbol-btn-back-to-top{font-size:22px;color:#fff;line-height:1em}.btn-back-to-top:hover{opacity:1;cursor:pointer}@media (max-width:576px){.btn-back-to-top{bottom:15px;right:15px}}@media (max-width:576px){.mob-text-hide{display:none}}
+
+.product-card{margin:0 auto;float:none;margin-bottom:10px;margin-top:10px;border-radius:10px}
+.product-img{object-fit: cover;}
+.btn-circle{width: 35px;height: 35px;border-radius: 25px;}
+.qty-input{border:0;width:100%;-moz-appearance:textfield}.qty-input::-webkit-inner-spin-button,.qty-input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}.qty-input:disabled{background-color:transparent}
+
+.btn-circle-sm{width:25px;height:25px;padding:6px 0;border-radius:18px;text-align:center;font-size:12px;line-height:1.42857}

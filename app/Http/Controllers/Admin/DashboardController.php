@@ -10,10 +10,8 @@ class DashboardController extends Controller
 {
     //
     public function index(){
-        if(Auth::check()){
+        
             return view('admin.dashboard');
-        }
-        return abort(404);
         
     }
 }

@@ -13,9 +13,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index'); // view
+
+
+
+Route::get('cart', 'CartController@getCart'); // view
+
+
+Route::get('cart/store/{id}/{qty}', 'CartController@store');
+Route::get('total', 'CartController@getTotal');
+
+
+//Route::get('cart/show', 'CartController@getCart');
+Route::get('cart/remove/{id}', 'CartController@remove');
+
+
+Route::get('order', 'OrderController@index'); // view
+Route::get('order/create', 'OrderController@store');
 
 /* ====================[[ADMIN]]==================== */
 
