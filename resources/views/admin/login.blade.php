@@ -12,7 +12,7 @@
             <div class="card rounded mt-5 shadow-sm">
                 <div class="card-header h5 text-center">Admin Login</div>
                 <div class="card-body">
-                    <form action="{{url('login')}}" method="POST">
+                    <form action="{{url('user/login')}}" method="POST">
                         @csrf
 
                         <div class="form-group">

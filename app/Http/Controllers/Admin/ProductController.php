@@ -14,21 +14,19 @@ class ProductController extends Controller
 {
     //
     public function index(){
-        if(Auth::check()){
+        
             return view('admin.products');
-        }
-        return abort(404);
+        
     }
 
     public function getproducts(){
-        if(Auth::check()){
+        
             return new ProductResourceCollection(Product::whereIn('status', ['visible', 'hidden'])->orderBy('id', 'asc')->get());
-        }
-        return abort(404);
+        
     }
-    public function addProduct(Request $request){
+    public function stroe(Request $request){
 
-        if(Auth::check()){
+        
 
             $product = new Product();
             $product->name = $request->name;
@@ -51,12 +49,11 @@ class ProductController extends Controller
             if($product->save()){
                 return response()->json(['msg' => 'Added']);
             }
-        }
-        return abort(404);
+        
     }
 
-    public function deleteProduct($id){
-        if(Auth::check()){
+    public function destroy($id){
+        
             $product = Product::findOrFail($id);
             $imagePath = $product->image;
             if($product->delete()){
@@ -67,13 +64,14 @@ class ProductController extends Controller
                 return response()->json(['msg' => 'Deleted']);
             }
             return response()->json(['msg' => 'Error Deleting']);
-        }
-        return abort(404);
+        
     }
-    public function changeStatus($status, $id){
-        $product = Product::findOrFail($id);
-        $product->status = $status;
-        $product->save();
-        return new ProductResource($product);
+    public function updateStatus($status, $id){
+        
+            $product = Product::findOrFail($id);
+            $product->status = $status;
+            $product->save();
+            return new ProductResource($product);
+        
     }
 }

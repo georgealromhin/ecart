@@ -173,7 +173,7 @@
         if(this.formEdit){
          var obj = {'name': this.form.name}
             //var strngObj = qs.stringify(obj)
-          axios.put('edit_product/'+this.form.id , obj).then(response => {
+          axios.put('product/update/'+this.form.id , obj).then(response => {
             //console.log(response);
             this.hideModal()
             this.getProducts()
@@ -186,7 +186,7 @@
           formData.append('des', this.form.des);
           formData.append('category_id', this.form.category_id);
           console.log(this.form.category_id);
-          axios.post('add_product', formData).then(response => {
+          axios.post('product/create', formData).then(response => {
             //console.log(response);
             this.hideModal()
             this.getProducts()
@@ -201,7 +201,7 @@
    
       // fetch data 
       getProducts() {
-        axios.get('all_products').then(function(response){
+        axios.get('products/all').then(function(response){
           this.items = response.data.data;
           // Set the initial number of items
           this.totalRows = this.items.length
@@ -209,7 +209,7 @@
         },
         // fetch categories 
         getCategories() {
-            axios.get('all_categories').then(function(response){
+            axios.get('categories/all').then(function(response){
             this.categories = response.data.data;
             }.bind(this));         
         },
@@ -226,7 +226,7 @@
             confirmButtonText: 'Yes'
           }).then((result) => {
             if (result.value) {
-              axios.delete('delete_product/'+ id).then(response => {
+              axios.delete('product/delete/'+ id).then(response => {
               //console.log(response);
               this.getProducts()
             }).catch(err => { console.log(err)})  

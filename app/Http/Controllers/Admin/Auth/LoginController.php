@@ -33,8 +33,8 @@ class LoginController extends Controller
         if(Auth::attempt($userData, $rememberMe)){
             //Mail::to('ex@gmail.com')->send(new LoginMail($userData['username']));
             return redirect('dashboard');
-        }else{
+        }//else
             return back()->with('error', 'Wrong username or password');
-        }
+        
     }
 }

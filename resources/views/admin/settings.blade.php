@@ -19,7 +19,7 @@
                 </div>
               <div class="card shadow-sm mt-3">
                 <div class="card-body">
-                    <form action="{{url('change_name')}}" method="POST">
+                    <form action="{{url('name/update')}}" method="POST">
                         @csrf
                         <div class="row">
                             <div class="col-md-2 h-100">
@@ -38,7 +38,7 @@
 
               <div class="card shadow-sm mt-3">
                 <div class="card-body">
-                    <form action="{{url('change_username')}}" method="POST">
+                    <form action="{{url('username/update')}}" method="POST">
                         @csrf
                         <div class="row">
                             <div class="col-md-2 h-100">
@@ -57,7 +57,7 @@
 
               <div class="card shadow-sm mt-3">
                 <div class="card-body">
-                    <form action="{{url('change_password')}}" method="POST">
+                    <form action="{{url('password/update')}}" method="POST">
                         @csrf
                         <div class="row">
                             <div class="col-md-2 h-100">
@@ -95,7 +95,7 @@
                 </button>
                 </div>
 
-                <form action="{{url('delete_account')}}" method="POST">
+                <form action="{{url('account/delete')}}" method="POST">
                     @csrf
 
                     <div class="modal-body">

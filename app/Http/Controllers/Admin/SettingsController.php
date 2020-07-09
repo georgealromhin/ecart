@@ -14,14 +14,13 @@ class SettingsController extends Controller
         * index = view
     */
     public function index(){
-        if(Auth::check()){
+        
             return view('admin.settings');
-        }
-        return abort(404);
+        
     }
 
-    public function changeName(Request $request){
-        if(Auth::check()){
+    public function updateName(Request $request){
+        
             $validatedData = $request->validate([
                 'name' => 'required|max:50',
             ]);
@@ -29,13 +28,12 @@ class SettingsController extends Controller
             $user->name = $request->name;
             $user->save();
             return back()->with('success', 'Name Changed successfully');
-        }
-        return abort(404);
+        
     }
 
 
-    public function changeUsername(Request $request){
-        if(Auth::check()){
+    public function updateUsername(Request $request){
+        
             $validatedData = $request->validate([
                 'username' => 'required|unique:users|max:50',
             ]);
@@ -43,12 +41,11 @@ class SettingsController extends Controller
             $user->username = $request->username;
             $user->save();
             return back()->with('success', 'Username Changed successfully');
-        }
-        return abort(404);
+        
     }
 
-    public function changePassword(Request $request){
-        if(Auth::check()){
+    public function updatePassword(Request $request){
+        
             $validatedData = $request->validate([
                 'current_password' => 'required',
                 'new_password' => 'required|min:8',
@@ -64,12 +61,11 @@ class SettingsController extends Controller
             }
             return back()->with('error', 'Wrong Password');
             
-        }
-        return abort(404);
+        
     }
 
     public function deleteAccount(Request $request){
-        if(Auth::check()){
+        
             $validatedData = $request->validate([
                 'password' => 'required',
             ]);
@@ -90,14 +86,12 @@ class SettingsController extends Controller
                 return back()->with('error', 'This is the only main account in the system');
             }
             return back()->with('error', 'Wrong Password');
-        }
-        return abort(404);
+        
     }
 
     public function deleteUser($user_id){
         $user = new User();
         $objUser = $user->find($user_id);
         $objUser->delete();
-        
     }
 }

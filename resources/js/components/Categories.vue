@@ -122,7 +122,7 @@
         if(this.formEdit){
          var obj = {'name': this.form.name}
             //var strngObj = qs.stringify(obj)
-          axios.put('edit_category/'+this.form.id , obj).then(response => {
+          axios.put('category/update/'+this.form.id , obj).then(response => {
             //console.log(response);
             this.hideModal()
             this.getCategories()
@@ -130,7 +130,7 @@
         }else{
           const formData = new FormData();
           formData.append('name', this.form.name);
-          axios.post('add_category', {name: this.form.name}).then(response => {
+          axios.post('category/create', {name: this.form.name}).then(response => {
             //console.log(response);
             this.hideModal()
             this.getCategories()
@@ -142,7 +142,7 @@
    
       // fetch data 
       getCategories() {
-        axios.get('all_categories').then(function(response){
+        axios.get('categories/all').then(function(response){
           this.items = response.data.data;
           // Set the initial number of items
           this.totalRows = this.items.length
@@ -161,7 +161,7 @@
             confirmButtonText: 'Yes'
           }).then((result) => {
             if (result.value) {
-              axios.delete('delete_category/'+ id).then(response => {
+              axios.delete('category/delete/'+ id).then(response => {
               //console.log(response);
               this.getCategories()
             }).catch(err => { console.log(err)})  
@@ -176,7 +176,7 @@
            if(status == 'visible'){
              _status = 'hidden'
            }
-           axios.get('change_status/'+_status+'/'+id).then(function(response){
+           axios.put('category_status/update/'+_status+'/'+id).then(function(response){
              //console.log(response);
           }).then(
              this.getCategories()

@@ -2042,7 +2042,7 @@ __webpack_require__.r(__webpack_exports__);
           'name': this.form.name
         }; //var strngObj = qs.stringify(obj)
 
-        axios.put('edit_category/' + this.form.id, obj).then(function (response) {
+        axios.put('category/update/' + this.form.id, obj).then(function (response) {
           //console.log(response);
           _this.hideModal();
 
@@ -2053,7 +2053,7 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         var formData = new FormData();
         formData.append('name', this.form.name);
-        axios.post('add_category', {
+        axios.post('category/create', {
           name: this.form.name
         }).then(function (response) {
           //console.log(response);
@@ -2067,7 +2067,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     // fetch data 
     getCategories: function getCategories() {
-      axios.get('all_categories').then(function (response) {
+      axios.get('categories/all').then(function (response) {
         this.items = response.data.data; // Set the initial number of items
 
         this.totalRows = this.items.length;
@@ -2087,7 +2087,7 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonText: 'Yes'
       }).then(function (result) {
         if (result.value) {
-          axios["delete"]('delete_category/' + id).then(function (response) {
+          axios["delete"]('category/delete/' + id).then(function (response) {
             //console.log(response);
             _this2.getCategories();
           })["catch"](function (err) {
@@ -2104,7 +2104,7 @@ __webpack_require__.r(__webpack_exports__);
         _status = 'hidden';
       }
 
-      axios.get('change_status/' + _status + '/' + id).then(function (response) {//console.log(response);
+      axios.put('category_status/update/' + _status + '/' + id).then(function (response) {//console.log(response);
       }).then(this.getCategories());
     },
     // Trigger pagination to update the number of buttons/pages due to filtering
@@ -2334,7 +2334,7 @@ __webpack_require__.r(__webpack_exports__);
           'name': this.form.name
         }; //var strngObj = qs.stringify(obj)
 
-        axios.put('edit_product/' + this.form.id, obj).then(function (response) {
+        axios.put('product/update/' + this.form.id, obj).then(function (response) {
           //console.log(response);
           _this.hideModal();
 
@@ -2350,7 +2350,7 @@ __webpack_require__.r(__webpack_exports__);
         formData.append('des', this.form.des);
         formData.append('category_id', this.form.category_id);
         console.log(this.form.category_id);
-        axios.post('add_product', formData).then(function (response) {
+        axios.post('product/create', formData).then(function (response) {
           //console.log(response);
           _this.hideModal();
 
@@ -2367,7 +2367,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     // fetch data 
     getProducts: function getProducts() {
-      axios.get('all_products').then(function (response) {
+      axios.get('products/all').then(function (response) {
         this.items = response.data.data; // Set the initial number of items
 
         this.totalRows = this.items.length;
@@ -2375,7 +2375,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     // fetch categories 
     getCategories: function getCategories() {
-      axios.get('all_categories').then(function (response) {
+      axios.get('categories/all').then(function (response) {
         this.categories = response.data.data;
       }.bind(this));
     },
@@ -2393,7 +2393,7 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonText: 'Yes'
       }).then(function (result) {
         if (result.value) {
-          axios["delete"]('delete_product/' + id).then(function (response) {
+          axios["delete"]('product/delete/' + id).then(function (response) {
             //console.log(response);
             _this2.getProducts();
           })["catch"](function (err) {

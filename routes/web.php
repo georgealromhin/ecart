@@ -20,38 +20,39 @@ Route::get('/', function () {
 /* ====================[[ADMIN]]==================== */
 
 /* ====================[Auth]==================== */
-Route::get('admin', 'Admin\Auth\LoginController@index');
-Route::post('login', 'Admin\Auth\LoginController@login');
-Route::get('logout', 'Admin\Auth\LogoutController@logout');
+Route::get('admin', 'Admin\Auth\LoginController@index');//view
+Route::post('user/login', 'Admin\Auth\LoginController@login');
+Route::get('user/logout', 'Admin\Auth\LogoutController@logout');
 
 /* ====================[User Manager]==================== */
-Route::get('user_manager', 'Admin\UserManagerController@index');
-Route::get('users', 'Admin\UserManagerController@getUsers');
-Route::get('add_user', 'Admin\UserManagerController@addUserView');
-Route::post('add_new_user', 'Admin\UserManagerController@addUser');
-Route::get('delete_user/{user_id}', 'Admin\UserManagerController@deleteUser');
+Route::get('user_manager', 'Admin\UserManagerController@index')->middleware('auth'); // view
+Route::get('users', 'Admin\UserManagerController@show')->middleware('auth');
+Route::get('user', 'Admin\UserManagerController@userView')->middleware('auth');
+Route::post('user/create', 'Admin\UserManagerController@store')->middleware('auth');
+Route::get('user/delete/{user_id}', 'Admin\UserManagerController@destroy')->middleware('auth');
 
 /* ====================[Settings]==================== */
-Route::get('settings', 'Admin\SettingsController@index');
-Route::post('change_name', 'Admin\SettingsController@changeName');
-Route::post('change_username', 'Admin\SettingsController@changeUsername');
-Route::post('change_password', 'Admin\SettingsController@changePassword');
-Route::post('delete_account', 'Admin\SettingsController@deleteAccount');
+Route::get('settings', 'Admin\SettingsController@index')->middleware('auth'); // view
+Route::post('name/update', 'Admin\SettingsController@updateName')->middleware('auth');
+Route::post('username/update', 'Admin\SettingsController@updateUsername')->middleware('auth');
+Route::post('password/update', 'Admin\SettingsController@updatePassword')->middleware('auth');
+Route::post('account/delete', 'Admin\SettingsController@deleteAccount')->middleware('auth');
 
+/* ====================[Dashboard]==================== */
+Route::get('dashboard', 'Admin\DashboardController@index')->middleware('auth'); //view
 
-Route::get('dashboard', 'Admin\DashboardController@index');
+/* ====================[Categories]==================== */
+Route::get('categories', 'Admin\CategoryController@index')->middleware('auth'); // view
+Route::get('categories/all', 'Admin\CategoryController@getCategories')->middleware('auth');
+Route::get('category/{id}', 'Admin\CategoryController@getCategory')->middleware('auth');
+Route::put('category_status/update/{status}/{id}', 'Admin\CategoryController@updateStatus')->middleware('auth');
+Route::post('category/create', 'Admin\CategoryController@store')->middleware('auth');
+Route::put('category/update/{id}', 'Admin\CategoryController@update')->middleware('auth');
+Route::delete('category/delete/{id}', 'Admin\CategoryController@destroy')->middleware('auth');
 
-Route::get('categories', 'Admin\CategoryController@index');
-Route::get('all_categories', 'Admin\CategoryController@getCategories');
-Route::get('category/{id}', 'Admin\CategoryController@getCategory');
-Route::get('change_status/{status}/{id}', 'Admin\CategoryController@changeStatus');
-Route::post('add_category', 'Admin\CategoryController@addCategory');
-Route::put('edit_category/{id}', 'Admin\CategoryController@editCategory');
-Route::delete('delete_category/{id}', 'Admin\CategoryController@deleteCategory');
-
-
-Route::get('products', 'Admin\ProductController@index');
-Route::get('all_products', 'Admin\ProductController@getProducts');
-Route::post('add_product', 'Admin\ProductController@addProduct');
-Route::delete('delete_product/{id}', 'Admin\ProductController@deleteProduct');
-Route::get('product_status/{status}/{id}', 'Admin\ProductController@changeStatus');
+/* ====================[Products]==================== */
+Route::get('products', 'Admin\ProductController@index')->middleware('auth');// view
+Route::get('products/all', 'Admin\ProductController@getProducts')->middleware('auth');
+Route::post('product/create', 'Admin\ProductController@stroe')->middleware('auth');
+Route::delete('product/delete/{id}', 'Admin\ProductController@destroy')->middleware('auth');
+Route::put('product_status/update/{status}/{id}', 'Admin\ProductController@updateStatus')->middleware('auth');

@@ -16,9 +16,9 @@
                         <div class="col-md-3"></div>
                         <div class="col-md-6">
                             <div class="card shadow-sm">
-                                <div class="card-header">Add new user</div>
+                                <div class="card-header h5">Add new user</div>
                                 <div class="card-body">
-                                    <form action="add_new_user" method="POST" id="addUserForm">
+                                    <form action="user/create" method="POST" id="addUserForm">
                                         @csrf
                                         <div class="form-group">
                                           <label for="name">Name</label>

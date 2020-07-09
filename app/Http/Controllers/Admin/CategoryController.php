@@ -13,28 +13,25 @@ class CategoryController extends Controller
 {
     //
     public function index(){
-        if(Auth::check()){
+        
             return view('admin.categories');
-        }
-        return abort(404);
+        
     }
 
     public function getCategories(){
-        if(Auth::check()){
+        
             return new CategoryResourceCollection(Category::whereIn('status', ['visible', 'hidden'])->orderBy('id', 'asc')->get());
-        }
-        return abort(404);
+        
     }
     
     public function getCategory($id){
-        if(Auth::check()){
+        
             $category = Category::find($id);
             return new CategoryResource($category);
-        }
-        return abort(404);
+        
     }
-    public function addCategory(Request $request){
-        if(Auth::check()){
+    public function store(Request $request){
+        
             $validatedData = $request->validate([
                 'name' => 'required|max:255',
             ]);
@@ -44,33 +41,30 @@ class CategoryController extends Controller
             if($category->save()){
                 return response()->json(['name'=> $request->name]);
             }
-        }
-        return abort(404);
+        
     }
-    public function deleteCategory($id){
-        if(Auth::check()){
+    public function destroy($id){
+        
             $category = Category::findOrFail($id);
             if($category->delete()){
                 return response()->json(['msg'=> 'deleted']);
             }
-        }
-        return abort(404);
+        
     }
-    public function editCategory(Request $request, $id){
-        if(Auth::check()){
+    public function update(Request $request, $id){
+        
             $category = Category::findOrFail($id);
             $category->name = $request->name;
             if($category->save()){
                 return response()->json(['msg'=> 'updated']);
             }
-        }
-        return abort(404);
+        
     }
 
-    public function changeStatus($status, $id){
-        $category = Category::find($id);
-        $category->status = $status;
-        $category->save();
-        return new CategoryResource($category);
+    public function updateStatus($status, $id){
+            $category = Category::find($id);
+            $category->status = $status;
+            $category->save();
+            return new CategoryResource($category);
     }
 }
