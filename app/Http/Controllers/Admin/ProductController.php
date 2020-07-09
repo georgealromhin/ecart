@@ -8,7 +8,7 @@ use App\Product;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\ProductResourceCollection;
 use App\Http\Resources\ProductResource;
-
+use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
@@ -49,9 +49,31 @@ class ProductController extends Controller
             $product->category_id = $request->category_id;
 
             if($product->save()){
-                return response()->json(['msg' => 'added']);
+                return response()->json(['msg' => 'Added']);
             }
         }
         return abort(404);
+    }
+
+    public function deleteProduct($id){
+        if(Auth::check()){
+            $product = Product::findOrFail($id);
+            $imagePath = $product->image;
+            if($product->delete()){
+                // delete image from folder
+                if(File::exists($imagePath)) {
+                    File::delete($imagePath);
+                }
+                return response()->json(['msg' => 'Deleted']);
+            }
+            return response()->json(['msg' => 'Error Deleting']);
+        }
+        return abort(404);
+    }
+    public function changeStatus($status, $id){
+        $product = Product::findOrFail($id);
+        $product->status = $status;
+        $product->save();
+        return new ProductResource($product);
     }
 }

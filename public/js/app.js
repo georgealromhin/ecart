@@ -2229,17 +2229,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2252,12 +2241,12 @@ __webpack_require__.r(__webpack_exports__);
         height: 35
       },
       form: {
-        id: '',
-        name: '',
-        price: '',
-        des: '',
-        image: '',
-        category_id: ''
+        id: null,
+        name: null,
+        price: null,
+        des: null,
+        image: null,
+        category_id: null
       },
       //show: true,
       items: [],
@@ -2274,8 +2263,11 @@ __webpack_require__.r(__webpack_exports__);
         key: 'price',
         label: 'Price',
         sortable: true
-      }, //{key:'status', label:'Status', sortable:false },
-      {
+      }, {
+        key: 'category.name',
+        label: 'Category',
+        sortable: false
+      }, {
         key: 'status_check',
         label: 'Status',
         sortable: false
@@ -2293,17 +2285,26 @@ __webpack_require__.r(__webpack_exports__);
       filter: null,
       modalTitle: null,
       formEdit: false,
-      imageUrl: 'images/default.jpg'
+      imageUrl: 'images/default.jpg',
+      imagePath: null
     };
   },
   mounted: function mounted() {},
   methods: {
     openImage: function openImage(e) {
-      var file = e.target.files[0];
-      this.imageUrl = URL.createObjectURL(file);
+      this.imagePath = e.target.files[0];
+      this.imageUrl = URL.createObjectURL(this.imagePath);
     },
     resetImage: function resetImage() {
       this.imageUrl = 'images/default.jpg';
+      this.imagePath = null;
+    },
+    resetForm: function resetForm() {
+      this.form.name = null;
+      this.form.price = null;
+      this.form.des = null;
+      this.form.category_id = null;
+      this.resetImage();
     },
     showModal: function showModal(add, name, id) {
       this.form.name = name;
@@ -2342,8 +2343,8 @@ __webpack_require__.r(__webpack_exports__);
           console.log(err);
         });
       } else {
-        var formData = new FormData(); //formData.append('image', this.form.image.target.files[0]);
-
+        var formData = new FormData();
+        formData.append('image', this.imagePath);
         formData.append('name', this.form.name);
         formData.append('price', this.form.price);
         formData.append('des', this.form.des);
@@ -2354,6 +2355,11 @@ __webpack_require__.r(__webpack_exports__);
           _this.hideModal();
 
           _this.getProducts();
+
+          _this.resetForm(); //reset form
+
+
+          evt.target.reset();
         })["catch"](function (err) {
           console.log(err);
         });
@@ -2367,14 +2373,14 @@ __webpack_require__.r(__webpack_exports__);
         this.totalRows = this.items.length;
       }.bind(this));
     },
-    // fetch data 
+    // fetch categories 
     getCategories: function getCategories() {
       axios.get('all_categories').then(function (response) {
         this.categories = response.data.data;
       }.bind(this));
     },
     // delete data
-    deleteItem: function deleteItem(id) {
+    deleteProduct: function deleteProduct(id) {
       var _this2 = this;
 
       Swal.fire({
@@ -2387,7 +2393,7 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonText: 'Yes'
       }).then(function (result) {
         if (result.value) {
-          axios["delete"]('delete_category/' + id).then(function (response) {
+          axios["delete"]('delete_product/' + id).then(function (response) {
             //console.log(response);
             _this2.getProducts();
           })["catch"](function (err) {
@@ -2404,7 +2410,7 @@ __webpack_require__.r(__webpack_exports__);
         _status = 'hidden';
       }
 
-      axios.get('change_status/' + _status + '/' + id).then(function (response) {//console.log(response);
+      axios.get('product_status/' + _status + '/' + id).then(function (response) {//console.log(response);
       }).then(this.getProducts());
     },
     // Trigger pagination to update the number of buttons/pages due to filtering
@@ -81088,7 +81094,7 @@ var render = function() {
               _c(
                 "b-col",
                 [
-                  _vm._v("\n          Show "),
+                  _vm._v("\n        Show "),
                   _c("b-form-select", {
                     staticClass: "form-control w-25",
                     attrs: {
@@ -81104,7 +81110,7 @@ var render = function() {
                       expression: "perPage"
                     }
                   }),
-                  _vm._v(" entries\n        ")
+                  _vm._v(" entries\n      ")
                 ],
                 1
               ),
@@ -81257,7 +81263,7 @@ var render = function() {
                         attrs: { href: "#" },
                         on: {
                           click: function($event) {
-                            return _vm.deleteItem(row.item.id)
+                            return _vm.deleteProduct(row.item.id)
                           }
                         }
                       },
@@ -81337,7 +81343,6 @@ var render = function() {
                       _vm._v(" "),
                       _c("b-form-file", {
                         attrs: {
-                          state: Boolean(_vm.file),
                           placeholder: "",
                           "drop-placeholder": "Drop file here...",
                           accept: "image/*"

@@ -53,3 +53,5 @@ Route::delete('delete_category/{id}', 'Admin\CategoryController@deleteCategory')
 Route::get('products', 'Admin\ProductController@index');
 Route::get('all_products', 'Admin\ProductController@getProducts');
 Route::post('add_product', 'Admin\ProductController@addProduct');
+Route::delete('delete_product/{id}', 'Admin\ProductController@deleteProduct');
+Route::get('product_status/{status}/{id}', 'Admin\ProductController@changeStatus');

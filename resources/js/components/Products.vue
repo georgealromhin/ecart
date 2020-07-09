@@ -36,7 +36,7 @@
         </template>  
 
         <template v-slot:cell(delete)="row">
-        <b-link href="#" class="text-danger" @click="deleteItem(row.item.id)"><b-icon-trash></b-icon-trash> Delete</b-link>
+        <b-link href="#" class="text-danger" @click="deleteProduct(row.item.id)"><b-icon-trash></b-icon-trash> Delete</b-link>
         </template>
       </b-table>
         <p class="text-center" v-if="totalRows == 0">No data available in table</p>
@@ -50,56 +50,45 @@
     <b-modal ref="product-modal" size="lg" hide-footer :title="modalTitle">
 
       <b-form @submit="onSubmit">
-       
-            
-                <b-row>
-                    
-
-
-<b-col cols="3">
-                <b-img thumbnail center v-bind="imageProps" fluid :src="imageUrl" alt="Image 1"></b-img>
-
-<b-form-file v-model="form.image" :state="Boolean(file)" placeholder="" @change="openImage" @drop="openImage" drop-placeholder="Drop file here..." accept='image/*'></b-form-file>
-<b-button variant="dark" size="sm" class="mt-2 w-100" @click="resetImage">Reset image</b-button> 
-</b-col>
-    <b-col  cols="9">
-        
-    
+        <b-row>
+          <b-col cols="3">
+            <b-img thumbnail center v-bind="imageProps" fluid :src="imageUrl" alt="Image 1"></b-img>
+            <b-form-file v-model="form.image"  placeholder="" @change="openImage" @drop="openImage" drop-placeholder="Drop file here..." accept='image/*'></b-form-file>
+            <b-button variant="dark" size="sm" class="mt-2 w-100" @click="resetImage">Reset image</b-button> 
+          </b-col>
+          <b-col  cols="9">
             <b-form-group id="input-group-2" label="Category:" label-for="select-category" class="mt-3">
-                 <select name="select-category" id="select-category" class="form-control" v-model="form.category_id" required>
-            <option v-for="category in categories"  v-bind:key="category.id" :value="category.id" >{{category.name}}</option>
-            </select>
+              <select name="select-category" id="select-category" class="form-control" v-model="form.category_id" required>
+                <option v-for="category in categories"  v-bind:key="category.id" :value="category.id" >{{category.name}}</option>
+              </select>
             </b-form-group>
-           
-        
-        <b-form-group id="input-group-2" label="Product name:" label-for="input-name" class="mt-3">
-          <b-form-input id="input-name" v-model="form.name" required ></b-form-input>
-        </b-form-group>
+            
+            <b-form-group id="input-group-2" label="Product name:" label-for="input-name" class="mt-3">
+              <b-form-input id="input-name" v-model="form.name" required ></b-form-input>
+            </b-form-group>
 
-        <b-form-group id="input-group-2" label="Price" label-for="input-price">
-          <b-form-input type="number" min="0" step="0.1" value="0" id="input-price" v-model="form.price" required></b-form-input>
-        </b-form-group>
-        <b-form-group id="input-group-2" label="Description" label-for="input-des">
-            <b-form-textarea
-            id="input-des"
-            v-model="form.des"
-            rows="2"
-            required
-            ></b-form-textarea>
-        </b-form-group>
-     
-        <b-form-input id="input-id" v-model="form.id" hidden></b-form-input>
-        <b-row class="mt-2">
-          <b-col>
-            <b-button variant="danger"  @click="hideModal()" class="w-100">Close</b-button>
+            <b-form-group id="input-group-2" label="Price" label-for="input-price">
+              <b-form-input type="number" min="0" step="0.1" value="0" id="input-price" v-model="form.price" required></b-form-input>
+            </b-form-group>
+
+            <b-form-group id="input-group-2" label="Description" label-for="input-des">
+              <b-form-textarea id="input-des" v-model="form.des" rows="2" required></b-form-textarea>
+            </b-form-group>
+
+            <b-form-input id="input-id" v-model="form.id" hidden></b-form-input>
+
+            <b-row class="mt-2">
+              <b-col>
+                <b-button variant="danger"  @click="hideModal()" class="w-100">Close</b-button>
+              </b-col>
+              <b-col>
+                <b-button type="submit" variant="primary" class="w-100">Save</b-button>
+              </b-col>
+            </b-row>
+
           </b-col>
-          <b-col>
-            <b-button type="submit" variant="primary" class="w-100">Save</b-button>
-          </b-col>
+
         </b-row>
-    </b-col>
-
-    </b-row>
       </b-form>
 
     </b-modal>
@@ -115,7 +104,7 @@
       return {
           imageProps: { width: 200, height: 200},
           imageProps2: { width: 35, height: 35},
-        form:{ id:'', name:'', price:'', des:'',image:'', category_id:''},
+        form:{ id:null, name:null, price:null, des:null,image:null, category_id:null},
         //show: true,
           items: [],
           categories: [],
@@ -123,7 +112,7 @@
             {key:'image', label:'Image', sortable: false, },
             {key:'name', label:'Name', sortable: true, },
             {key:'price', label:'Price', sortable: true, },
-            //{key:'status', label:'Status', sortable:false },
+            {key:'category.name', label:'Category', sortable:false },
             {key:'status_check', label:'Status', sortable:false },
             {key:'edit', label:'' },
             {key:'delete', label:'' }
@@ -135,7 +124,9 @@
           filter: null,
           modalTitle: null,
           formEdit: false,
-          imageUrl: 'images/default.jpg'
+          imageUrl: 'images/default.jpg',
+          imagePath: null,
+         
       }
     },
        
@@ -144,13 +135,22 @@
         },
 
     methods:{
-openImage(e){
-    const file = e.target.files[0];
-      this.imageUrl = URL.createObjectURL(file);
-},
-resetImage(){
-    this.imageUrl = 'images/default.jpg';
-},
+      openImage(e){
+           this.imagePath = e.target.files[0];
+            this.imageUrl = URL.createObjectURL(this.imagePath);
+      },
+      resetImage(){
+          this.imageUrl = 'images/default.jpg';
+          this.imagePath = null;
+      },
+      resetForm(){
+         this.form.name = null;
+         this.form.price = null;
+         this.form.des = null;
+         this.form.category_id = null;
+         this.resetImage()
+      },
+      
       showModal(add, name, id) {
         this.form.name = name;
         this.form.id = id;
@@ -160,7 +160,6 @@ resetImage(){
          }else{
             this.modalTitle = 'Edit Product';
            this.formEdit = true;
-           
          }
         this.$refs['product-modal'].show()
       },
@@ -181,7 +180,7 @@ resetImage(){
           }).catch(err => { console.log(err)});
         }else{
           const formData = new FormData();
-          //formData.append('image', this.form.image.target.files[0]);
+          formData.append('image', this.imagePath);
           formData.append('name', this.form.name);
           formData.append('price', this.form.price);
           formData.append('des', this.form.des);
@@ -191,6 +190,9 @@ resetImage(){
             //console.log(response);
             this.hideModal()
             this.getProducts()
+            this.resetForm()
+            //reset form
+            evt.target.reset()
           }).catch(err => { console.log(err)});
             
         }
@@ -205,7 +207,7 @@ resetImage(){
           this.totalRows = this.items.length
           }.bind(this));         
         },
-        // fetch data 
+        // fetch categories 
         getCategories() {
             axios.get('all_categories').then(function(response){
             this.categories = response.data.data;
@@ -213,7 +215,7 @@ resetImage(){
         },
 
         // delete data
-        deleteItem(id) {
+        deleteProduct(id) {
           Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -224,7 +226,7 @@ resetImage(){
             confirmButtonText: 'Yes'
           }).then((result) => {
             if (result.value) {
-              axios.delete('delete_category/'+ id).then(response => {
+              axios.delete('delete_product/'+ id).then(response => {
               //console.log(response);
               this.getProducts()
             }).catch(err => { console.log(err)})  
@@ -239,7 +241,7 @@ resetImage(){
            if(status == 'visible'){
              _status = 'hidden'
            }
-           axios.get('change_status/'+_status+'/'+id).then(function(response){
+           axios.get('product_status/'+_status+'/'+id).then(function(response){
              //console.log(response);
           }).then(
              this.getProducts()

@@ -1,5 +1,5 @@
 @extends('admin.layout')
-@section('title', 'Categories')
+@section('title', 'Products')
 
 @section('header')
 
