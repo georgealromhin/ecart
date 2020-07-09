@@ -2306,14 +2306,18 @@ __webpack_require__.r(__webpack_exports__);
       this.form.category_id = null;
       this.resetImage();
     },
-    showModal: function showModal(add, name, id) {
-      this.form.name = name;
-      this.form.id = id;
-
+    showModal: function showModal(add, item) {
       if (add) {
+        this.resetForm();
         this.modalTitle = 'Add New Peoduct';
         this.formEdit = false;
       } else {
+        this.form.id = item.id;
+        this.imageUrl = item.image;
+        this.form.name = item.name;
+        this.form.price = item.price;
+        this.form.des = item.des;
+        this.form.category_id = item.category_id;
         this.modalTitle = 'Edit Product';
         this.formEdit = true;
       }
@@ -2328,13 +2332,16 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       evt.preventDefault();
+      var formData = new FormData();
+      formData.append('id', this.form.id);
+      formData.append('image', this.imagePath);
+      formData.append('name', this.form.name);
+      formData.append('price', this.form.price);
+      formData.append('des', this.form.des);
+      formData.append('category_id', this.form.category_id);
 
       if (this.formEdit) {
-        var obj = {
-          'name': this.form.name
-        }; //var strngObj = qs.stringify(obj)
-
-        axios.put('product/update/' + this.form.id, obj).then(function (response) {
+        axios.post('product/update', formData).then(function (response) {
           //console.log(response);
           _this.hideModal();
 
@@ -2343,13 +2350,6 @@ __webpack_require__.r(__webpack_exports__);
           console.log(err);
         });
       } else {
-        var formData = new FormData();
-        formData.append('image', this.imagePath);
-        formData.append('name', this.form.name);
-        formData.append('price', this.form.price);
-        formData.append('des', this.form.des);
-        formData.append('category_id', this.form.category_id);
-        console.log(this.form.category_id);
         axios.post('product/create', formData).then(function (response) {
           //console.log(response);
           _this.hideModal();
@@ -2410,7 +2410,7 @@ __webpack_require__.r(__webpack_exports__);
         _status = 'hidden';
       }
 
-      axios.get('product_status/' + _status + '/' + id).then(function (response) {//console.log(response);
+      axios.put('product_status/update/' + _status + '/' + id).then(function (response) {//console.log(response);
       }).then(this.getProducts());
     },
     // Trigger pagination to update the number of buttons/pages due to filtering
@@ -81080,7 +81080,7 @@ var render = function() {
               attrs: { id: "show-btn", variant: "primary" },
               on: {
                 click: function($event) {
-                  return _vm.showModal(true, null, null)
+                  return _vm.showModal(true, null)
                 }
               }
             },
@@ -81238,11 +81238,7 @@ var render = function() {
                         attrs: { href: "#" },
                         on: {
                           click: function($event) {
-                            return _vm.showModal(
-                              false,
-                              row.item.name,
-                              row.item.id
-                            )
+                            return _vm.showModal(false, row.item, row.item)
                           }
                         }
                       },

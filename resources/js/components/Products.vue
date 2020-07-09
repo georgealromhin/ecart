@@ -9,7 +9,7 @@
       </template>
     
       <!-- Button trigger modal -->
-      <b-button id="show-btn" variant="primary" @click="showModal(true, null, null)">+ Add New Product</b-button>
+      <b-button id="show-btn" variant="primary" @click="showModal(true, null)">+ Add New Product</b-button>
 
       <b-row class="mt-2">
         <b-col>
@@ -32,7 +32,7 @@
         </template>
 
         <template v-slot:cell(edit)="row">
-          <b-link href="#" class="text-primary" @click="showModal(false, row.item.name, row.item.id)"><b-icon-pencil-square></b-icon-pencil-square> Edit</b-link>
+          <b-link href="#" class="text-primary" @click="showModal(false, row.item, row.item)"><b-icon-pencil-square></b-icon-pencil-square> Edit</b-link>
         </template>  
 
         <template v-slot:cell(delete)="row">
@@ -151,15 +151,21 @@
          this.resetImage()
       },
       
-      showModal(add, name, id) {
-        this.form.name = name;
-        this.form.id = id;
+      showModal(add, item) {
+                
          if (add){
+           this.resetForm()
            this.modalTitle = 'Add New Peoduct';
            this.formEdit = false;
          }else{
+            this.form.id =  item.id;
+            this.imageUrl = item.image;
+            this.form.name = item.name;
+            this.form.price = item.price;
+            this.form.des = item.des;
+            this.form.category_id = item.category_id;
             this.modalTitle = 'Edit Product';
-           this.formEdit = true;
+            this.formEdit = true;
          }
         this.$refs['product-modal'].show()
       },
@@ -169,23 +175,24 @@
       // submit form (add data)
       onSubmit(evt) {
         evt.preventDefault();
-
-        if(this.formEdit){
-         var obj = {'name': this.form.name}
-            //var strngObj = qs.stringify(obj)
-          axios.put('product/update/'+this.form.id , obj).then(response => {
-            //console.log(response);
-            this.hideModal()
-            this.getProducts()
-          }).catch(err => { console.log(err)});
-        }else{
           const formData = new FormData();
+          formData.append('id', this.form.id);
           formData.append('image', this.imagePath);
           formData.append('name', this.form.name);
           formData.append('price', this.form.price);
           formData.append('des', this.form.des);
           formData.append('category_id', this.form.category_id);
-          console.log(this.form.category_id);
+
+        if(this.formEdit){
+         
+          axios.post('product/update' , formData).then(response => {
+            //console.log(response);
+            this.hideModal()
+            this.getProducts()
+          }).catch(err => { console.log(err)});
+        }else{
+          
+          
           axios.post('product/create', formData).then(response => {
             //console.log(response);
             this.hideModal()
@@ -241,7 +248,7 @@
            if(status == 'visible'){
              _status = 'hidden'
            }
-           axios.get('product_status/'+_status+'/'+id).then(function(response){
+           axios.put('product_status/update/'+_status+'/'+id).then(function(response){
              //console.log(response);
           }).then(
              this.getProducts()

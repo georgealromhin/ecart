@@ -55,4 +55,5 @@ Route::get('products', 'Admin\ProductController@index')->middleware('auth');// v
 Route::get('products/all', 'Admin\ProductController@getProducts')->middleware('auth');
 Route::post('product/create', 'Admin\ProductController@stroe')->middleware('auth');
 Route::delete('product/delete/{id}', 'Admin\ProductController@destroy')->middleware('auth');
+Route::post('product/update', 'Admin\ProductController@update')->middleware('auth');
 Route::put('product_status/update/{status}/{id}', 'Admin\ProductController@updateStatus')->middleware('auth');
