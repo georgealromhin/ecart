@@ -15,6 +15,10 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    
+    'currency' => '$',
+    'email_address' => 'georgealromhin@gmail.com',
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

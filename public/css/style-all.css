@@ -1,14 +1,19 @@
 @font-face {font-family: 'roboto';src: url('../fonts/roboto_regular.ttf');}  
 * {font-family: 'roboto';}
-body {padding-top: 56px;}
+body {padding-top: 96px;}
 .btn{border-radius: 25px;}
 .form-control{border-radius: 25px;}
-
+html {
+    scroll-behavior: smooth;
+  }
+  
+.btn-primary{background-color: #0080FF !important;}
 
 .bg-primary{background-color: #0080FF !important;}
 .btn-primary:hover{background-color: #0D47A1 !important;}
 
 .bg-danger{background-color: #FF2645 !important;}
+.btn-danger{background-color: #FF2645 !important;}
 .btn-danger:hover{background-color: #CC0000 !important;}
 
 

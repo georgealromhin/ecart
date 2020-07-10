@@ -24,6 +24,7 @@ Vue.use(BootstrapVueIcons)
 
 Vue.component('categories-component', require('./components/Categories.vue').default);
 Vue.component('products-component', require('./components/Products.vue').default);
+Vue.component('orders-component', require('./components/Orders.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

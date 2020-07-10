@@ -15,21 +15,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@index'); // view
 
-
-
 Route::get('cart', 'CartController@getCart'); // view
-
-
 Route::get('cart/store/{id}/{qty}', 'CartController@store');
 Route::get('total', 'CartController@getTotal');
-
-
-//Route::get('cart/show', 'CartController@getCart');
 Route::get('cart/remove/{id}', 'CartController@remove');
 
 
-Route::get('order', 'OrderController@index'); // view
-Route::get('order/create', 'OrderController@store');
+Route::get('checkout', 'CheckoutController@index'); // view
+Route::post('order/create', 'OrderController@store');
+
+
 
 /* ====================[[ADMIN]]==================== */
 
@@ -71,3 +66,9 @@ Route::post('product/create', 'Admin\ProductController@stroe')->middleware('auth
 Route::delete('product/delete/{id}', 'Admin\ProductController@destroy')->middleware('auth');
 Route::post('product/update', 'Admin\ProductController@update')->middleware('auth');
 Route::put('product_status/update/{status}/{id}', 'Admin\ProductController@updateStatus')->middleware('auth');
+
+/* ====================[Orders]==================== */
+Route::get('orders', 'Admin\OrderController@index')->middleware('auth');
+Route::get('orders/all', 'Admin\OrderController@showOrders')->middleware('auth');
+Route::get('order_details/{id}', 'Admin\OrderController@show')->middleware('auth');
+Route::delete('order/delete/{id}', 'Admin\OrderController@destroy')->middleware('auth');

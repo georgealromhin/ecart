@@ -1,5 +1,5 @@
 <!-- Footer -->
-<footer class="page-footer font-small bg-dark text-light" style="margin-top: 250px">
+<footer class="page-footer font-small bg-dark text-light" style="margin-top: 500px">
 
     <!-- Copyright -->
     <div class="footer-copyright text-center py-3">© 2020 Copyright:

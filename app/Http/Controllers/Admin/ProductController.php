@@ -41,7 +41,7 @@ class ProductController extends Controller
                 $request->image->move('images/products', $image_name);
                 $product->image = 'images/products/'.$image_name;
             }else{     
-                $product->image = 'images/default.jpg';
+                $product->image = 'images/products/default.jpg';
             }
 
             $product->des = $request->des;
@@ -83,7 +83,7 @@ class ProductController extends Controller
         }else{ 
             $product->image = $request->current_image;
             if(empty($request->current_image)){
-                $product->image = 'images/default.jpg';
+                $product->image = 'images/products/default.jpg';
             }  
         }
 

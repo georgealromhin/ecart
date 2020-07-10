@@ -52,7 +52,7 @@
       <b-form @submit="onSubmit">
         <b-row>
           <b-col cols="3">
-            <b-img thumbnail center v-bind="imageProps" fluid :src="imageUrl" alt="Image 1"></b-img>
+            <b-img center v-bind="imageProps" fluid :src="imageUrl" alt="Image 1" class="thumbnail-img"></b-img>
             <b-form-file v-model="form.image"  placeholder="" @change="openImage" @drop="openImage" drop-placeholder="Drop file here..." accept='image/*'></b-form-file>
             <b-button variant="dark" size="sm" class="mt-2 w-100" @click="resetImage">Reset image</b-button> 
           </b-col>
@@ -72,7 +72,7 @@
             </b-form-group>
 
             <b-form-group id="input-group-2" label="Description" label-for="input-des">
-              <b-form-textarea id="input-des" v-model="form.des" rows="2" required></b-form-textarea>
+              <b-form-textarea id="input-des" v-model="form.des" rows="2"></b-form-textarea>
             </b-form-group>
 
             <b-form-input id="input-id" v-model="form.id" hidden></b-form-input>
@@ -124,7 +124,7 @@
           filter: null,
           modalTitle: null,
           formEdit: false,
-          imageUrl: 'images/default.jpg',
+          imageUrl: 'images/thumbnail_image.jpg',
           imagePath: null,
          
       }
@@ -136,11 +136,11 @@
 
     methods:{
       openImage(e){
-           this.imagePath = e.target.files[0];
-            this.imageUrl = URL.createObjectURL(this.imagePath);
+          this.imagePath = e.target.files[0];
+          this.imageUrl = URL.createObjectURL(this.imagePath);
       },
       resetImage(){
-          this.imageUrl = 'images/default.jpg';
+          this.imageUrl = 'images/thumbnail_image.jpg';
           this.imagePath = null;
       },
       resetForm(){
@@ -182,6 +182,7 @@
           formData.append('price', this.form.price);
           formData.append('des', this.form.des);
           formData.append('category_id', this.form.category_id);
+          formData.append('current_image', this.imageUrl);
 
         if(this.formEdit){
          
