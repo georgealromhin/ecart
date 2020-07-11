@@ -5,7 +5,7 @@
     <b-card class="shadow-sm">
 
       <template v-slot:header>
-        <h4 class="mb-0"><b-icon-inbox></b-icon-inbox> Orders</h4> 
+        <h4 class="mb-0"><b-icon-inbox></b-icon-inbox> Orders <b-button variant="dark" class="float-right" @click="refreshTable()"><b-icon-bootstrap-reboot></b-icon-bootstrap-reboot> Refresh</b-button> </h4> 
       </template>
     
       <b-row class="mt-2">
@@ -86,7 +86,9 @@
           this.totalRows = this.items.length
           }.bind(this));         
         },
-
+refreshTable(){
+ this.getOrders();
+},
 
         // delete data
         deleteOrder(id) {

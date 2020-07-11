@@ -72,3 +72,4 @@ Route::get('orders', 'Admin\OrderController@index')->middleware('auth');
 Route::get('orders/all', 'Admin\OrderController@showOrders')->middleware('auth');
 Route::get('order_details/{id}', 'Admin\OrderController@show')->middleware('auth');
 Route::delete('order/delete/{id}', 'Admin\OrderController@destroy')->middleware('auth');
+Route::put('order_status/update/{status}/{id}', 'Admin\OrderController@updateStatus')->middleware('auth');

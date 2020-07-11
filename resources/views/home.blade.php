@@ -1,18 +1,9 @@
 @extends('layout')
 @section('title', config('app.name'))
-@section('header')
-    <style>
-        .toast {
-    left: 50%;
-    top: 85%;
-    position: fixed;
-    transform: translate(-50%, 0px);
-    z-index: 9999;
-}
-    </style>
-@endsection
+
 @section('content')
 
+  
 <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
     <div class="toast-body">
         <i class="fas fa-check-circle text-success"></i> Added to cart
@@ -22,7 +13,7 @@
   <ul class="nav fixed-top bg-danger justify-content-center" style="margin-top: 56px;">
     @foreach ($categories as $category)
     <li class="nav-item">
-      <a class="nav-link text-light text-center" href="#category{{$category->id}}{{$category->name}}">{{$category->name}}</a>
+      <a class="nav-link text-light text-center" href="#{{$category->id}}{{$category->name}}">{{$category->name}}</a>
     </li>
     @endforeach
 </ul>
@@ -30,7 +21,7 @@
 
 
 @foreach ($categories as $category)
-<h3 class="mt-5" id="category{{$category->id}}{{$category->name}}">{{$category->name}}</h3>
+<h3 class="mt-5" id="{{$category->id}}{{$category->name}}">{{$category->name}}</h3>
 <hr>
 <div class="row">
     @foreach ($category->products as $product)

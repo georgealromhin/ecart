@@ -17,10 +17,11 @@ class OrderController extends Controller
     }
     public function show($id){
     
-            $order = Order::findOrFail($id);
-            $res = new OrderResource($order);
+            $order = Order::with(array('customer', 'order_details' =>  function($query){
+                $query->with('products');
+             }))->findOrFail($id);
+            //$res = new OrderResource($order);
             return view('admin.order_details', [ 'order' => $order]);
-            //return $res;
     
     }
     public function showOrders(){
@@ -29,5 +30,15 @@ class OrderController extends Controller
     public function destroy($id){
             Customer::findOrFail($id)->delete();
             return response()->json();
+    }
+
+    public function updateStatus($status, $id){
+        $order =  Order::findOrFail($id);
+        $order->order_status = $status;
+        
+        if($order->save()){
+            return response()->json(['msg' => 'Updated']);
+        }
+        return response()->json(['msg' => 'Error updating']);
     }
 }

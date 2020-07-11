@@ -2230,6 +2230,9 @@ __webpack_require__.r(__webpack_exports__);
         this.totalRows = this.items.length;
       }.bind(this));
     },
+    refreshTable: function refreshTable() {
+      this.getOrders();
+    },
     // delete data
     deleteOrder: function deleteOrder(id) {
       var _this = this;
@@ -81212,7 +81215,24 @@ var render = function() {
                   _c(
                     "h4",
                     { staticClass: "mb-0" },
-                    [_c("b-icon-inbox"), _vm._v(" Orders")],
+                    [
+                      _c("b-icon-inbox"),
+                      _vm._v(" Orders "),
+                      _c(
+                        "b-button",
+                        {
+                          staticClass: "float-right",
+                          attrs: { variant: "dark" },
+                          on: {
+                            click: function($event) {
+                              return _vm.refreshTable()
+                            }
+                          }
+                        },
+                        [_c("b-icon-bootstrap-reboot"), _vm._v(" Refresh")],
+                        1
+                      )
+                    ],
                     1
                   )
                 ]
