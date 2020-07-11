@@ -52,12 +52,14 @@ class CategoryController extends Controller
         
     }
     public function update(Request $request, $id){
-        
-            $category = Category::findOrFail($id);
-            $category->name = $request->name;
-            if($category->save()){
-                return response()->json(['msg'=> 'updated']);
-            }
+        if(Auth::user()->role == 'main'){
+                $category = Category::findOrFail($id);
+                $category->name = $request->name;
+                if($category->save()){
+                        return response()->json(['msg'=> 'updated']);
+                }
+        }
+        return response()->json(['msg'=> 'unauthorized action'], 401);
         
     }
 

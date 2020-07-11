@@ -23,19 +23,22 @@
       <b-table id="my-table" class="mt-2" :items="items" :per-page="perPage" :current-page="currentPage" :fields="fields" outlined bordered hover striped responsive  :filter="filter" @filtered="onFiltered">
         
         <template v-slot:cell(status_check)="row">
-          <b-link href="#" class="text-danger" v-if="row.item.status == 'hidden'" @click="updateStatus(row.item.id, row.item.status)"><b-icon-play-fill></b-icon-play-fill> Paused</b-link>
-          <b-link href="#" class="text-primary" v-if="row.item.status == 'visible'" @click="updateStatus(row.item.id, row.item.status)"><b-icon-pause-fill></b-icon-pause-fill> Pause</b-link>
+          <b-link href="#" class="text-danger" v-if="row.item.status == 'hidden' && user_role == 'main'" @click="updateStatus(row.item.id, row.item.status)"><b-icon-play-fill></b-icon-play-fill> Paused</b-link>
+          <b-link href="#" class="text-primary" v-if="row.item.status == 'visible' && user_role == 'main'" @click="updateStatus(row.item.id, row.item.status)"><b-icon-pause-fill></b-icon-pause-fill> Pause</b-link>
         </template>
 
         <template v-slot:cell(edit)="row">
-          <b-link href="#" class="text-primary" @click="showModal(false, row.item.name, row.item.id)"><b-icon-pencil-square></b-icon-pencil-square> Edit</b-link>
+          <b-link href="#" class="text-primary" @click="showModal(false, row.item.name, row.item.id)" v-if="user_role == 'main'"><b-icon-pencil-square></b-icon-pencil-square> Edit</b-link>
         </template>  
 
         <template v-slot:cell(delete)="row">
-        <b-link href="#" class="text-danger" @click="deleteItem(row.item.id)"><b-icon-trash></b-icon-trash> Delete</b-link>
+        <b-link href="#" class="text-danger" @click="deleteItem(row.item.id)" v-if="user_role == 'main'"><b-icon-trash></b-icon-trash> Delete</b-link>
         </template>
       </b-table>
-        <p class="text-center" v-if="totalRows == 0">No data available in table</p>
+      <div class="text-center" v-if="!dataLoaded">
+        <b-spinner variant="primary"></b-spinner>
+      </div>
+        <p class="text-center" v-if="totalRows == 0 && dataLoaded">No data available in table</p>
 
       <b-pagination v-model="currentPage" :total-rows="totalRows" :per-page="perPage" align="right" first-text="First" prev-text="Prev" next-text="Next" last-text="Last" class="mt-1"></b-pagination>
 
@@ -43,7 +46,7 @@
 
 
     <!-- Modal -->
-    <b-modal ref="category-modal" hide-footer :title="modalTitle">
+    <b-modal ref="category-modal" centered  hide-footer :title="modalTitle">
 
       <b-form @submit="onSubmit">
 
@@ -71,6 +74,7 @@
 <script>
 
  export default {
+    props: ['user_role'],
     data(){
       return {
         form:{ id:'', name:'', },
@@ -90,6 +94,8 @@
           filter: null,
           modalTitle: null,
           formEdit: false,
+          dataLoaded : false,
+          
       }
     },
        
@@ -146,6 +152,7 @@
           this.items = response.data.data;
           // Set the initial number of items
           this.totalRows = this.items.length
+          this.dataLoaded = true;
           }.bind(this));         
         },
 

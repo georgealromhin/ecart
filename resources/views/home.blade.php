@@ -3,7 +3,9 @@
 
 @section('content')
 
-  
+<section class="bg-title-page text-center mt-5" style="background-image: url(images/header_image.webp);">
+
+</section>
 <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
     <div class="toast-body">
         <i class="fas fa-check-circle text-success"></i> Added to cart

@@ -34,7 +34,10 @@
         <b-link href="#" class="text-danger" @click="deleteOrder(row.item.id)"><b-icon-trash></b-icon-trash> Delete</b-link>
         </template>
       </b-table>
-        <p class="text-center" v-if="totalRows == 0">No data available in table</p>
+        <div class="text-center" v-if="!dataLoaded">
+        <b-spinner variant="primary"></b-spinner>
+      </div>
+        <p class="text-center" v-if="totalRows == 0 && dataLoaded">No data available in table</p>
 
       <b-pagination v-model="currentPage" :total-rows="totalRows" :per-page="perPage" align="right" first-text="First" prev-text="Prev" next-text="Next" last-text="Last" class="mt-1"></b-pagination>
 
@@ -67,6 +70,7 @@
           perPage:  10,
           pageOptions: [10, 25, 50, 100],
           filter: null,
+          dataLoaded: false,
          
       }
     },
@@ -84,6 +88,7 @@
           this.items = response.data.data;
           // Set the initial number of items
           this.totalRows = this.items.length
+          this.dataLoaded = true;
           }.bind(this));         
         },
 refreshTable(){

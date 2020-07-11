@@ -39,7 +39,11 @@
         <b-link href="#" class="text-danger" @click="deleteProduct(row.item.id)"><b-icon-trash></b-icon-trash> Delete</b-link>
         </template>
       </b-table>
-        <p class="text-center" v-if="totalRows == 0">No data available in table</p>
+
+      <div class="text-center" v-if="!dataLoaded">
+        <b-spinner variant="primary"></b-spinner>
+      </div>
+        <p class="text-center"  v-if="totalRows == 0 && dataLoaded">No data available in table</p>
 
       <b-pagination v-model="currentPage" :total-rows="totalRows" :per-page="perPage" align="right" first-text="First" prev-text="Prev" next-text="Next" last-text="Last" class="mt-1"></b-pagination>
 
@@ -47,7 +51,7 @@
 
 
     <!-- Modal -->
-    <b-modal ref="product-modal" size="lg" hide-footer :title="modalTitle">
+    <b-modal ref="product-modal" size="lg" centered  hide-footer :title="modalTitle">
 
       <b-form @submit="onSubmit">
         <b-row>
@@ -112,7 +116,7 @@
             {key:'image', label:'Image', sortable: false, },
             {key:'name', label:'Name', sortable: true, },
             {key:'price', label:'Price', sortable: true, },
-            {key:'category.name', label:'Category', sortable:false },
+            {key:'category.name', label:'Category', sortable:true },
             {key:'status_check', label:'Status', sortable:false },
             {key:'edit', label:'' },
             {key:'delete', label:'' }
@@ -126,6 +130,7 @@
           formEdit: false,
           imageUrl: 'images/thumbnail_image.jpg',
           imagePath: null,
+           dataLoaded : false,
          
       }
     },
@@ -213,6 +218,7 @@
           this.items = response.data.data;
           // Set the initial number of items
           this.totalRows = this.items.length
+          this.dataLoaded = true;
           }.bind(this));         
         },
         // fetch categories 
