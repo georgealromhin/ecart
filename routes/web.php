@@ -14,15 +14,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'HomeController@index'); // view
-
 Route::get('cart', 'CartController@getCart'); // view
 Route::get('cart/store/{id}/{qty}', 'CartController@store');
 Route::get('total', 'CartController@getTotal');
 Route::get('cart/remove/{id}', 'CartController@remove');
-
-
 Route::get('checkout', 'CheckoutController@index'); // view
 Route::post('order/create', 'OrderController@store');
+Route::get('about', function(){ return view('about'); });
+Route::get('privacy_policy', function(){ return view('privacy_policy'); });
+Route::get('terms_conditions', function(){ return view('terms'); });
+Route::get('delivery_information', function(){ return view('delivery_info'); });
+Route::get('contact', function(){ return view('contact'); });
 
 
 
@@ -40,12 +42,12 @@ Route::get('user', 'Admin\UserManagerController@userView')->middleware('auth');
 Route::post('user/create', 'Admin\UserManagerController@store')->middleware('auth');
 Route::get('user/delete/{user_id}', 'Admin\UserManagerController@destroy')->middleware('auth');
 
-/* ====================[Settings]==================== */
-Route::get('settings', 'Admin\SettingsController@index')->middleware('auth'); // view
-Route::post('name/update', 'Admin\SettingsController@updateName')->middleware('auth');
-Route::post('username/update', 'Admin\SettingsController@updateUsername')->middleware('auth');
-Route::post('password/update', 'Admin\SettingsController@updatePassword')->middleware('auth');
-Route::post('account/delete', 'Admin\SettingsController@deleteAccount')->middleware('auth');
+/* ====================[Account Settings]==================== */
+Route::get('account', 'Admin\AccountController@index')->middleware('auth'); // view
+Route::post('name/update', 'Admin\AccountController@updateName')->middleware('auth');
+Route::post('username/update', 'Admin\AccountController@updateUsername')->middleware('auth');
+Route::post('password/update', 'Admin\AccountController@updatePassword')->middleware('auth');
+Route::post('account/delete', 'Admin\AccountController@deleteAccount')->middleware('auth');
 
 /* ====================[Dashboard]==================== */
 Route::get('dashboard', 'Admin\DashboardController@index')->middleware('auth'); //view
@@ -68,8 +70,19 @@ Route::post('product/update', 'Admin\ProductController@update')->middleware('aut
 Route::put('product_status/update/{status}/{id}', 'Admin\ProductController@updateStatus')->middleware('auth');
 
 /* ====================[Orders]==================== */
-Route::get('orders', 'Admin\OrderController@index')->middleware('auth');
+Route::get('orders', 'Admin\OrderController@index')->middleware('auth');//view
 Route::get('orders/all', 'Admin\OrderController@showOrders')->middleware('auth');
 Route::get('order_details/{id}', 'Admin\OrderController@show')->middleware('auth');
 Route::delete('order/delete/{id}', 'Admin\OrderController@destroy')->middleware('auth');
 Route::put('order_status/update/{status}/{id}', 'Admin\OrderController@updateStatus')->middleware('auth');
+
+
+/* ====================[Store Settings]==================== */
+Route::get('settings', 'Admin\SettingsController@index')->middleware('auth');//view
+Route::get('settings/all', 'Admin\SettingsController@showSettings')->middleware('auth');
+Route::put('settings/update', 'Admin\SettingsController@updateSettings')->middleware('auth');
+
+
+/* ====================[Notifications]==================== */
+Route::get('notifications/count', 'Admin\NotificationController@index')->middleware('auth');//view
+Route::get('notification/markAsRead', 'Admin\NotificationController@markAsRead')->middleware('auth');//view

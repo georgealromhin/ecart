@@ -14,3 +14,8 @@
     </div>
 </div>
 @endsection
+@section('script')
+<script type="text/javascript" src="{{asset('js/easy_notify.js')}}"></script>   
+<script type="text/javascript" src="{{asset('js/notification.js')}}"></script>   
+
+@endsection

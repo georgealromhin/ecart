@@ -31,7 +31,7 @@ class CategoryController extends Controller
         
     }
     public function store(Request $request){
-        
+        if(Auth::user()->role == 'main'){
             $validatedData = $request->validate([
                 'name' => 'required|max:255',
             ]);
@@ -41,17 +41,20 @@ class CategoryController extends Controller
             if($category->save()){
                 return response()->json(['name'=> $request->name]);
             }
-        
+        }
+        return response()->json(['msg'=> 'unauthorized action'], 401);
     }
     public function destroy($id){
-        
+        if(Auth::user()->role == 'main'){
             $category = Category::findOrFail($id);
             if($category->delete()){
                 return response()->json(['msg'=> 'deleted']);
             }
-        
+        }
+        return response()->json(['msg'=> 'unauthorized action'], 401);
     }
     public function update(Request $request, $id){
+
         if(Auth::user()->role == 'main'){
                 $category = Category::findOrFail($id);
                 $category->name = $request->name;
@@ -60,13 +63,16 @@ class CategoryController extends Controller
                 }
         }
         return response()->json(['msg'=> 'unauthorized action'], 401);
-        
     }
 
     public function updateStatus($status, $id){
-            $category = Category::find($id);
-            $category->status = $status;
-            $category->save();
-            return new CategoryResource($category);
+
+        if(Auth::user()->role == 'main'){
+                $category = Category::find($id);
+                $category->status = $status;
+                $category->save();
+                return new CategoryResource($category);
+        }
+        return response()->json(['msg'=> 'unauthorized action'], 401);
     }
 }

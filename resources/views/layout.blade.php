@@ -1,15 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title')</title>
+    <meta name="description" content="{{$settings[13]->value }}">
+    <meta property="og:title" content="{{$settings[12]->value }}"/>
+    <meta property="og:description" content="{{$settings[13]->value }}"/>
+    <meta property="og:image" content="{{url('favicon.ico')}}"/>
+    <meta name="language" content="en" />
+    <link rel="apple-touch-icon" href="{{url('favicon.ico')}}">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="{{url('favicon.ico')}}">
+    <meta name="theme-color" content="#ffffff">
     <link rel="icon" type="image/ico" href="{{url('favicon.ico') }}">
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{asset('css/sweetalert2.min.css') }}">
     <link rel="stylesheet" href="{{asset('css/style-all.css') }}">
-
     @section('header')
         
         
@@ -38,19 +46,7 @@
     <script type="text/javascript" src="{{ asset('js/sweetalert2.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/fontawesome_all.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
-    <script>
-        var t=$(window).height()/2;
-    $(window).on("scroll",function(){$(this).scrollTop()>t?$("#back_to_top").css("display","flex"):$("#back_to_top").css("display","none")}),$("#back_to_top").on("click",function(){$("html, body").animate({scrollTop:0},300)})
-    function openNav() {
-      document.getElementById("main-sidebar").style.width = "250px";
-      document.getElementById("main").style.marginLeft = "250px";
-    }
-    
-    function closeNav() {
-      document.getElementById("main-sidebar").style.width = "0";
-      document.getElementById("main").style.marginLeft= "0";
-    }
-    </script>
+    <script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
     
  </body>
 </html>

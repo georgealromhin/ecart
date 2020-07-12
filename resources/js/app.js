@@ -9,6 +9,8 @@ require('./bootstrap');
 window.Vue = require('vue');
 import { BootstrapVue, BootstrapVueIcons  } from 'bootstrap-vue'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -25,6 +27,7 @@ Vue.use(BootstrapVueIcons)
 Vue.component('categories-component', require('./components/Categories.vue').default);
 Vue.component('products-component', require('./components/Products.vue').default);
 Vue.component('orders-component', require('./components/Orders.vue').default);
+Vue.component('settings-component', require('./components/Settings.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

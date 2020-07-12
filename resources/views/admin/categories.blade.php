@@ -21,24 +21,7 @@
 @endsection
 
 @section('script')
-<script>
-    $('#name').on('keyup', function(){
-        $('#changeNameBtn').prop("disabled", false);;
-    });
-    $('#username').on('keyup', function(){
-        $('#changeUsernameBtn').prop("disabled", false);;
-    });
+<script type="text/javascript" src="{{asset('js/easy_notify.js')}}"></script>   
+<script type="text/javascript" src="{{asset('js/notification.js')}}"></script>   
 
-</script>
-@if ($message = Session::get('error'))
-        <script type="text/javascript">
-            Swal.fire('Error', '{{$message}}', 'error');
-        </script>
-    @endif
-
-    @if ($message = Session::get('success'))
-        <script type="text/javascript">
-            Swal.fire('Success', '{{$message}}', 'success');
-        </script>
-    @endif
 @endsection

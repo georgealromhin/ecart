@@ -49,28 +49,3 @@
 
 
 @endsection
-
-
-@section('script')
-    <script>
-
-$( document ).ready(function() {
-    getTotalPrice();
-
-function getTotalPrice(){
-    $.ajax({
-        type:"GET",
-        url:"total",
-        success:function(t){
-            $('#cart-total').text(t);
-        },error:function(t,e,o){
-            console.log(t);
-        }
-    })  
-}
-
-
-});        
-
-    </script>
-@endsection

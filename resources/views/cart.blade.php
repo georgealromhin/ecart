@@ -52,56 +52,11 @@
 
     @else
 
-        <div class="text-center nt-5">
+        <div class="text-center mt-5 mb-5">
 
             <br><img src="{{asset('images/emptycart.webp')}}" alt="empty_cart" class="img-fluid">
 
         </div>
 
     @endif
-@endsection
-
-
-@section('script')
-    <script>
-
-$( document ).ready(function() {
-    getTotalPrice();
-
-    $(".add-to-cart").click(function(){
-    var itemid = this.id;
-    qty=$("#qty"+itemid).val();
-    $('#'+itemid).prop('disabled', true);
-    $.ajax({
-        type:"GET",
-        url:"cart/store/"+itemid+"/"+qty,
-        success:function(t){
-            getTotalPrice();
-            $('#'+itemid).prop('disabled', false);
-        },error:function(t,e,o){
-            $('#'+itemid).prop('disabled', false);
-            console.log(t);
-        }
-    })
-});
-
-function getTotalPrice(){
-    $.ajax({
-        type:"GET",
-        url:"total",
-        success:function(t){
-            $('#cart-total').text(t);
-        },error:function(t,e,o){
-            console.log(t);
-        }
-    })  
-}
-
-
-});        
-
-
-
-
-    </script>
 @endsection

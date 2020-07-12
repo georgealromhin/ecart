@@ -9,7 +9,7 @@
       </template>
 
       <!-- Button trigger modal -->
-      <b-button id="show-btn" variant="primary" @click="showModal(true, null, null)">+ Add New Category</b-button>
+      <b-button id="show-btn" variant="primary" v-if="user_role == 'main'" @click="showModal(true, null, null)">+ Add New Category</b-button>
 
       <b-row class="mt-2">
         <b-col>

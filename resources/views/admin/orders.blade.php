@@ -13,7 +13,7 @@
         <div id="page-content-wrapper">
             @include('admin.navbar')
             <div class="container mt-5 mb-5">
-                <orders-component></orders-component>
+                <orders-component user_role="{{ Auth::user()->role }}"></orders-component>
             </div>
         </div>
     </div>
@@ -21,16 +21,6 @@
 @endsection
 
 @section('script')
-
-@if ($message = Session::get('error'))
-        <script type="text/javascript">
-            Swal.fire('Error', '{{$message}}', 'error');
-        </script>
-    @endif
-
-    @if ($message = Session::get('success'))
-        <script type="text/javascript">
-            Swal.fire('Success', '{{$message}}', 'success');
-        </script>
-    @endif
+    <script type="text/javascript" src="{{asset('js/easy_notify.js')}}"></script>   
+    <script type="text/javascript" src="{{asset('js/notification.js')}}"></script>   
 @endsection

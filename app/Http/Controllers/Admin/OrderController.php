@@ -8,11 +8,16 @@ use App\Http\Resources\OrderResourceCollection;
 use App\Http\Resources\OrderResource;
 use App\Order;
 use App\Customer;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
     //
     public function index(){
+
+        foreach(Auth::user()->notifications as $notification){
+            $notification->delete();
+        }
         return view('admin.orders');
     }
     public function show($id){
@@ -27,9 +32,13 @@ class OrderController extends Controller
     public function showOrders(){
         return new OrderResourceCollection(Order::with('customer')->orderBy('created_at', 'desc')->get());
     }
+    
     public function destroy($id){
+        if(Auth::user()->role == 'main'){
             Customer::findOrFail($id)->delete();
             return response()->json();
+        }
+        return response()->json(['msg'=> 'unauthorized action'], 401);
     }
 
     public function updateStatus($status, $id){

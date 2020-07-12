@@ -30,37 +30,52 @@
 
                   <li class="nav-item dropdown">
 
-                      <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
-                        <i class="fas fa-user-circle"></i>  
-                        
-                        @if (isset(Auth::user()->username))
-
-                            {{Auth::user()->name}}
-
-                        @endif
-                        @if (Auth::user()->role == 'main')
-
-                        <i class="fas fa-star text-warning"></i>
-
-                    @endif
+                      <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown"  aria-expanded="false">
+                      <i class="far fa-bell"></i> 
+                      @if (Auth::user()->notifications->count() > 0)
+                        <span class="badge badge-warning">{{Auth::user()->notifications->count()}}</span>
+                      @endif
                       </a>
 
-                  <div class="dropdown-menu bg-light shadow dropdown-menu-right" aria-labelledby="navbarDropdown">
-
-
-                      <a class="dropdown-item" href="{{url('user_manager')}}"> <i class="fas fa-user-cog"></i>  User Manager</a>
-
-                      <a class="dropdown-item" href="{{url('settings')}}"> <i class="fas fa-cog"></i>  Settings</a>
-
-                      <div class="dropdown-divider"></div> 
-
-                      <a class="dropdown-item"  href="{{url('user/logout')}}"><i class="fas fa-sign-out-alt"></i> Logout</a>
-
+                  <div class="dropdown-menu bg-light shadow dropdown-menu-right" aria-labelledby="navbarDropdown2">
+                        @foreach (Auth::user()->notifications as $notification)
+                        <a class="dropdown-item" href="{{url('orders')}}"> {{$notification->data['data']}}</a>
+                        @endforeach
                   </div>
 
                   </li>
+                  <li class="nav-item dropdown">
 
+                    <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                      <i class="fas fa-user-circle"></i>  
+                      
+                      @if (isset(Auth::user()->username))
+
+                          {{Auth::user()->name}}
+
+                      @endif
+                      @if (Auth::user()->role == 'main')
+
+                      <i class="fas fa-star text-warning"></i>
+
+                  @endif
+                    </a>
+
+                <div class="dropdown-menu bg-light shadow dropdown-menu-right" aria-labelledby="navbarDropdown">
+
+
+                    <a class="dropdown-item" href="{{url('user_manager')}}"> <i class="fas fa-users-cog"></i>  User Manager</a>
+
+                    <a class="dropdown-item" href="{{url('account')}}"> <i class="fas fa-user-cog"></i>  Your Account</a>
+
+                    <div class="dropdown-divider"></div> 
+
+                    <a class="dropdown-item"  href="{{url('user/logout')}}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+
+                </div>
+
+                </li>
               </ul>
 
           </div>

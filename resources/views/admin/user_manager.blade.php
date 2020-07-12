@@ -16,7 +16,7 @@
                 
                     @if (Auth::user()->role == 'main')
                     <div class="row">
-                        <div class="col-md-6"><h3> <i class="fas fa-user-cog"></i> User Manager</h3></div>
+                        <div class="col-md-6"><h3> <i class="fas fa-users-cog"></i> User Manager</h3></div>
                         <div class="col-md-6"><a href="user" class="btn btn-primary btn-sm float-right"> <i class="fas fa-user-plus"></i> Add User</a></div>
                     </div>
                     <table class="table table-striped table-bordered bg-light shadow-sm">
@@ -61,6 +61,11 @@
 @endsection
 
 @section('script')
+
+<script type="text/javascript" src="{{asset('js/easy_notify.js')}}"></script>   
+<script type="text/javascript" src="{{asset('js/notification.js')}}"></script>   
+
+
     <script>
        function deleteUser(user_id){
            Swal.fire({

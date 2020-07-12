@@ -8,8 +8,11 @@ use App\Customer;
 use App\Order;
 use App\OrderDetails;
 use App\Cart;
+use App\User;
 use Session;
 use App\Http\Resources\OrderResourceCollection;
+use App\Notifications\OrderPlaced;
+
 
 class OrderController extends Controller
 {
@@ -57,11 +60,18 @@ class OrderController extends Controller
                 $order_details->order_id = $order_id;
                 $order_details->save();
             }
+            // send mail
             // Mail::to('baitydelicias@gmail.com')->send(new NewOrderAdminMail($order));
             // if(!empty($request->email)){
             //     Mail::to($request->email)->send(new NewOrderMail($order));
             // }
+
+            // create notification
+            $users = User::all();
             
+            foreach ($users as $user) {
+                $user->notify(new OrderPlaced($order));
+            }
             Session::forget('cart'); #empty cart
             return view('success')->with( ['order_number' => $order->order_number, 'email'=> $customer->email]);
         }

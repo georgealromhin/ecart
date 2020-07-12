@@ -9,7 +9,7 @@
       </template>
     
       <!-- Button trigger modal -->
-      <b-button id="show-btn" variant="primary" @click="showModal(true, null)">+ Add New Product</b-button>
+      <b-button id="show-btn" variant="primary" v-if="user_role == 'main'" @click="showModal(true, null)">+ Add New Product</b-button>
 
       <b-row class="mt-2">
         <b-col>
@@ -27,16 +27,16 @@
         </template>
 
         <template v-slot:cell(status_check)="row">
-          <b-link href="#" class="text-danger" v-if="row.item.status == 'hidden'" @click="updateStatus(row.item.id, row.item.status)"><b-icon-play-fill></b-icon-play-fill> Paused</b-link>
-          <b-link href="#" class="text-primary" v-if="row.item.status == 'visible'" @click="updateStatus(row.item.id, row.item.status)"><b-icon-pause-fill></b-icon-pause-fill> Pause</b-link>
+          <b-link href="#" class="text-danger" v-if="row.item.status == 'hidden' && user_role == 'main'" @click="updateStatus(row.item.id, row.item.status)"><b-icon-play-fill></b-icon-play-fill> Paused</b-link>
+          <b-link href="#" class="text-primary" v-if="row.item.status == 'visible' && user_role == 'main'" @click="updateStatus(row.item.id, row.item.status)"><b-icon-pause-fill></b-icon-pause-fill> Pause</b-link>
         </template>
 
         <template v-slot:cell(edit)="row">
-          <b-link href="#" class="text-primary" @click="showModal(false, row.item, row.item)"><b-icon-pencil-square></b-icon-pencil-square> Edit</b-link>
+          <b-link href="#" class="text-primary" @click="showModal(false, row.item, row.item)" v-if="user_role == 'main'"><b-icon-pencil-square></b-icon-pencil-square> Edit</b-link>
         </template>  
 
         <template v-slot:cell(delete)="row">
-        <b-link href="#" class="text-danger" @click="deleteProduct(row.item.id)"><b-icon-trash></b-icon-trash> Delete</b-link>
+        <b-link href="#" class="text-danger" @click="deleteProduct(row.item.id)" v-if="user_role == 'main'"><b-icon-trash></b-icon-trash> Delete</b-link>
         </template>
       </b-table>
 
@@ -104,6 +104,7 @@
 <script>
 
  export default {
+   props: ['user_role'],
     data(){
       return {
           imageProps: { width: 200, height: 200},
@@ -114,7 +115,7 @@
           categories: [],
           fields: [
             {key:'image', label:'Image', sortable: false, },
-            {key:'name', label:'Name', sortable: true, },
+            {key:'name', label:'Product', sortable: true, },
             {key:'price', label:'Price', sortable: true, },
             {key:'category.name', label:'Category', sortable:true },
             {key:'status_check', label:'Status', sortable:false },

@@ -31,7 +31,7 @@
         </template>  
 
         <template v-slot:cell(delete)="row">
-        <b-link href="#" class="text-danger" @click="deleteOrder(row.item.id)"><b-icon-trash></b-icon-trash> Delete</b-link>
+        <b-link href="#" class="text-danger" @click="deleteOrder(row.item.id)" v-if="user_role == 'main'"><b-icon-trash></b-icon-trash> Delete</b-link>
         </template>
       </b-table>
         <div class="text-center" v-if="!dataLoaded">
@@ -51,6 +51,7 @@
 <script>
 
  export default {
+   props: ['user_role'],
     data(){
       return {
         //show: true,

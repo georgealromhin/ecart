@@ -77,8 +77,20 @@ html {
 
 .toast {
   left: 50%;
-  top: 85%;
+  top: 75%;
   position: fixed;
   transform: translate(-50%, 0px);
   z-index: 9999;
 }
+
+
+.fb-btn{color: #3b5998 !important;}
+.twitter-btn{color: #3b5998 !important;}
+.instagram-btn{color: #f09433!important; }
+.youtube-btn{color: #c4302b !important; }
+.vk-btn{color: #4c75a3 !important; }
+.telegram-btn{color: #0088cc !important; }
+.whatsapp-btn{color: #4FCE5D !important; }
+footer{background-color: #111111 !important;}
+
+.pre-line-text{white-space: pre-line}
