@@ -5,6 +5,6 @@
 @section('content')
 
     <h3> Privacy policy </h3>
-    <p style="white-space: pre-line">{{$settings[17]->value }}</p>
+    <p style="white-space: pre-line">{{$settings[16]->value }}</p>
 
 @endsection

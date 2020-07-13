@@ -2,8 +2,32 @@
 @section('title', $settings[12]->value)
 @section('content')
 
-<section class="bg-title-page text-center mt-5" style="background-image: url(images/header_image.webp);">
-</section>
+
+<div id="carouselControls" class="carousel slide mt-4 shadow" data-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img class="d-block w-100 carousel-img rounded" src="images/header_image.webp" alt="First slide">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100 carousel-img rounded" src="images/header_image.webp" alt="Second slide">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100 carousel-img rounded" src="images/ecart_logo.png" alt="Third slide">
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselControls" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselControls" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+
+
+
 <div class="toast float-left" role="alert" aria-live="assertive" aria-atomic="true">
     <div class="toast-body">
         <i class="fas fa-check-circle text-success"></i> Added to cart

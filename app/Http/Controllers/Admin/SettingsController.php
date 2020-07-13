@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Resources\SettingsResourceCollection;
 use App\Http\Resources\SettingsResource;
 use App\Settings;
+use Illuminate\Support\Facades\Auth;
 
 
 class SettingsController extends Controller

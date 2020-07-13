@@ -104,7 +104,14 @@
         },
 
     methods:{
-
+        makeToast(title, text, variant) {
+            this.$bvToast.toast(text, {
+            title: title,
+            variant: variant,
+            autoHideDelay: 1000,
+            solid: true
+            })
+        },
       showModal(add, name, id) {
         this.form.name = name;
         this.form.id = id;
@@ -129,18 +136,27 @@
          var obj = {'name': this.form.name}
             //var strngObj = qs.stringify(obj)
           axios.put('category/update/'+this.form.id , obj).then(response => {
-            //console.log(response);
-            this.hideModal()
-            this.getCategories()
-          }).catch(err => { console.log(err)});
+            if(response.status == 200){
+              this.makeToast('Updated','Category Updated','success')
+              this.hideModal()
+              this.getCategories()
+            }
+            
+          }).catch( error => {
+              this.makeToast('Error','Something went wrong, error: '+ error.response.status, 'danger')
+            });
         }else{
           const formData = new FormData();
           formData.append('name', this.form.name);
           axios.post('category/create', {name: this.form.name}).then(response => {
-            //console.log(response);
-            this.hideModal()
-            this.getCategories()
-          }).catch(err => { console.log(err)});
+            if(response.status == 200){
+              this.makeToast('Added','New Category Added','success')
+              this.hideModal()
+              this.getCategories()
+            }
+          }).catch( error => {
+              this.makeToast('Error','Something went wrong, error: '+ error.response.status, 'danger')
+            });
             
         }
         
@@ -148,13 +164,15 @@
    
       // fetch data 
       getCategories() {
-        axios.get('categories/all').then(function(response){
+        axios.get('categories/all').then(response =>{
           this.items = response.data.data;
           // Set the initial number of items
           this.totalRows = this.items.length
           this.dataLoaded = true;
-          }.bind(this));         
-        },
+        }).catch( error => {
+            this.makeToast('Error','Could not load categories, error: '+ error.response.status, 'danger')
+        });         
+      },
 
         // delete data
         deleteItem(id) {
@@ -163,15 +181,20 @@
             text: "You won't be able to revert this!",
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes'
+            confirmButtonColor: '#0080FF',
+            cancelButtonColor: '#FF2645',
+            confirmButtonText: 'Yes',
+            focusCancel: true
           }).then((result) => {
             if (result.value) {
               axios.delete('category/delete/'+ id).then(response => {
-              //console.log(response);
-              this.getCategories()
-            }).catch(err => { console.log(err)})  
+               if(response.status == 200){
+                this.makeToast('Deleted','Category deleted','success')
+                this.getCategories()
+              }
+            }).catch( error => {
+              this.makeToast('Error','Something went wrong, error: '+ error.response.status, 'danger')
+            });
             }
           })
             ;
@@ -183,11 +206,14 @@
            if(status == 'visible'){
              _status = 'hidden'
            }
-           axios.put('category_status/update/'+_status+'/'+id).then(function(response){
-             //console.log(response);
-          }).then(
-             this.getCategories()
-          ); 
+           axios.put('category_status/update/'+_status+'/'+id).then(response =>{
+            if(response.status == 200){
+                this.makeToast('Status changed','Category status has been changed','success')
+                this.getCategories()
+              }
+          }).catch( error => {
+              this.makeToast('Error','Something went wrong, error: '+ error.response.status, 'danger')
+            });
         },
         // Trigger pagination to update the number of buttons/pages due to filtering
         onFiltered(filteredItems) {

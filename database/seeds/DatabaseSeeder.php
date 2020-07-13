@@ -105,36 +105,30 @@ class DatabaseSeeder extends Seeder
 
         DB::table('settings')->insert([
             'id' => 15,
-            'name' => 'header_image',
-            'value' => 'images/header_image.webp',
-        ]);
-
-        DB::table('settings')->insert([
-            'id' => 16,
             'name' => 'about',
             'value' => 'About us text',
         ]);
 
         DB::table('settings')->insert([
-            'id' => 17,
+            'id' => 16,
             'name' => 'delivery_information',
             'value' => 'Delivery information text',
         ]);
 
         DB::table('settings')->insert([
-            'id' => 18,
+            'id' => 17,
             'name' => 'privacy_policy',
             'value' => 'Privacy Policy text',
         ]);
 
         DB::table('settings')->insert([
-            'id' => 19,
+            'id' => 18,
             'name' => 'terms_conditions',
             'value' => 'Terms & Conditions text',
         ]);
 
         DB::table('settings')->insert([
-            'id' => 20,
+            'id' => 19,
             'name' => 'footer_text',
             'value' => 'Footer text',
         ]);

@@ -23,19 +23,43 @@ class DashboardController extends Controller
         $totalOrders = $order->count();
         $totalCustomers = Customer::get()->groupBy('name')->count();
 
-        $orders = $order->select(DB::raw('DATE_FORMAT(created_at, "%M-%Y") as date'), DB::raw('count(*) as total'), DB::raw('max(created_at) as createdAt'))->groupBy('date')->orderBy(DB::raw("createdAt"), 'ASC')->get();
-            
+        // PostgreSQL
+        $orders = $order->select(DB::raw("to_char(created_at ,'Month YYYY') as date"), DB::raw('count(*) as total'))
+        ->groupBy('date')
+        ->orderBy(DB::raw("max(created_at)"), 'ASC')
+        ->get();
+     
+        // MySQL
+        // $orders = $order->select(DB::raw('DATE_FORMAT(created_at, "%M-%Y") as date'), DB::raw('count(*) as total'))
+        // ->groupBy('date')->orderBy(DB::raw("max(created_at)"), 'ASC')
+        // ->get();
 
-            
-        $orders_count = $order->select(DB::raw('DATE_FORMAT(created_at, "%M-%Y") as date'), DB::raw('SUM(total) as total'), DB::raw('max(created_at) as createdAt'))->where('order_status', 'delivered')->groupBy('date')->orderBy(DB::raw("createdAt"), 'ASC')->get();
+        // PostgreSQL
+        $sales = $order->select(DB::raw("to_char(created_at ,'Month YYYY') as date"), DB::raw('SUM(total) as total'))
+        ->where('order_status', 'Delivered')
+        ->groupBy('date')
+        ->orderBy(DB::raw("max(created_at)"), 'ASC')
+        ->get();
+
+
+        // MySQL
+        // $sales = $order->select(DB::raw('DATE_FORMAT(created_at, "%M-%Y") as date'), DB::raw('SUM(total) as total'))
+        // ->where('order_status', 'Delivered')
+        // ->groupBy('date')
+        // ->orderBy(DB::raw("max(created_at)"), 'ASC')
+        // ->get();
+
         
+        $latest_orders = $order->where('created_at','>=', Carbon::today())->orderBy('id', 'DESC')->get();
+
         return view('admin.dashboard', [
             
             'total' =>  $totalAmount,
             'total_orders' =>  $totalOrders,
             'total_customers' =>  $totalCustomers,
             'orders' => $orders,
-            'orders_count' => $orders_count,
+            'sales' => $sales,
+            'latest_orders' =>  $latest_orders,
            
         ]);
     }

@@ -141,6 +141,15 @@
         },
 
     methods:{
+      makeToast(title, text, variant) {
+            this.$bvToast.toast(text, {
+            title: title,
+            variant: variant,
+            autoHideDelay: 1000,
+            solid: true
+            })
+        },
+
       openImage(e){
           this.imagePath = e.target.files[0];
           this.imageUrl = URL.createObjectURL(this.imagePath);
@@ -193,21 +202,31 @@
         if(this.formEdit){
          
           axios.post('product/update' , formData).then(response => {
-            //console.log(response);
-            this.hideModal()
-            this.getProducts()
-          }).catch(err => { console.log(err)});
+
+            if(response.status == 200){
+                this.makeToast('Updated','Product Updated','success')
+                this.hideModal()
+                this.getProducts()
+              }
+            
+          }).catch( error => {
+              this.makeToast('Error','Something went wrong, error: '+ error.response.status, 'danger')
+            });
         }else{
           
           
           axios.post('product/create', formData).then(response => {
-            //console.log(response);
-            this.hideModal()
-            this.getProducts()
-            this.resetForm()
-            //reset form
-            evt.target.reset()
-          }).catch(err => { console.log(err)});
+              if(response.status == 200){
+                this.makeToast('Added','New Product Added','success')
+                this.hideModal()
+                this.getProducts()
+                this.resetForm()
+                //reset form
+                evt.target.reset()
+              }
+          }).catch( error => {
+              this.makeToast('Error','Something went wrong, error: '+ error.response.status, 'danger')
+          });
             
         }
         
@@ -215,18 +234,22 @@
    
       // fetch data 
       getProducts() {
-        axios.get('products/all').then(function(response){
-          this.items = response.data.data;
-          // Set the initial number of items
-          this.totalRows = this.items.length
-          this.dataLoaded = true;
-          }.bind(this));         
+        axios.get('products/all').then(response =>{
+            this.items = response.data.data;
+            // Set the initial number of items
+            this.totalRows = this.items.length
+            this.dataLoaded = true;
+          }).catch( error => {
+              this.makeToast('Error','Could not load products, error: '+ error.response.status, 'danger')
+          });          
         },
         // fetch categories 
         getCategories() {
-            axios.get('categories/all').then(function(response){
-            this.categories = response.data.data;
-            }.bind(this));         
+            axios.get('categories/all').then(response => {
+              this.categories = response.data.data;
+            }).catch( error => {
+              this.makeToast('Error','Could not load categories, error: '+ error.response.status, 'danger')
+            });        
         },
 
         // delete data
@@ -236,15 +259,21 @@
             text: "You won't be able to revert this!",
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes'
+            confirmButtonColor: '#0080FF',
+            cancelButtonColor: '#FF2645',
+            confirmButtonText: 'Yes',
+            focusCancel: true
           }).then((result) => {
             if (result.value) {
               axios.delete('product/delete/'+ id).then(response => {
-              //console.log(response);
-              this.getProducts()
-            }).catch(err => { console.log(err)})  
+              if(response.status == 200){
+                this.makeToast('Deleted','Product Deleted','success')
+                this.getProducts()
+              }
+             
+            }).catch( error => {
+              this.makeToast('Error','Something went wrong, error: '+ error.response.status, 'danger')
+            });  
             }
           })
             ;
@@ -256,11 +285,14 @@
            if(status == 'visible'){
              _status = 'hidden'
            }
-           axios.put('product_status/update/'+_status+'/'+id).then(function(response){
-             //console.log(response);
-          }).then(
-             this.getProducts()
-          ); 
+           axios.put('product_status/update/'+_status+'/'+id).then(response => {
+             if(response.status == 200){
+                this.makeToast('Status Changed','Product Status has been changed','success')
+                this.getProducts()
+              }
+          }).catch( error => {
+              this.makeToast('Error','Something went wrong, error: '+ error.response.status, 'danger')
+            }); 
         },
         // Trigger pagination to update the number of buttons/pages due to filtering
         onFiltered(filteredItems) {

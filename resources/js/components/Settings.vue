@@ -63,38 +63,40 @@
         },
 
     methods:{
-        makeToast(text) {
-            this.$bvToast.toast('Saved', {
-            title: 'Changes saved',
-            variant: 'success',
+ 
+        makeToast(title, text, variant) {
+            this.$bvToast.toast(text, {
+            title: title,
+            variant: variant,
             autoHideDelay: 1000,
             solid: true
             })
         },
-   
-      // fetch data 
+      
+        saveChanges(){
+            var jsonData = this.form
+            axios.put('settings/update', jsonData).then(response => {
+              if(response.status == 200){
+                 this.makeToast('Changes saved','Saved','success')
+              }
+            }).catch( error => {
+              this.makeToast('Error','Something went wrong, error: '+ error.response.status, 'danger')
+            });
+        },
+    // fetch data 
       getSettings() {
         axios.get('settings/all').then(function(response){
           this.items = response.data.data;
           this.items.forEach(element => {
               this.form[element.id] = element.value;
           });
-          
           // Set the initial number of items
           this.totalRows = this.items.length
           this.dataLoaded = true;
+          
           }.bind(this));         
         },
-        saveChanges(){
-            var jsonData = this.form
-            axios.put('settings/update', jsonData).then(function(response){
-                //console.log(response.data)
                
-            }).then(
-                this.getSettings()
-                
-            ).then( this.makeToast() );
-        },
         capitalizeFirstLetter(string){
             return string.charAt(0).toUpperCase() + string.slice(1).replace('_',' ')
         },

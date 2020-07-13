@@ -57,8 +57,8 @@
         //show: true,
           items: [],
           fields: [
-            {key:'order_number', label:'Order', sortable: true, },
-            {key:'customer.name', label:'Name', sortable: true, },
+            {key:'order_number', label:'Order №', sortable: true, },
+            {key:'customer.name', label:'Customer', sortable: true, },
             {key:'created_at', label:'Date', sortable:true },
             {key:'total', label:'Total', sortable:true },
             {key:'order_type', label:'Type', sortable:true },

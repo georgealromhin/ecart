@@ -12,7 +12,7 @@
 
         <!-- Content -->
         <h5 class="font-weight-bold text-uppercase mt-3 mb-4">{{$settings[0]->value}}</h5>
-        <p>{{$settings[19]->value}}</p>
+        <p>{{$settings[18]->value}}</p>
 
       </div>
       <!-- Grid column -->

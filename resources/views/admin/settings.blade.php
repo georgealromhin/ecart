@@ -14,6 +14,7 @@
             @include('admin.navbar')
             <div class="container mt-5 mb-5">
                 <settings-component user_role="{{ Auth::user()->role }}"></settings-component>
+                {{-- <a href="{{url('banners')}}">Banners</a> --}}
             </div>
         </div>
     </div>

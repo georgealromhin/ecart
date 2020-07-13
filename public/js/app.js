@@ -2019,6 +2019,14 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {},
   methods: {
+    makeToast: function makeToast(title, text, variant) {
+      this.$bvToast.toast(text, {
+        title: title,
+        variant: variant,
+        autoHideDelay: 1000,
+        solid: true
+      });
+    },
     showModal: function showModal(add, name, id) {
       this.form.name = name;
       this.form.id = id;
@@ -2048,12 +2056,15 @@ __webpack_require__.r(__webpack_exports__);
         }; //var strngObj = qs.stringify(obj)
 
         axios.put('category/update/' + this.form.id, obj).then(function (response) {
-          //console.log(response);
-          _this.hideModal();
+          if (response.status == 200) {
+            _this.makeToast('Updated', 'Category Updated', 'success');
 
-          _this.getCategories();
-        })["catch"](function (err) {
-          console.log(err);
+            _this.hideModal();
+
+            _this.getCategories();
+          }
+        })["catch"](function (error) {
+          _this.makeToast('Error', 'Something went wrong, error: ' + error.response.status, 'danger');
         });
       } else {
         var formData = new FormData();
@@ -2061,57 +2072,77 @@ __webpack_require__.r(__webpack_exports__);
         axios.post('category/create', {
           name: this.form.name
         }).then(function (response) {
-          //console.log(response);
-          _this.hideModal();
+          if (response.status == 200) {
+            _this.makeToast('Added', 'New Category Added', 'success');
 
-          _this.getCategories();
-        })["catch"](function (err) {
-          console.log(err);
+            _this.hideModal();
+
+            _this.getCategories();
+          }
+        })["catch"](function (error) {
+          _this.makeToast('Error', 'Something went wrong, error: ' + error.response.status, 'danger');
         });
       }
     },
     // fetch data 
     getCategories: function getCategories() {
-      axios.get('categories/all').then(function (response) {
-        this.items = response.data.data; // Set the initial number of items
+      var _this2 = this;
 
-        this.totalRows = this.items.length;
-        this.dataLoaded = true;
-      }.bind(this));
+      axios.get('categories/all').then(function (response) {
+        _this2.items = response.data.data; // Set the initial number of items
+
+        _this2.totalRows = _this2.items.length;
+        _this2.dataLoaded = true;
+      })["catch"](function (error) {
+        _this2.makeToast('Error', 'Could not load categories, error: ' + error.response.status, 'danger');
+      });
     },
     // delete data
     deleteItem: function deleteItem(id) {
-      var _this2 = this;
+      var _this3 = this;
 
       Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes'
+        confirmButtonColor: '#0080FF',
+        cancelButtonColor: '#FF2645',
+        confirmButtonText: 'Yes',
+        focusCancel: true
       }).then(function (result) {
         if (result.value) {
           axios["delete"]('category/delete/' + id).then(function (response) {
-            //console.log(response);
-            _this2.getCategories();
-          })["catch"](function (err) {
-            console.log(err);
+            if (response.status == 200) {
+              _this3.makeToast('Deleted', 'Category deleted', 'success');
+
+              _this3.getCategories();
+            }
+          })["catch"](function (error) {
+            _this3.makeToast('Error', 'Something went wrong, error: ' + error.response.status, 'danger');
           });
         }
       });
     },
     // update status
     updateStatus: function updateStatus(id, status) {
+      var _this4 = this;
+
       var _status = 'visible';
 
       if (status == 'visible') {
         _status = 'hidden';
       }
 
-      axios.put('category_status/update/' + _status + '/' + id).then(function (response) {//console.log(response);
-      }).then(this.getCategories());
+      axios.put('category_status/update/' + _status + '/' + id).then(function (response) {
+        if (response.status == 200) {
+          _this4.makeToast('Status changed', 'Category status has been changed', 'success');
+
+          _this4.getCategories();
+        }
+      })["catch"](function (error) {
+        _this4.makeToast('Error', 'Something went wrong, error: ' + error.response.status, 'danger');
+      });
     },
     // Trigger pagination to update the number of buttons/pages due to filtering
     onFiltered: function onFiltered(filteredItems) {
@@ -2194,11 +2225,11 @@ __webpack_require__.r(__webpack_exports__);
       items: [],
       fields: [{
         key: 'order_number',
-        label: 'Order',
+        label: 'Order №',
         sortable: true
       }, {
         key: 'customer.name',
-        label: 'Name',
+        label: 'Customer',
         sortable: true
       }, {
         key: 'created_at',
@@ -2460,6 +2491,14 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {},
   methods: {
+    makeToast: function makeToast(title, text, variant) {
+      this.$bvToast.toast(text, {
+        title: title,
+        variant: variant,
+        autoHideDelay: 1000,
+        solid: true
+      });
+    },
     openImage: function openImage(e) {
       this.imagePath = e.target.files[0];
       this.imageUrl = URL.createObjectURL(this.imagePath);
@@ -2512,77 +2551,104 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.formEdit) {
         axios.post('product/update', formData).then(function (response) {
-          //console.log(response);
-          _this.hideModal();
+          if (response.status == 200) {
+            _this.makeToast('Updated', 'Product Updated', 'success');
 
-          _this.getProducts();
-        })["catch"](function (err) {
-          console.log(err);
+            _this.hideModal();
+
+            _this.getProducts();
+          }
+        })["catch"](function (error) {
+          _this.makeToast('Error', 'Something went wrong, error: ' + error.response.status, 'danger');
         });
       } else {
         axios.post('product/create', formData).then(function (response) {
-          //console.log(response);
-          _this.hideModal();
+          if (response.status == 200) {
+            _this.makeToast('Added', 'New Product Added', 'success');
 
-          _this.getProducts();
+            _this.hideModal();
 
-          _this.resetForm(); //reset form
+            _this.getProducts();
+
+            _this.resetForm(); //reset form
 
 
-          evt.target.reset();
-        })["catch"](function (err) {
-          console.log(err);
+            evt.target.reset();
+          }
+        })["catch"](function (error) {
+          _this.makeToast('Error', 'Something went wrong, error: ' + error.response.status, 'danger');
         });
       }
     },
     // fetch data 
     getProducts: function getProducts() {
-      axios.get('products/all').then(function (response) {
-        this.items = response.data.data; // Set the initial number of items
+      var _this2 = this;
 
-        this.totalRows = this.items.length;
-        this.dataLoaded = true;
-      }.bind(this));
+      axios.get('products/all').then(function (response) {
+        _this2.items = response.data.data; // Set the initial number of items
+
+        _this2.totalRows = _this2.items.length;
+        _this2.dataLoaded = true;
+      })["catch"](function (error) {
+        _this2.makeToast('Error', 'Could not load products, error: ' + error.response.status, 'danger');
+      });
     },
     // fetch categories 
     getCategories: function getCategories() {
+      var _this3 = this;
+
       axios.get('categories/all').then(function (response) {
-        this.categories = response.data.data;
-      }.bind(this));
+        _this3.categories = response.data.data;
+      })["catch"](function (error) {
+        _this3.makeToast('Error', 'Could not load categories, error: ' + error.response.status, 'danger');
+      });
     },
     // delete data
     deleteProduct: function deleteProduct(id) {
-      var _this2 = this;
+      var _this4 = this;
 
       Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes'
+        confirmButtonColor: '#0080FF',
+        cancelButtonColor: '#FF2645',
+        confirmButtonText: 'Yes',
+        focusCancel: true
       }).then(function (result) {
         if (result.value) {
           axios["delete"]('product/delete/' + id).then(function (response) {
-            //console.log(response);
-            _this2.getProducts();
-          })["catch"](function (err) {
-            console.log(err);
+            if (response.status == 200) {
+              _this4.makeToast('Deleted', 'Product Deleted', 'success');
+
+              _this4.getProducts();
+            }
+          })["catch"](function (error) {
+            _this4.makeToast('Error', 'Something went wrong, error: ' + error.response.status, 'danger');
           });
         }
       });
     },
     // update status
     updateStatus: function updateStatus(id, status) {
+      var _this5 = this;
+
       var _status = 'visible';
 
       if (status == 'visible') {
         _status = 'hidden';
       }
 
-      axios.put('product_status/update/' + _status + '/' + id).then(function (response) {//console.log(response);
-      }).then(this.getProducts());
+      axios.put('product_status/update/' + _status + '/' + id).then(function (response) {
+        if (response.status == 200) {
+          _this5.makeToast('Status Changed', 'Product Status has been changed', 'success');
+
+          _this5.getProducts();
+        }
+      })["catch"](function (error) {
+        _this5.makeToast('Error', 'Something went wrong, error: ' + error.response.status, 'danger');
+      });
     },
     // Trigger pagination to update the number of buttons/pages due to filtering
     onFiltered: function onFiltered(filteredItems) {
@@ -2671,32 +2737,39 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {},
   methods: {
-    makeToast: function makeToast(text) {
-      this.$bvToast.toast('Saved', {
-        title: 'Changes saved',
-        variant: 'success',
+    makeToast: function makeToast(title, text, variant) {
+      this.$bvToast.toast(text, {
+        title: title,
+        variant: variant,
         autoHideDelay: 1000,
         solid: true
+      });
+    },
+    saveChanges: function saveChanges() {
+      var _this = this;
+
+      var jsonData = this.form;
+      axios.put('settings/update', jsonData).then(function (response) {
+        if (response.status == 200) {
+          _this.makeToast('Changes saved', 'Saved', 'success');
+        }
+      })["catch"](function (error) {
+        _this.makeToast('Error', 'Something went wrong, error: ' + error.response.status, 'danger');
       });
     },
     // fetch data 
     getSettings: function getSettings() {
       axios.get('settings/all').then(function (response) {
-        var _this = this;
+        var _this2 = this;
 
         this.items = response.data.data;
         this.items.forEach(function (element) {
-          _this.form[element.id] = element.value;
+          _this2.form[element.id] = element.value;
         }); // Set the initial number of items
 
         this.totalRows = this.items.length;
         this.dataLoaded = true;
       }.bind(this));
-    },
-    saveChanges: function saveChanges() {
-      var jsonData = this.form;
-      axios.put('settings/update', jsonData).then(function (response) {//console.log(response.data)
-      }).then(this.getSettings()).then(this.makeToast());
     },
     capitalizeFirstLetter: function capitalizeFirstLetter(string) {
       return string.charAt(0).toUpperCase() + string.slice(1).replace('_', ' ');

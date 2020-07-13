@@ -23,7 +23,9 @@
               <a class="nav-link text-light brand-baity"> {{config('app.name')}}</a>
 
           </li>
-
+            @php
+                use Carbon\Carbon;
+            @endphp
           </ul>
 
               <ul class="navbar-nav ml-auto">
@@ -39,7 +41,11 @@
 
                   <div class="dropdown-menu bg-light shadow dropdown-menu-right" aria-labelledby="navbarDropdown2">
                         @foreach (Auth::user()->notifications as $notification)
-                        <a class="dropdown-item" href="{{url('orders')}}"> {{$notification->data['data']}}</a>
+                        <a class="dropdown-item" href="{{url('orders')}}">
+                           {{$notification->data['data']}} 
+                          <br> <small class="text-muted">{{ $notification->created_at->diffForHumans() }} </small>
+                        </a>
+                        
                         @endforeach
                   </div>
 

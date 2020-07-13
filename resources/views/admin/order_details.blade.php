@@ -1,5 +1,5 @@
 @extends('admin.layout')
-@section('title', '#'.$order->order_number)
+@section('title', '№'.$order->order_number)
 
 @section('header')
 <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -15,7 +15,7 @@
                         
 
                         <ul class="list-group">
-                            <li class="list-group-item"><b>#{{$order->order_number}}</b> Date: {{$order->created_at}} ({{$order->order_type}}) 
+                            <li class="list-group-item"><b>№{{$order->order_number}}</b> Date: {{$order->created_at}} ({{$order->order_type}}) 
                                 
                                 <div class="form-group float-right">
                                 <label for="order_status">Order Status</label>
