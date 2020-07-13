@@ -18,7 +18,7 @@ class CreateOrdersTable extends Migration
             $table->string('order_number');
             $table->string('delivery_address')->nullable();
             $table->string('comments')->nullable();
-            $table->string('total');
+            $table->double('total');
             $table->string('order_type');
             $table->string('order_status');
             $table->bigInteger('customer_id')->unsigned();

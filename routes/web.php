@@ -35,6 +35,11 @@ Route::get('admin', 'Admin\Auth\LoginController@index');//view
 Route::post('user/login', 'Admin\Auth\LoginController@login');
 Route::get('user/logout', 'Admin\Auth\LogoutController@logout');
 
+
+/* ====================[Dashboard]==================== */
+Route::get('dashboard', 'Admin\DashboardController@index')->middleware('auth'); //view
+
+
 /* ====================[User Manager]==================== */
 Route::get('user_manager', 'Admin\UserManagerController@index')->middleware('auth'); // view
 Route::get('users', 'Admin\UserManagerController@show')->middleware('auth');
@@ -48,9 +53,6 @@ Route::post('name/update', 'Admin\AccountController@updateName')->middleware('au
 Route::post('username/update', 'Admin\AccountController@updateUsername')->middleware('auth');
 Route::post('password/update', 'Admin\AccountController@updatePassword')->middleware('auth');
 Route::post('account/delete', 'Admin\AccountController@deleteAccount')->middleware('auth');
-
-/* ====================[Dashboard]==================== */
-Route::get('dashboard', 'Admin\DashboardController@index')->middleware('auth'); //view
 
 /* ====================[Categories]==================== */
 Route::get('categories', 'Admin\CategoryController@index')->middleware('auth'); // view
