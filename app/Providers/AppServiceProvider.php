@@ -28,7 +28,6 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         // $settings = Settings::orderBy('id', 'asc')->get();
-        
         // View::share([
         //     'settings' => $settings,
         // ]);
