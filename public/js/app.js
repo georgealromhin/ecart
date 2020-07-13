@@ -83453,10 +83453,7 @@ var render = function() {
                 [
                   _c(
                     "b-link",
-                    {
-                      staticClass: "text-primary",
-                      attrs: { href: "banners", target: "_blank" }
-                    },
+                    { staticClass: "text-primary", attrs: { href: "banners" } },
                     [_c("b-icon-images"), _vm._v(" Banners Manager")],
                     1
                   )

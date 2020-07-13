@@ -10,7 +10,7 @@
     
       <b-row class="mt-2">
         <b-col>
-                    <b-link href="banners" class="text-primary" target="_blank"><b-icon-images></b-icon-images> Banners Manager</b-link>
+                    <b-link href="banners" class="text-primary"><b-icon-images></b-icon-images> Banners Manager</b-link>
 
         </b-col>
         <b-col>

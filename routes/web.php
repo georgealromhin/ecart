@@ -91,7 +91,7 @@ Route::post('banner/create', 'Admin\BannerController@store')->middleware('auth')
 Route::delete('banner/delete/{id}', 'Admin\BannerController@destroy')->middleware('auth');
 
 /* ====================[Notifications]==================== */
-Route::get('notifications/count', 'Admin\NotificationController@index')->middleware('auth');//view
-Route::get('notification/markAsRead', 'Admin\NotificationController@markAsRead')->middleware('auth');//view
+Route::get('notifications/count', 'Admin\NotificationController@index')->middleware('auth');
+Route::get('notification/markAsRead', 'Admin\NotificationController@markAsRead')->middleware('auth');
 
 
