@@ -18,7 +18,6 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('root'),
             'role' => 'main',
         ]);
-
         DB::table('settings')->insert([
             'id' => 1,
             'name' => 'store_name',

@@ -5,9 +5,6 @@
 @section('content')
 
     <h3> Contact Us </h3>
-
-
-
     <div class="row mt-5">
         <div class="col-md-6">
 

@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+/* ====================[[USER]]==================== */
 Route::get('/', 'HomeController@index'); // view
 Route::get('cart', 'CartController@getCart'); // view
 Route::get('cart/store/{id}/{qty}', 'CartController@store');
@@ -25,6 +27,7 @@ Route::get('privacy_policy', function(){ return view('privacy_policy'); });
 Route::get('terms_conditions', function(){ return view('terms'); });
 Route::get('delivery_information', function(){ return view('delivery_info'); });
 Route::get('contact', function(){ return view('contact'); });
+Route::post('send_mail', 'ContactController@send_mail');
 
 
 
@@ -35,10 +38,8 @@ Route::get('admin', 'Admin\Auth\LoginController@index');//view
 Route::post('user/login', 'Admin\Auth\LoginController@login');
 Route::get('user/logout', 'Admin\Auth\LogoutController@logout');
 
-
 /* ====================[Dashboard]==================== */
 Route::get('dashboard', 'Admin\DashboardController@index')->middleware('auth'); //view
-
 
 /* ====================[User Manager]==================== */
 Route::get('user_manager', 'Admin\UserManagerController@index')->middleware('auth'); // view
@@ -78,17 +79,19 @@ Route::get('order_details/{id}', 'Admin\OrderController@show')->middleware('auth
 Route::delete('order/delete/{id}', 'Admin\OrderController@destroy')->middleware('auth');
 Route::put('order_status/update/{status}/{id}', 'Admin\OrderController@updateStatus')->middleware('auth');
 
-
 /* ====================[Store Settings]==================== */
 Route::get('settings', 'Admin\SettingsController@index')->middleware('auth');//view
 Route::get('settings/all', 'Admin\SettingsController@showSettings')->middleware('auth');
 Route::put('settings/update', 'Admin\SettingsController@updateSettings')->middleware('auth');
 
+/* ====================[Banners]==================== */
+Route::get('banners', 'Admin\BannerController@index')->middleware('auth');//view
+Route::get('banners/all', 'Admin\BannerController@showBanners')->middleware('auth');
+Route::post('banner/create', 'Admin\BannerController@store')->middleware('auth');
+Route::delete('banner/delete/{id}', 'Admin\BannerController@destroy')->middleware('auth');
 
 /* ====================[Notifications]==================== */
 Route::get('notifications/count', 'Admin\NotificationController@index')->middleware('auth');//view
 Route::get('notification/markAsRead', 'Admin\NotificationController@markAsRead')->middleware('auth');//view
 
 
-/* ====================[Send Mail]==================== */
-Route::post('send_mail', 'ContactController@send_mail');

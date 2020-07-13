@@ -27,8 +27,8 @@ html {
 .btn-circle-sm{width:25px;height:25px;padding:6px 0;border-radius:18px;text-align:center;font-size:12px;line-height:1.42857}
 
 .bg-title-page{width:100%;min-height:470px;padding-left:15px;padding-right:15px;background-repeat:no-repeat;background-position:center 0;background-size:cover}@media (max-width:576px){.bg-title-page .tit6{font-size:30px}}.bg-title-page{width:100%;min-height:470px;padding-left:15px;padding-right:15px;background-repeat:no-repeat;background-position:center 0;background-size:cover}
-.carousel-img{object-fit: cover;height: 470px;}
-
+.carousel-img{height: 470px;}
+@media (max-width:576px){.carousel-img{height: 235px;}}
 .sidebar {
   height: 100%;
   width: 0;

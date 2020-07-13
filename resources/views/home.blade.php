@@ -5,15 +5,13 @@
 
 <div id="carouselControls" class="carousel slide mt-4 shadow" data-ride="carousel">
     <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img class="d-block w-100 carousel-img rounded" src="images/header_image.webp" alt="First slide">
+
+      @foreach ($banners as $banner)
+      <div class="carousel-item @if($loop->first) active @endif ">
+        <img class="d-block w-100 carousel-img rounded" src="{{url($banner->image)}}" alt="image">
       </div>
-      <div class="carousel-item">
-        <img class="d-block w-100 carousel-img rounded" src="images/header_image.webp" alt="Second slide">
-      </div>
-      <div class="carousel-item">
-        <img class="d-block w-100 carousel-img rounded" src="images/ecart_logo.png" alt="Third slide">
-      </div>
+      @endforeach
+
     </div>
     <a class="carousel-control-prev" href="#carouselControls" role="button" data-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>

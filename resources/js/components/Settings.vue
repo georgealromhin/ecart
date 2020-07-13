@@ -10,6 +10,8 @@
     
       <b-row class="mt-2">
         <b-col>
+                    <b-link href="banners" class="text-primary" target="_blank"><b-icon-images></b-icon-images> Banners Manager</b-link>
+
         </b-col>
         <b-col>
           <b-form-input v-model="filter" type="search" id="filterInput" placeholder="Search..." size="sm"></b-form-input>
