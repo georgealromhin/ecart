@@ -17,3 +17,6 @@ ECART is A free shopping cart system.
 - PHP >= 7.2.5
 - Laravel 7.x
 - PostgreSQL or MySQL
+
+
+## HowtoInstall
