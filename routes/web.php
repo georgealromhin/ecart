@@ -88,3 +88,7 @@ Route::put('settings/update', 'Admin\SettingsController@updateSettings')->middle
 /* ====================[Notifications]==================== */
 Route::get('notifications/count', 'Admin\NotificationController@index')->middleware('auth');//view
 Route::get('notification/markAsRead', 'Admin\NotificationController@markAsRead')->middleware('auth');//view
+
+
+/* ====================[Send Mail]==================== */
+Route::post('send_mail', 'ContactController@send_mail');

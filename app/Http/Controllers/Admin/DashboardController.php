@@ -19,9 +19,11 @@ class DashboardController extends Controller
 
         $order = new Order();
         $order_details = new OrderDetails();
-        $totalAmount =  DB::table("orders")->sum('total');
-        $totalOrders = $order->count();
-        $totalCustomers = Customer::get()->groupBy('name')->count();
+
+        $orders_info = $order->select(DB::raw("sum(total) as total_sales"), DB::raw('count(*) as total_orders'))
+        ->where('order_status', 'Delivered')->get();
+
+        $total_customers = Customer::get()->groupBy('name')->count();
 
         // PostgreSQL
         $orders = $order->select(DB::raw("to_char(created_at ,'Month YYYY') as date"), DB::raw('count(*) as total'))
@@ -54,9 +56,8 @@ class DashboardController extends Controller
 
         return view('admin.dashboard', [
             
-            'total' =>  $totalAmount,
-            'total_orders' =>  $totalOrders,
-            'total_customers' =>  $totalCustomers,
+            'orders_info' =>  $orders_info,
+            'total_customers' =>  $total_customers,
             'orders' => $orders,
             'sales' => $sales,
             'latest_orders' =>  $latest_orders,

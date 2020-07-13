@@ -21,7 +21,7 @@
                     <div class="row">
                         <div class="col-md-4 text-center"><i class="fas fa-money-bill-alt mt-2 fa-3x"></i></div>
                         <div class="col-md-8">
-                           <p class="h4"> {{ $total }} {{config('app.currency')}}</p>
+                           <p class="h4"> {{ $orders_info[0]->total_sales}} {{config('app.currency')}}</p>
                            <p>Total Sales</p>
                            </div>
                     </div>
@@ -36,7 +36,7 @@
                             <div class="row">
                                 <div class="col-md-4 text-center"><i class="fas fa-shopping-cart mt-2 fa-3x"></i></div>
                                 <div class="col-md-8">
-                                   <p class="h4"> {{$total_orders}}</p>
+                                   <p class="h4"> {{ $orders_info[0]->total_orders }}</p>
                                    <p>Total Orders</p>
                                    </div>
                             </div>

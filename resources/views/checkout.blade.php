@@ -39,13 +39,23 @@
                         <label for="comments">Comments</label>
                         <textarea class="form-control shadow-sm" name="comments" id="comments" rows="3"></textarea>
                       </div>
-                      <button type="submit" class="btn btn-danger w-100">SUBMIT</button>
+                      <button type="submit" class="btn btn-danger w-100" id="submitBtn">SUBMIT</button>
                 </form>
             </div>
         </div>
-    </div>
+    </div>                      
+
     <div class="col-md-2"></div>
 </div>
 
 
+@endsection
+
+@section('script')
+    <script>
+        $( "#submitBtn" ).click(function() {
+            Swal.fire({title: '',text: 'Loading...',allowEscapeKey: false, allowOutsideClick: false});
+            Swal.showLoading();
+        });
+    </script>
 @endsection

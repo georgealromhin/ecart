@@ -1,15 +1,20 @@
 @component('mail::message')
 
 <p>Order №{!! $data->order_number !!} on the site {!! url('/') !!}. the Total cost of the order is <b>{!! $data->total !!} {!! config('app.currency') !!}</b></p>
+
 <p><b>Contact Details:</b></p>
+
 <p><b>Name:</b> {!! $data->customer->name !!}</p>
 <p><b>Email:</b> {!! $data->customer->email !!}</p>
 <p><b>Phone:</b> {!! $data->customer->phone !!}</p>
+
+
 <p><b>Order Type:</b> {!! $data->order_type !!}</p>
 <p><b>Delivery Address:</b> {!! $data->delivery_address !!}</p>
 <p><b>Comments:</b> {!! $data->comments !!}</p>
-<strong>Order Details</strong>
 
+
+<strong>Order Details</strong>
 <table>
     @foreach ($data->order_details as $item)
         <tr>
@@ -24,7 +29,7 @@
 
 </table>
 
-Thank you for your choice!<br><br>
+<br>
 This message is sent automatically by the system, please do not respond to it<br>
 
 {!! config('app.name') !!}

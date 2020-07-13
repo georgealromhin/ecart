@@ -2264,37 +2264,53 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {},
   methods: {
+    makeToast: function makeToast(title, text, variant) {
+      this.$bvToast.toast(text, {
+        title: title,
+        variant: variant,
+        autoHideDelay: 1000,
+        solid: true
+      });
+    },
     // fetch data 
     getOrders: function getOrders() {
-      axios.get('orders/all').then(function (response) {
-        this.items = response.data.data; // Set the initial number of items
+      var _this = this;
 
-        this.totalRows = this.items.length;
-        this.dataLoaded = true;
-      }.bind(this));
+      axios.get('orders/all').then(function (response) {
+        _this.items = response.data.data; // Set the initial number of items
+
+        _this.totalRows = _this.items.length;
+        _this.dataLoaded = true;
+      })["catch"](function (error) {
+        _this.makeToast('Error', 'Could not load orders, error: ' + error.response.status, 'danger');
+      });
     },
     refreshTable: function refreshTable() {
       this.getOrders();
     },
     // delete data
     deleteOrder: function deleteOrder(id) {
-      var _this = this;
+      var _this2 = this;
 
       Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes'
+        confirmButtonColor: '#0080FF',
+        cancelButtonColor: '#FF2645',
+        confirmButtonText: 'Yes',
+        focusCancel: true
       }).then(function (result) {
         if (result.value) {
           axios["delete"]('order/delete/' + id).then(function (response) {
-            //console.log(response);
-            _this.getOrders();
-          })["catch"](function (err) {
-            console.log(err);
+            if (response.status == 200) {
+              _this2.makeToast('Deleted', 'Order Deleted', 'success');
+
+              _this2.getOrders();
+            }
+          })["catch"](function (error) {
+            _this2.makeToast('Error', 'Something went wrong, error: ' + error.response.status, 'danger');
           });
         }
       });

@@ -3,17 +3,28 @@
 
 @section('header')
 <meta name="csrf-token" content="{{ csrf_token() }}">
+<style>.toast {
+    left: 50%;
+    top: 75%;
+    position: fixed;
+    transform: translate(-50%, 0px);
+    z-index: 9999;
+  }</style>
 @endsection
 
 @section('content')
-
+<div class="toast float-right" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-body">
+        <i class="fas fa-check-circle text-success"></i> Status Changed
+    </div>
+  </div>
             <div class="container mb-5">
                 
                 <div class="row">
-                  
+                    
                     <div class="col-md-12">
                         
-
+                        
                         <ul class="list-group">
                             <li class="list-group-item"><b>№{{$order->order_number}}</b> Date: {{$order->created_at}} ({{$order->order_type}}) 
                                 
@@ -67,7 +78,7 @@
                 </div>
             </div>
     
-    
+            
 @endsection
 
 @section('script')
@@ -87,10 +98,17 @@
         $.ajax({
             type:"PUT",
             url:"{{url('order_status/update')}}/"+status+'/'+id,
-            success:function(t){
-                console.log(t)
-            },error:function(t,e,o){
-                console.log(t)
+            success:function(data, textStatus, xhr){
+                
+                if(xhr.status == 200){
+                    $('.toast').toast('show')
+                }
+            },error:function(error){
+                Swal.fire(
+  'Error',
+  'Error changing order status',
+  'error'
+)
             }
         })  
     }

@@ -81,20 +81,29 @@
         },
 
     methods:{
-
+        makeToast(title, text, variant) {
+            this.$bvToast.toast(text, {
+            title: title,
+            variant: variant,
+            autoHideDelay: 1000,
+            solid: true
+          })
+      },
    
       // fetch data 
       getOrders() {
-        axios.get('orders/all').then(function(response){
-          this.items = response.data.data;
-          // Set the initial number of items
-          this.totalRows = this.items.length
-          this.dataLoaded = true;
-          }.bind(this));         
+        axios.get('orders/all').then(response => {
+            this.items = response.data.data;
+            // Set the initial number of items
+            this.totalRows = this.items.length
+            this.dataLoaded = true;
+          }).catch( error => {
+              this.makeToast('Error','Could not load orders, error: '+ error.response.status, 'danger')
+            });        
         },
-refreshTable(){
- this.getOrders();
-},
+        refreshTable(){
+          this.getOrders();
+        },
 
         // delete data
         deleteOrder(id) {
@@ -103,15 +112,20 @@ refreshTable(){
             text: "You won't be able to revert this!",
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes'
+            confirmButtonColor: '#0080FF',
+            cancelButtonColor: '#FF2645',
+            confirmButtonText: 'Yes',
+            focusCancel: true
           }).then((result) => {
             if (result.value) {
               axios.delete('order/delete/'+ id).then(response => {
-              //console.log(response);
-              this.getOrders()
-            }).catch(err => { console.log(err)})  
+              if(response.status == 200){
+                this.makeToast('Deleted','Order Deleted','success')
+                this.getOrders()
+              }
+            }).catch( error => {
+              this.makeToast('Error','Something went wrong, error: '+ error.response.status, 'danger')
+            });
             }
           })
             ;
