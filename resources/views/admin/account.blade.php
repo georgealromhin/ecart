@@ -124,10 +124,11 @@
 @endsection
 
 @section('script')
-<script>
-    <script type="text/javascript" src="{{asset('js/easy_notify.js')}}"></script>   
-    <script type="text/javascript" src="{{asset('js/notification.js')}}"></script>   
+<script type="text/javascript" src="{{asset('js/easy_notify.js')}}"></script>   
+<script type="text/javascript" src="{{asset('js/notification.js')}}"></script>   
 
+<script>
+   
     $('#name').on('keyup', function(){
         $('#changeNameBtn').prop("disabled", false);;
     });
