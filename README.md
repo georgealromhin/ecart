@@ -7,7 +7,7 @@ ECART is A free shopping cart system.
 
 [Requirements](#Requirements)
 
-[How to Install](#HowtoInstall)
+[Local Setup](#Local-Setup)
 
 [User Manual](#userManul)
 
@@ -19,7 +19,7 @@ ECART is A free shopping cart system.
 - PostgreSQL or MySQL
 
 
-## HowtoInstall
+## Local-Setup
 #### 1- Clone GitHub repo for this project locally
 ```
 git clone https://github.com/GeorgeT01/ecart.git projectName
@@ -129,7 +129,7 @@ and uncomment:
     ->orderBy(DB::raw("max(created_at)"), 'ASC')
     ->get();
 ```
-#### 12 Go to config > app.php, and change email_address and currency to your preferences
+#### 12- Go to config > app.php, and change email_address and currency to your preferences
 ```
     'currency' => '$',
     'email_address' => 'example@domain.com', 
