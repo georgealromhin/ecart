@@ -7,7 +7,7 @@ ECART is A free shopping cart system.
 
 [Requirements](#Requirements)
 
-[Local Setup](#Local Setup)
+[Local Setup](#LocalSetup)
 
 [User Manual](#userManul)
 
