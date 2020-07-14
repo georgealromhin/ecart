@@ -7,7 +7,7 @@ ECART is A free shopping cart system.
 
 [Requirements](#Requirements)
 
-[Local Setup](#LocalSetup)
+[Local Setup](#Local Setup)
 
 [User Manual](#userManul)
 
@@ -19,7 +19,7 @@ ECART is A free shopping cart system.
 - PostgreSQL or MySQL
 
 
-## LocalSetup
+## Local Setup
 #### 1- Clone GitHub repo for this project locally
 ```
 git clone https://github.com/GeorgeT01/ecart.git projectName
