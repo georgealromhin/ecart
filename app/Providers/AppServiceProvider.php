@@ -26,7 +26,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // uncomment
+        
         // $settings = Settings::orderBy('id', 'asc')->get();
         // View::share([
         //     'settings' => $settings,

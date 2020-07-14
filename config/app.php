@@ -17,7 +17,7 @@ return [
 
     
     'currency' => '$',
-    'email_address' => 'georgealromhin@gmail.com',
+    'email_address' => 'example@domain.com', 
 
     /*
     |--------------------------------------------------------------------------
