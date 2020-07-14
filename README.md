@@ -20,7 +20,7 @@ ECART is A free shopping cart system.
 
 
 ## HowtoInstall
-1- Clone GitHub repo for this project locally
+#### 1- Clone GitHub repo for this project locally
 ```
 git clone https://github.com/GeorgeT01/ecart.git projectName
 ```
