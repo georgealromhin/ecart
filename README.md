@@ -24,3 +24,23 @@ ECART is A free shopping cart system.
 ```
 git clone https://github.com/GeorgeT01/ecart.git projectName
 ```
+#### 2- Change directory into your project
+```
+cd projectName
+```
+#### 3- Install Composer Dependencies
+```
+composer install
+```
+#### 4- Install NPM Dependencies
+```
+npm install
+```
+#### 5- Create a copy of your .env file
+```
+cp .env.example .env
+```
+#### 6- Generate an app encryption key
+```
+php artisan key:generate
+```
