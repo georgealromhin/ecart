@@ -9,7 +9,7 @@ ECART is A free shopping cart system.
 
 [Local Setup](#Local-Setup)
 
-[User Manual](#userManul)
+[User Guide](#User-Guide)
 
 
 ## Requirements
@@ -135,3 +135,8 @@ and uncomment:
     'email_address' => 'example@domain.com', 
 ```
 #### 13- Enjoy
+
+
+## User-Guide
+
+
