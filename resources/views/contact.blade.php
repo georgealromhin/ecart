@@ -21,62 +21,10 @@
             <p class="pre-line-text">{{$settings[11]->value}}</p>
         </div>
         <div class="col-md-6">
-        <form action="{{url('send_mail')}}" method="POST">
-            @csrf
-            <div class="form-group">
-              <label for="name">Name*</label>
-              <input type="text" name="name" id="name" class="form-control shadow-sm" required>
-            </div>
 
-            <div class="form-group">
-                <label for="email">E-Mail*</label>
-                <input type="email" name="email" id="email" class="form-control shadow-sm" required>
-            </div>
-
-            <div class="form-group">
-                <label for="message">Message*</label>
-                <textarea name="message" id="message" class="form-control shadow-sm" rows="4" required></textarea>
-            </div>
-
-            <button type="submit" class="btn btn-danger w-100 shadow-sm">SUBMIT</button>
-
-        </form>
-        @if($errors->any())
-              <p class="text-danger text-center mt-2">
-                  Error: {{ implode('', $errors->all(':message')) }}
-              </p>
-              @endif
+            <contact-component></contact-component>
+            
         </div>
     </div>
     
-@endsection
-
-@section('script')
-@if ($message = Session::get('error'))
-
-<script>
-
-    Swal.fire('{{$message}}', '', 'error');
-
-</script>
-
-
-
-@endif
-
-
-
-@if ($message = Session::get('success'))
-
-<script>
-
-    Swal.fire('{{$message}}', '', 'success');
-
-</script>
-
-
-
-@endif
-
-<script>$('form').submit(function(e) {Swal.fire({title: '',text: 'Sending...',allowEscapeKey: false,allowOutsideClick: false});Swal.showLoading();});</script>
 @endsection

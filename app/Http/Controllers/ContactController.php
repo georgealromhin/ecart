@@ -22,8 +22,9 @@ class ContactController extends Controller
 
         if (Mail::failures()) {
             return back()->with('error', 'Error Sending Message, Please try again later');
+            return response()->json(['msg' =>  'Error Sending Message, Please try again later']);
         }
-        return back()->with('success', 'Message sent successfully');
+        return response()->json(['msg' =>  'Message sent successfully']);
 
     }
 }

@@ -30,6 +30,7 @@ Vue.component('orders-component', require('./components/Orders.vue').default);
 Vue.component('settings-component', require('./components/Settings.vue').default);
 Vue.component('banners-component', require('./components/Banners.vue').default);
 Vue.component('checkout-component', require('./components/Checkout.vue').default);
+Vue.component('contact-component', require('./components/Contact.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
