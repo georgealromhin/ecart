@@ -12,7 +12,7 @@
 
 ## About ECART
 
-ECART is A free shopping cart system.
+ECART is an online store management system
 
 [Requirements](#Requirements)
 
