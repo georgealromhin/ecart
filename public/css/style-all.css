@@ -20,7 +20,7 @@ html {
 .btn-back-to-top{display:none;position:fixed;width:40px;height:40px;bottom:40px;right:40px;background-color:#000;opacity:.5;justify-content:center;align-items:center;z-index:1000;border-radius:25px;transition:all .4s;-webkit-transition:all .4s;-o-transition:all .4s;-moz-transition:all .3s}.symbol-btn-back-to-top{font-size:22px;color:#fff;line-height:1em}.btn-back-to-top:hover{opacity:1;cursor:pointer}@media (max-width:576px){.btn-back-to-top{bottom:15px;right:15px}}@media (max-width:576px){.mob-text-hide{display:none}}
 
 .product-card{margin:0 auto;float:none;margin-bottom:10px;margin-top:10px;border-radius:10px}
-.product-img{object-fit: cover;}
+.product-img{object-fit: cover;height: 18vw;width: 100%;}
 .btn-circle{width: 35px;height: 35px;border-radius: 25px;}
 .qty-input{border:0;width:100%;-moz-appearance:textfield}.qty-input::-webkit-inner-spin-button,.qty-input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}.qty-input:disabled{background-color:transparent}
 

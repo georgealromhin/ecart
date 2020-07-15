@@ -73,7 +73,7 @@ class OrderController extends Controller
             }
             
             Session::forget('cart'); #empty cart
-            return view('success')->with( ['order_number' => $order->order_number, 'email'=> $customer->email]);
+            return response()->json(['order_number' =>  $order->order_number, 'email' => $customer->email]);
         }
         return redirect()->action('HomeController@index');
     }
