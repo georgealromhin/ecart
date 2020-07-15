@@ -2466,9 +2466,9 @@ __webpack_require__.r(__webpack_exports__);
       formData.append('order_type', this.form.selected);
       axios.post('order/create', formData).then(function (response) {
         if (response.status == 200) {
-          _this.checkout = true;
           _this.order_number = response.data.order_number;
           _this.email_address = response.data.email;
+          _this.checkout = true;
           Swal.close();
         }
       })["catch"](function (error) {

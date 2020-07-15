@@ -91,9 +91,10 @@
             axios.post('order/create' , formData).then(response => {
 
                 if(response.status == 200){
-                    this.checkout = true;
+                   
                     this.order_number = response.data.order_number
                     this.email_address = response.data.email
+                    this.checkout = true;
                     Swal.close();
                 }
 
