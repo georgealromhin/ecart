@@ -9,6 +9,7 @@ require('./bootstrap');
 window.Vue = require('vue');
 import { BootstrapVue, BootstrapVueIcons  } from 'bootstrap-vue'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+//import TotalStore from './components/Totalstore'
 
 
 /**
@@ -31,6 +32,9 @@ Vue.component('settings-component', require('./components/Settings.vue').default
 Vue.component('banners-component', require('./components/Banners.vue').default);
 Vue.component('checkout-component', require('./components/Checkout.vue').default);
 Vue.component('contact-component', require('./components/Contact.vue').default);
+Vue.component('cart-component', require('./components/Cart.vue').default);
+Vue.component('cart-total-component', require('./components/Total.vue').default);
+Vue.component('products-menu-component', require('./components/ProductsMenu.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -40,5 +44,5 @@ Vue.component('contact-component', require('./components/Contact.vue').default);
 
 const app = new Vue({
     el: '#app',
-
+    //TotalStore,
 });

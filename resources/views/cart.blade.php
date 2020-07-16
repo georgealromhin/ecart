@@ -3,7 +3,9 @@
 
 
 @section('content')
-@if(Session::has('cart'))
+
+
+{{-- @if(Session::has('cart'))
 
     <h3> Your Order</h3>
 
@@ -49,7 +51,6 @@
         </div>
 
 
-
     @else
 
         <div class="text-center mt-5 mb-5">
@@ -58,5 +59,8 @@
 
         </div>
 
-    @endif
+    @endif --}}
+
+    <cart-component currency="{{ config('app.currency') }}"></cart-component>
+
 @endsection

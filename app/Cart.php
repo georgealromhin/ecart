@@ -30,7 +30,12 @@ class Cart
         $this->products[$id] = $storedProduct;
         $this->qty += $qty2;
         $this->total += $product->price * $qty2;
+        if($storedProduct['qty'] == 0){
+            Cart::remove($id);
+        }
+
     }
+    
     public function remove($id){
         if($this->products){
             if(array_key_exists($id, $this->products)){

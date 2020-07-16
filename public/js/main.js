@@ -31,7 +31,6 @@ $( document ).ready(function() {
             url:"cart/store/"+itemid+"/"+qty,
             success:function(t){
                 $('.toast').toast('show');
-                getTotalPrice();
                 $('#'+itemid).prop('disabled', false);
             
             },error:function(t,e,o){
@@ -40,18 +39,6 @@ $( document ).ready(function() {
         })
     });
 
-getTotalPrice();
-function getTotalPrice(){
-$.ajax({
-type:"GET",
-url:"total",
-success:function(t){
-$('#cart-total').text(t);
-},error:function(t,e,o){
-console.log(t);
-}
-})  
-}
 
 
 });    

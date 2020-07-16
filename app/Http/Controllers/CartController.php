@@ -7,11 +7,17 @@ use App\Product;
 use App\Cart;
 use Session;
 use App;
+use App\Http\Resources\CartResource;
+
 
 
 class CartController extends Controller
 {
     //
+    public function index(){
+        return view('cart');
+    }
+
 
     public function store(Request $request, $id, $qty){
         $product = Product::findOrFail($id);
@@ -29,17 +35,14 @@ class CartController extends Controller
     }
 
     public function getCart(){
-
-        if(!Session::has('cart')){
-            return view('cart', [
-                'cart_items' => null,
-            ]);
+        $cart_items = null;
+        if(Session::has('cart')){
+            $oldCart = Session::get('cart');
+            $cart = new Cart($oldCart);
+            $cart_items = $cart->products;
         }
-        $oldCart = Session::get('cart');
-        $cart = new Cart($oldCart);
-        return view('cart', [
-            'cart_items' =>  $cart->products,
-        ]);
+       
+        return new CartResource($cart_items);
     }
     public function remove(Request $request, $id){
             $oldCart = Session::has('cart') ? Session::get('cart') : null;
@@ -52,6 +55,6 @@ class CartController extends Controller
                     Session::forget('cart');
                 }
             }
-            return back();
+            return response(['msg'=>'Removed from cart']);
     }
 }

@@ -25,8 +25,9 @@
     
 </head>
 <body>
+  <div id="app">
     @include('navbar')
-    <div id="app">
+   
         <div class="container mb-5">
             
        

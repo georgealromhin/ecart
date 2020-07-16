@@ -16,10 +16,13 @@ use Illuminate\Support\Facades\Route;
 
 /* ====================[[USER]]==================== */
 Route::get('/', 'HomeController@index'); // view
-Route::get('cart', 'CartController@getCart'); // view
+
+Route::get('cart', 'CartController@index'); // view
+Route::get('cart/all', 'CartController@getCart'); // view
 Route::get('cart/store/{id}/{qty}', 'CartController@store');
 Route::get('total', 'CartController@getTotal');
-Route::get('cart/remove/{id}', 'CartController@remove');
+Route::delete('cart/remove/{id}', 'CartController@remove');
+
 Route::get('checkout', 'CheckoutController@index'); // view
 Route::post('order/create', 'OrderController@store');
 Route::get('about', function(){ return view('about'); });

@@ -16,7 +16,7 @@
             <a class="nav-link" href="{{url('about')}}">About</a>
           </li>
       </ul>
-      <a href="{{url('cart')}}" class="btn shadow my-2 my-sm-0 btn-danger text-shadow" id="cart-btn" style="font-size: 14px;"><i class="fas fa-shopping-cart"></i> Cart: <span id="cart-total" class="mt-2"></span> {{config('app.currency')}}</a>
+      <a href="{{url('cart')}}" class="btn shadow my-2 my-sm-0 btn-danger text-shadow" id="cart-btn" style="font-size: 14px;"><i class="fas fa-shopping-cart"></i> Cart: <cart-total-component></cart-total-component>  {{config('app.currency')}}</a>
     </div>
 </nav>
 
