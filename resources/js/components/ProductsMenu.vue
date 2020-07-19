@@ -22,10 +22,10 @@
             </div>
             <div class="card-footer border-0 bg-transparent">
                 <div class="row text-center">
-                    <div class="col"><button class="btn btn-primary btn-circle p-0"><i class="fas fa-minus"></i></button> </div>
+                    <div class="col"><button class="btn btn-primary btn-circle p-0" @click="decrement(product)"><i class="fas fa-minus"></i></button> </div>
                     <div class="col"><input type="number" class="count h4 qty-input text-center" min="1" disabled v-model="form[product.id]">
                     </div>
-                    <div class="col"><button class="btn btn-primary btn-circle p-0" @click="changeQty(product)"><i class="fas fa-plus"></i></button></div>
+                    <div class="col"><button class="btn btn-primary btn-circle p-0" @click="increment(product)"><i class="fas fa-plus"></i></button></div>
                 </div>
                 <div class="row">
                     <div class="col-4"><span style="position: absolute;top:50%;left:50%;">{{priceValue[product.id]}}</span></div>
@@ -99,9 +99,19 @@ export default {
         },
 
         
-        changeQty(product){
+        increment(product){
            this.form[product.id]++
            this.priceValue[product.id] = parseInt(this.form[product.id]) * product.price
+
+            console.log(this.form[product.id])
+            console.log( this.priceValue[product.id])
+        },
+        decrement(product){
+            if(this.form[product.id] >= 2){
+                this.form[product.id]--
+                this.priceValue[product.id] = parseInt(this.form[product.id]) * product.price
+            }
+           
 
             console.log(this.form[product.id])
             console.log( this.priceValue[product.id])

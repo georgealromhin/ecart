@@ -3332,9 +3332,18 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {//this.makeToast('Error','Could not load categories, error: '+ error.response.status, 'danger')
       });
     },
-    changeQty: function changeQty(product) {
+    increment: function increment(product) {
       this.form[product.id]++;
       this.priceValue[product.id] = parseInt(this.form[product.id]) * product.price;
+      console.log(this.form[product.id]);
+      console.log(this.priceValue[product.id]);
+    },
+    decrement: function decrement(product) {
+      if (this.form[product.id] >= 2) {
+        this.form[product.id]--;
+        this.priceValue[product.id] = parseInt(this.form[product.id]) * product.price;
+      }
+
       console.log(this.form[product.id]);
       console.log(this.priceValue[product.id]);
     },
@@ -84579,7 +84588,20 @@ var render = function() {
                       { staticClass: "card-footer border-0 bg-transparent" },
                       [
                         _c("div", { staticClass: "row text-center" }, [
-                          _vm._m(0, true),
+                          _c("div", { staticClass: "col" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-primary btn-circle p-0",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.decrement(product)
+                                  }
+                                }
+                              },
+                              [_c("i", { staticClass: "fas fa-minus" })]
+                            )
+                          ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "col" }, [
                             _c("input", {
@@ -84616,7 +84638,7 @@ var render = function() {
                                 staticClass: "btn btn-primary btn-circle p-0",
                                 on: {
                                   click: function($event) {
-                                    return _vm.changeQty(product)
+                                    return _vm.increment(product)
                                   }
                                 }
                               },
@@ -84671,18 +84693,7 @@ var render = function() {
     2
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col" }, [
-      _c("button", { staticClass: "btn btn-primary btn-circle p-0" }, [
-        _c("i", { staticClass: "fas fa-minus" })
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
