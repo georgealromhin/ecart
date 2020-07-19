@@ -23,9 +23,7 @@
               <a class="nav-link text-light brand-baity"> {{config('app.name')}}</a>
 
           </li>
-            @php
-                use Carbon\Carbon;
-            @endphp
+       
           </ul>
 
               <ul class="navbar-nav ml-auto">

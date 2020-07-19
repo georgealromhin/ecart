@@ -4,6 +4,9 @@ const TotalStore = {
      
         data: {
           total: 0,
+        }, 
+        methods:{
+
         }
 
 };

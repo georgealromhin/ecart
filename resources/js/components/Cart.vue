@@ -36,7 +36,7 @@
             </b-table>
                 <b-row>
                     <b-col></b-col>
-                    <b-col><a href="checkout" class="btn btn-danger btn-lg w-100">Checkout <b-icon-arrow-right-circle></b-icon-arrow-right-circle></a> </b-col>
+                    <b-col><b-link href="checkout" class="btn btn-danger btn-lg w-100">Checkout <b-icon-arrow-right-circle></b-icon-arrow-right-circle></b-link> </b-col>
                 </b-row>
             </div>
 
@@ -45,6 +45,8 @@
             </div>
 
             <h4 class="text-center mt-5" v-if="dataLoaded && totalRows == 0">Cart is Empty</h4>
+
+            <div v-for="item in TotalStore.data.cart" v-bind:key="item.id">{{item.id}}/{{item.name}}/{{item.qty}}</div>
         </div>
 
 </template>
@@ -67,7 +69,8 @@ export default {
         ],
         dataLoaded : false,
         totalRows: 0,
-        TotalStore
+        TotalStore,
+
       }
     },
     methods:{

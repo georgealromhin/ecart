@@ -33,6 +33,9 @@ Route::get('contact', function(){ return view('contact'); });
 Route::post('send_mail', 'ContactController@send_mail');
 
 
+Route::get('menu/products', 'HomeController@getProducts');
+
+
 
 /* ====================[[ADMIN]]==================== */
 

@@ -20,6 +20,21 @@
         // $(e).val(parseInt($(e).val())-1),$(e).val()<a&&$(e).val(a);var s=parseFloat($(e).val())*t;$(o).text(" "+s.toFixed(2).replace(".",","))
     }
 
+
+
+    window.onscroll = function() {myFunction()};
+
+var header = document.getElementById("category-header");
+var sticky = header.offsetTop;
+
+function myFunction() {
+  if (window.pageYOffset > sticky) {
+    header.classList.add("fixed-top");
+  } else {
+    header.classList.remove("fixed-top");
+  }
+}
+
 $( document ).ready(function() {
 
     $(".add-to-cart").click(function(){

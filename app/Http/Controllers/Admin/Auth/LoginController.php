@@ -26,11 +26,9 @@ class LoginController extends Controller
         ]);
 
         $userData = array('username'=>$request->input('inputUsername'), 'password'=>$request->input('inputPassword'));
-        $rememberMe = false;
-        if($request->remember == 'on'){
-            $rememberMe = true;
-        }    
-        if(Auth::attempt($userData, $rememberMe)){
+        $remember = isset($request->remember) ? true : false;
+        
+        if(Auth::attempt($userData, $remember)){
             //Mail::to('ex@gmail.com')->send(new LoginMail($userData['username']));
             return redirect('dashboard');
         }//else
