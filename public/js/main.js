@@ -10,50 +10,17 @@
       document.getElementById("main-sidebar").style.width = "0";
       document.getElementById("main").style.marginLeft= "0";
     }
-    
-    function increase(t,e,o){
-        $(e).val(parseInt($(e).val())+1);var s=parseFloat($(e).val())*t;$(o).text(s)
-    }
-    function decrease(t,e,o){
-        var a= 1;
-        $(e).val(parseInt($(e).val())-1),$(e).val()<a&&$(e).val(a);var s=parseFloat($(e).val())*t;$(o).text(s)
-        // $(e).val(parseInt($(e).val())-1),$(e).val()<a&&$(e).val(a);var s=parseFloat($(e).val())*t;$(o).text(" "+s.toFixed(2).replace(".",","))
-    }
 
-
-
-    window.onscroll = function() {myFunction()};
+    window.onscroll = function() {scrollOffset()};
 
 var header = document.getElementById("category-header");
 var sticky = header.offsetTop;
 
-function myFunction() {
+function scrollOffset() {
   if (window.pageYOffset > sticky) {
     header.classList.add("fixed-top");
   } else {
     header.classList.remove("fixed-top");
   }
 }
-
-$( document ).ready(function() {
-
-    $(".add-to-cart").click(function(){
-        var itemid = this.id;
-        qty=$("#qty"+itemid).val();
-        $('#'+itemid).prop('disabled', true);
-        $.ajax({
-            type:"GET",
-            url:"cart/store/"+itemid+"/"+qty,
-            success:function(t){
-                $('.toast').toast('show');
-                $('#'+itemid).prop('disabled', false);
-            
-            },error:function(t,e,o){
-                $('#'+itemid).prop('disabled', false);
-            }
-        })
-    });
-
-
-
-});    
+   

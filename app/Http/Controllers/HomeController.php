@@ -19,7 +19,6 @@ class HomeController extends Controller
     }
 
     public function getProducts(){
-
         $category = new Category();
         $categories = $category->with(array('products' =>  function($query){
             $query->where('status', 'visible')->orderBy('name', 'asc');
