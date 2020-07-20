@@ -23,6 +23,6 @@
   </div>
 
 
-  <products-menu-component></products-menu-component>
+  <products-menu-component currency="{{ config('app.currency') }}"></products-menu-component>
 
 @endsection

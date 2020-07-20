@@ -2165,7 +2165,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['currency'],
@@ -3283,14 +3282,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['currency'],
   data: function data() {
     return {
       categories: [],
-      form: {},
-      priceValue: {},
-      qtyInitalValue: 1,
       TotalStore: _TotalStore__WEBPACK_IMPORTED_MODULE_0__["default"]
     };
   },
@@ -3298,6 +3298,7 @@ __webpack_require__.r(__webpack_exports__);
     makeToast: function makeToast() {
       this.$bvToast.toast('added to cart', {
         noCloseButton: true,
+        toaster: 'b-toaster-bottom-center',
         variant: 'success',
         autoHideDelay: 200,
         solid: true,
@@ -3308,22 +3309,15 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get('menu/products').then(function (response) {
-        _this.categories = response.data.data; // inital value for quantity input 
-        // if you know another way to iniate a v-model input, please HELP ME!!!
-
-        _this.categories.forEach(function (element) {
-          element.products.forEach(function (elem) {
-            _this.form[elem.id] = 1;
-            _this.priceValue[elem.id] = elem.price;
-          });
-        });
+        _this.categories = response.data.data;
       })["catch"](function (error) {//this.makeToast('Error','Could not load categories, error: '+ error.response.status, 'danger')
       });
     },
     addToCart: function addToCart(product) {
       var _this2 = this;
 
-      axios.get('cart/store/' + product.id + '/' + this.form[product.id]).then(function (response) {
+      var qtyInput = document.getElementById('qty' + product.id);
+      axios.get('cart/store/' + product.id + '/' + qtyInput.value).then(function (response) {
         if (response.status == 200) {
           _this2.makeToast();
 
@@ -3333,30 +3327,29 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     increment: function increment(product) {
-      this.form[product.id]++;
-      this.priceValue[product.id] = parseInt(this.form[product.id]) * product.price;
-      console.log(this.form[product.id]);
-      console.log(this.priceValue[product.id]);
+      var qtyInput = document.getElementById('qty' + product.id);
+      var priceText = document.getElementById('price' + product.id);
+      qtyInput.value++;
+      priceText.innerHTML = parseFloat(product.price) * parseInt(qtyInput.value);
     },
     decrement: function decrement(product) {
-      if (this.form[product.id] >= 2) {
-        this.form[product.id]--;
-        this.priceValue[product.id] = parseInt(this.form[product.id]) * product.price;
-      }
+      var qtyInput = document.getElementById('qty' + product.id);
+      var priceText = document.getElementById('price' + product.id);
 
-      console.log(this.form[product.id]);
-      console.log(this.priceValue[product.id]);
+      if (qtyInput.value >= 2) {
+        qtyInput.value--;
+        priceText.innerHTML = parseFloat(product.price) * parseInt(qtyInput.value);
+      }
     },
     getTotal: function getTotal() {
       axios.get('total').then(function (response) {
-        _TotalStore__WEBPACK_IMPORTED_MODULE_0__["default"].data.total = response.data; //console.log('get total is working: '+TotalStore.data.total )
+        _TotalStore__WEBPACK_IMPORTED_MODULE_0__["default"].data.total = response.data;
       })["catch"](function (error) {//this.makeToast('Error','Could not load categories, error: '+ error.response.status, 'danger')
       });
     }
   },
   created: function created() {
     this.getCategories();
-    this.getTotal();
   }
 });
 
@@ -82712,191 +82705,175 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _vm.totalRows > 0
-        ? _c(
-            "div",
-            [
-              _c("h3", [_vm._v(" Your Order")]),
-              _vm._v(" "),
-              _c("b-table", {
-                attrs: {
-                  id: "my-table",
-                  items: _vm.items,
-                  fields: _vm.fields,
-                  outlined: "",
-                  bordered: "",
-                  hover: "",
-                  responsive: ""
-                },
-                scopedSlots: _vm._u(
-                  [
-                    {
-                      key: "cell(qty)",
-                      fn: function(row) {
-                        return [
-                          _c(
-                            "b-row",
-                            { staticClass: "text-center" },
-                            [
-                              _c(
-                                "b-col",
-                                [
-                                  _c(
-                                    "b-button",
-                                    {
-                                      staticClass:
-                                        "btn btn-primary btn-circle p-0",
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.addToCart(
-                                            row.item.product.id,
-                                            -1
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [_c("b-icon-dash")],
-                                    1
-                                  )
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c("b-col", [
-                                _c("p", [_vm._v(_vm._s(row.item.qty))])
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "b-col",
-                                [
-                                  _c(
-                                    "b-button",
-                                    {
-                                      staticClass:
-                                        "btn btn-primary btn-circle p-0",
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.addToCart(
-                                            row.item.product.id,
-                                            1
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [_c("b-icon-plus")],
-                                    1
-                                  )
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          )
-                        ]
-                      }
-                    },
-                    {
-                      key: "cell(price)",
-                      fn: function(row) {
-                        return [
-                          _c("p", [
-                            _vm._v(
-                              _vm._s(row.item.price) +
-                                " " +
-                                _vm._s(_vm.currency)
-                            )
-                          ])
-                        ]
-                      }
-                    },
-                    {
-                      key: "cell(delete)",
-                      fn: function(row) {
-                        return [
-                          _c(
-                            "b-link",
-                            {
-                              staticClass: "text-danger",
-                              attrs: { href: "#" },
-                              on: {
-                                click: function($event) {
-                                  return _vm.deleteItem(row.item.product.id)
-                                }
-                              }
-                            },
-                            [_c("b-icon-trash"), _vm._v(" Remove")],
-                            1
-                          )
-                        ]
-                      }
-                    }
-                  ],
-                  null,
-                  false,
-                  3351851150
-                )
-              }),
-              _vm._v(" "),
-              _c(
-                "b-row",
+  return _c("div", [
+    _vm.totalRows > 0
+      ? _c(
+          "div",
+          [
+            _c("h3", [_vm._v(" Your Order")]),
+            _vm._v(" "),
+            _c("b-table", {
+              attrs: {
+                id: "my-table",
+                items: _vm.items,
+                fields: _vm.fields,
+                outlined: "",
+                bordered: "",
+                hover: "",
+                responsive: ""
+              },
+              scopedSlots: _vm._u(
                 [
-                  _c("b-col"),
-                  _vm._v(" "),
-                  _c(
-                    "b-col",
-                    [
-                      _c(
-                        "b-link",
-                        {
-                          staticClass: "btn btn-danger btn-lg w-100",
-                          attrs: { href: "checkout" }
-                        },
-                        [_vm._v("Checkout "), _c("b-icon-arrow-right-circle")],
-                        1
-                      )
-                    ],
-                    1
-                  )
+                  {
+                    key: "cell(qty)",
+                    fn: function(row) {
+                      return [
+                        _c(
+                          "b-row",
+                          { staticClass: "text-center" },
+                          [
+                            _c(
+                              "b-col",
+                              [
+                                _c(
+                                  "b-button",
+                                  {
+                                    staticClass:
+                                      "btn btn-primary btn-circle p-0",
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.addToCart(
+                                          row.item.product.id,
+                                          -1
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [_c("b-icon-dash")],
+                                  1
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c("b-col", [
+                              _c("p", [_vm._v(_vm._s(row.item.qty))])
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "b-col",
+                              [
+                                _c(
+                                  "b-button",
+                                  {
+                                    staticClass:
+                                      "btn btn-primary btn-circle p-0",
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.addToCart(
+                                          row.item.product.id,
+                                          1
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [_c("b-icon-plus")],
+                                  1
+                                )
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
+                      ]
+                    }
+                  },
+                  {
+                    key: "cell(price)",
+                    fn: function(row) {
+                      return [
+                        _c("p", [
+                          _vm._v(
+                            _vm._s(row.item.price) + " " + _vm._s(_vm.currency)
+                          )
+                        ])
+                      ]
+                    }
+                  },
+                  {
+                    key: "cell(delete)",
+                    fn: function(row) {
+                      return [
+                        _c(
+                          "b-link",
+                          {
+                            staticClass: "text-danger",
+                            attrs: { href: "#" },
+                            on: {
+                              click: function($event) {
+                                return _vm.deleteItem(row.item.product.id)
+                              }
+                            }
+                          },
+                          [_c("b-icon-trash"), _vm._v(" Remove")],
+                          1
+                        )
+                      ]
+                    }
+                  }
                 ],
-                1
+                null,
+                false,
+                3351851150
               )
-            ],
-            1
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      !_vm.dataLoaded
-        ? _c(
-            "div",
-            { staticClass: "text-center mt-5" },
-            [
-              _c("b-spinner", {
-                attrs: { variant: "danger", type: "grow", label: "Spinning" }
-              })
-            ],
-            1
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.dataLoaded && _vm.totalRows == 0
-        ? _c("h4", { staticClass: "text-center mt-5" }, [
-            _vm._v("Cart is Empty")
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _vm._l(_vm.TotalStore.data.cart, function(item) {
-        return _c("div", { key: item.id }, [
-          _vm._v(
-            _vm._s(item.id) + "/" + _vm._s(item.name) + "/" + _vm._s(item.qty)
-          )
-        ])
-      })
-    ],
-    2
-  )
+            }),
+            _vm._v(" "),
+            _c(
+              "b-row",
+              [
+                _c("b-col"),
+                _vm._v(" "),
+                _c(
+                  "b-col",
+                  [
+                    _c(
+                      "b-link",
+                      {
+                        staticClass: "btn btn-danger btn-lg w-100",
+                        attrs: { href: "checkout" }
+                      },
+                      [_vm._v("Checkout "), _c("b-icon-arrow-right-circle")],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ],
+              1
+            )
+          ],
+          1
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    !_vm.dataLoaded
+      ? _c(
+          "div",
+          { staticClass: "text-center mt-5" },
+          [
+            _c("b-spinner", {
+              attrs: { variant: "danger", type: "grow", label: "Spinning" }
+            })
+          ],
+          1
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.dataLoaded && _vm.totalRows == 0
+      ? _c("h4", { staticClass: "text-center mt-5" }, [_vm._v("Cart is Empty")])
+      : _vm._e()
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -84568,10 +84545,12 @@ var render = function() {
                 },
                 [
                   _c("div", { staticClass: "card product-card shadow-sm" }, [
-                    _c("img", {
-                      staticClass: "card-img-top product-img",
-                      attrs: { src: product.image, alt: "image" }
-                    }),
+                    _c("a", { attrs: { href: "product/" + product.id } }, [
+                      _c("img", {
+                        staticClass: "card-img-top product-img",
+                        attrs: { src: product.image, alt: "image" }
+                      })
+                    ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "card-body" }, [
                       _c("h5", { staticClass: "card-title" }, [
@@ -84605,28 +84584,13 @@ var render = function() {
                           _vm._v(" "),
                           _c("div", { staticClass: "col" }, [
                             _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.form[product.id],
-                                  expression: "form[product.id]"
-                                }
-                              ],
                               staticClass: "count h4 qty-input text-center",
-                              attrs: { type: "number", min: "1", disabled: "" },
-                              domProps: { value: _vm.form[product.id] },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(
-                                    _vm.form,
-                                    product.id,
-                                    $event.target.value
-                                  )
-                                }
+                              attrs: {
+                                type: "number",
+                                min: "1",
+                                value: "1",
+                                id: "qty" + product.id,
+                                disabled: ""
                               }
                             })
                           ]),
@@ -84649,17 +84613,14 @@ var render = function() {
                         _vm._v(" "),
                         _c("div", { staticClass: "row" }, [
                           _c("div", { staticClass: "col-4" }, [
-                            _c(
-                              "span",
-                              {
-                                staticStyle: {
-                                  position: "absolute",
-                                  top: "50%",
-                                  left: "50%"
-                                }
-                              },
-                              [_vm._v(_vm._s(_vm.priceValue[product.id]))]
-                            )
+                            _c("p", { staticClass: "h5 mt-4" }, [
+                              _c(
+                                "span",
+                                { attrs: { id: "price" + product.id } },
+                                [_vm._v(_vm._s(product.price))]
+                              ),
+                              _vm._v(" " + _vm._s(_vm.currency))
+                            ])
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "col-8" }, [
