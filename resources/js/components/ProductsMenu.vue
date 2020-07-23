@@ -7,10 +7,15 @@
   </b-nav>
 
  <b-row class="mt-2">
+        <b-col></b-col>
         <b-col>
-        </b-col>
-        <b-col>
-          <b-form-input v-model="search" type="search" class="mt-4" id="filterInput" placeholder="Search..." size="sm"></b-form-input>
+            <label class="sr-only" for="inlineFormInputGroup">Search</label>
+            <div class="input-group mb-2  mt-4">
+                <div class="input-group-prepend">
+                <div class="input-group-text bg-transparent "><i class="fas fa-search"></i></div>
+                </div>
+                <input type="text" v-model="search" class="form-control" id="inlineFormInputGroup" placeholder="Search">
+            </div>
         </b-col>
       </b-row>
 <div  v-for="category in categoryList"  v-bind:key="category.id">

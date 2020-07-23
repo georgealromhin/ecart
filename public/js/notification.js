@@ -2,7 +2,7 @@ window.setInterval(function(){
     checkNotification();
   }, 3000);
 
-  var notifImage = "../public/images/logo.png";
+  var notifImage = "../images/logo.png";
   var options = {
     title: "New Order",
     options: {
@@ -16,7 +16,7 @@ window.setInterval(function(){
     function checkNotification(){
    $.ajax({ 
        type: 'GET', 
-       url: '../public/notifications/count', 
+       url: '../notifications/count', 
        dataType: 'json',
        success: function (data) { 
         if(data > 0){
@@ -25,9 +25,7 @@ window.setInterval(function(){
         }
 
        },
-       error: function(XMLHttpRequest) { 
-           console.log('Error reading notificatios');
-       }
+       
      });
    }
  
@@ -35,13 +33,13 @@ window.setInterval(function(){
        
      $.ajax({ 
        type: 'GET', 
-       url: '../public/notification/markAsRead', 
+       url: '../notification/markAsRead', 
        dataType: 'json',
        success: function (data) { 
          console.log('Notification marked as read');
        },
        error: function() { 
-           console.log('Error');
+           //console.log('Error');
        }
    });
    }

@@ -8,7 +8,7 @@
         <h3>Order completed successfully</h3>
         <h4>Order №{{order_number}}</h4>
         <h4>An automated email was sent to {{email_address}}</h4>
-        <a class="btn btn-primary" href="/public/">Go To Home Page</a>
+        <a class="btn btn-primary" href="/">Go To Home Page</a>
     </div>
 
     <b-card header="Checkout" header-tag="header" class="shadow-sm" v-if="!checkout">

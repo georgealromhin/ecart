@@ -5,16 +5,29 @@
     <b-card class="shadow-sm">
 
       <template v-slot:header>
-        <h4 class="mb-0"><i class="fas fa-cog"></i> Store Settings <b-button variant="primary" @click="saveChanges" class="float-right" v-if="user_role == 'main'">Save Changes</b-button> </h4> 
+      
+        <b-row>
+          <b-col><h4 class="mb-0"><i class="fas fa-cog"></i> Store Settings  </h4> </b-col>
+          <b-col>
+            <b-button variant="primary" @click="saveChanges" class="float-right" v-if="user_role == 'main'"><i class="far fa-save"></i> Save Changes</b-button>
+            </b-col>
+        </b-row>
       </template>
     
       <b-row class="mt-2">
         <b-col>
-                    <b-link href="banners" class="text-primary"><b-icon-images></b-icon-images> Banners Manager</b-link>
+          <b-link href="banners" class="text-primary"><b-icon-images></b-icon-images> Banners Manager</b-link>
 
         </b-col>
         <b-col>
-          <b-form-input v-model="filter" type="search" id="filterInput" placeholder="Search..." size="sm"></b-form-input>
+
+          <label class="sr-only" for="inlineFormInputGroup">Search</label>
+      <div class="input-group mb-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text bg-transparent "><i class="fas fa-search"></i></div>
+        </div>
+        <input type="text" v-model="filter" class="form-control form-control-sm" id="inlineFormInputGroup" placeholder="Search">
+      </div>
         </b-col>
       </b-row>
 

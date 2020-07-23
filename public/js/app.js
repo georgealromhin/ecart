@@ -1972,6 +1972,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['user_role'],
   data: function data() {
@@ -1980,7 +1985,7 @@ __webpack_require__.r(__webpack_exports__);
       items: [],
       fields: [{
         key: 'image',
-        label: 'Image',
+        label: 'Banner',
         sortable: false
       }, {
         key: 'delete',
@@ -1996,7 +2001,8 @@ __webpack_require__.r(__webpack_exports__);
       imageProps: {
         width: 555,
         height: 235
-      }
+      },
+      imagePath: null
     };
   },
   mounted: function mounted() {},
@@ -2016,13 +2022,6 @@ __webpack_require__.r(__webpack_exports__);
     resetImage: function resetImage() {
       this.imageUrl = 'images/banners/header_image.webp';
       this.imagePath = null;
-    },
-    resetForm: function resetForm() {
-      this.form.name = null;
-      this.form.price = null;
-      this.form.des = null;
-      this.form.category_id = null;
-      this.resetImage();
     },
     showModal: function showModal() {
       this.$refs['banner-modal'].show();
@@ -2251,6 +2250,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2762,6 +2769,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['user_role'],
   data: function data() {
@@ -2988,6 +3008,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['user_role'],
   data: function data() {
@@ -3067,6 +3095,7 @@ __webpack_require__.r(__webpack_exports__);
     resetImage: function resetImage() {
       this.imageUrl = 'images/thumbnail_image.jpg';
       this.imagePath = null;
+      this.form.image = null;
     },
     resetForm: function resetForm() {
       this.form.name = null;
@@ -3290,6 +3319,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['currency'],
@@ -3384,6 +3418,19 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -82457,9 +82504,39 @@ var render = function() {
               fn: function() {
                 return [
                   _c(
-                    "h4",
-                    { staticClass: "mb-0" },
-                    [_c("b-icon-images"), _vm._v(" Banners ")],
+                    "b-row",
+                    [
+                      _c("b-col", [
+                        _c(
+                          "h4",
+                          { staticClass: "mb-0" },
+                          [_c("b-icon-images"), _vm._v(" Banners ")],
+                          1
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "b-col",
+                        [
+                          _vm.user_role == "main"
+                            ? _c(
+                                "b-button",
+                                {
+                                  staticClass: "float-right",
+                                  attrs: { id: "show-btn", variant: "primary" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.showModal()
+                                    }
+                                  }
+                                },
+                                [_vm._v("+ Add Banner")]
+                              )
+                            : _vm._e()
+                        ],
+                        1
+                      )
+                    ],
                     1
                   )
                 ]
@@ -82469,21 +82546,6 @@ var render = function() {
           ])
         },
         [
-          _vm._v(" "),
-          _vm.user_role == "main"
-            ? _c(
-                "b-button",
-                {
-                  attrs: { id: "show-btn", variant: "primary" },
-                  on: {
-                    click: function($event) {
-                      return _vm.showModal()
-                    }
-                  }
-                },
-                [_vm._v("+ Add Banner")]
-              )
-            : _vm._e(),
           _vm._v(" "),
           _c("b-table", {
             staticClass: "mt-2",
@@ -82638,12 +82700,19 @@ var render = function() {
                     [
                       _c("b-form-file", {
                         attrs: {
-                          placeholder: "Choose or Drop image here...",
+                          placeholder: "Choose image...",
                           "drop-placeholder": "Drop file here...",
                           accept: "image/*",
                           required: ""
                         },
-                        on: { change: _vm.openImage, drop: _vm.openImage }
+                        on: { change: _vm.openImage },
+                        model: {
+                          value: _vm.imagePath,
+                          callback: function($$v) {
+                            _vm.imagePath = $$v
+                          },
+                          expression: "imagePath"
+                        }
                       })
                     ],
                     1
@@ -82930,9 +82999,39 @@ var render = function() {
               fn: function() {
                 return [
                   _c(
-                    "h4",
-                    { staticClass: "mb-0" },
-                    [_c("b-icon-tag-fill"), _vm._v(" Categories")],
+                    "b-row",
+                    [
+                      _c("b-col", [
+                        _c(
+                          "h4",
+                          { staticClass: "mb-0" },
+                          [_c("b-icon-tag-fill"), _vm._v(" Categories")],
+                          1
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "b-col",
+                        [
+                          _vm.user_role == "main"
+                            ? _c(
+                                "b-button",
+                                {
+                                  staticClass: "float-right",
+                                  attrs: { id: "show-btn", variant: "primary" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.showModal(true, null, null)
+                                    }
+                                  }
+                                },
+                                [_vm._v("+ Add New Category")]
+                              )
+                            : _vm._e()
+                        ],
+                        1
+                      )
+                    ],
                     1
                   )
                 ]
@@ -82943,21 +83042,6 @@ var render = function() {
         },
         [
           _vm._v(" "),
-          _vm.user_role == "main"
-            ? _c(
-                "b-button",
-                {
-                  attrs: { id: "show-btn", variant: "primary" },
-                  on: {
-                    click: function($event) {
-                      return _vm.showModal(true, null, null)
-                    }
-                  }
-                },
-                [_vm._v("+ Add New Category")]
-              )
-            : _vm._e(),
-          _vm._v(" "),
           _c(
             "b-row",
             { staticClass: "mt-2" },
@@ -82965,7 +83049,7 @@ var render = function() {
               _c(
                 "b-col",
                 [
-                  _vm._v("\n        Show "),
+                  _vm._v("\n          Show "),
                   _c("b-form-select", {
                     staticClass: "form-control w-25",
                     attrs: {
@@ -82981,32 +83065,57 @@ var render = function() {
                       expression: "perPage"
                     }
                   }),
-                  _vm._v(" entries\n      ")
+                  _vm._v(" entries\n        ")
                 ],
                 1
               ),
               _vm._v(" "),
-              _c(
-                "b-col",
-                [
-                  _c("b-form-input", {
+              _c("b-col", [
+                _c(
+                  "label",
+                  {
+                    staticClass: "sr-only",
+                    attrs: { for: "inlineFormInputGroup" }
+                  },
+                  [_vm._v("Search")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "input-group mb-2" }, [
+                  _c("div", { staticClass: "input-group-prepend" }, [
+                    _c(
+                      "div",
+                      { staticClass: "input-group-text bg-transparent " },
+                      [_c("i", { staticClass: "fas fa-search" })]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.filter,
+                        expression: "filter"
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm",
                     attrs: {
-                      type: "search",
-                      id: "filterInput",
-                      placeholder: "Search...",
-                      size: "sm"
+                      type: "text",
+                      id: "inlineFormInputGroup",
+                      placeholder: "Search"
                     },
-                    model: {
-                      value: _vm.filter,
-                      callback: function($$v) {
-                        _vm.filter = $$v
-                      },
-                      expression: "filter"
+                    domProps: { value: _vm.filter },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.filter = $event.target.value
+                      }
                     }
                   })
-                ],
-                1
-              )
+                ])
+              ])
             ],
             1
           ),
@@ -83307,11 +83416,9 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _c(
-              "a",
-              { staticClass: "btn btn-primary", attrs: { href: "/public/" } },
-              [_vm._v("Go To Home Page")]
-            )
+            _c("a", { staticClass: "btn btn-primary", attrs: { href: "/" } }, [
+              _vm._v("Go To Home Page")
+            ])
           ])
         : _vm._e(),
       _vm._v(" "),
@@ -83696,23 +83803,35 @@ var render = function() {
               fn: function() {
                 return [
                   _c(
-                    "h4",
-                    { staticClass: "mb-0" },
+                    "b-row",
                     [
-                      _c("b-icon-inbox"),
-                      _vm._v(" Orders "),
+                      _c("b-col", [
+                        _c(
+                          "h4",
+                          { staticClass: "mb-0" },
+                          [_c("b-icon-inbox"), _vm._v(" Orders ")],
+                          1
+                        )
+                      ]),
+                      _vm._v(" "),
                       _c(
-                        "b-button",
-                        {
-                          staticClass: "float-right",
-                          attrs: { variant: "dark" },
-                          on: {
-                            click: function($event) {
-                              return _vm.refreshTable()
-                            }
-                          }
-                        },
-                        [_c("b-icon-bootstrap-reboot"), _vm._v(" Refresh")],
+                        "b-col",
+                        [
+                          _c(
+                            "b-button",
+                            {
+                              staticClass: "float-right",
+                              attrs: { variant: "dark" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.refreshTable()
+                                }
+                              }
+                            },
+                            [_c("b-icon-bootstrap-reboot"), _vm._v(" Refresh")],
+                            1
+                          )
+                        ],
                         1
                       )
                     ],
@@ -83754,27 +83873,52 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c(
-                "b-col",
-                [
-                  _c("b-form-input", {
+              _c("b-col", [
+                _c(
+                  "label",
+                  {
+                    staticClass: "sr-only",
+                    attrs: { for: "inlineFormInputGroup" }
+                  },
+                  [_vm._v("Search")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "input-group mb-2" }, [
+                  _c("div", { staticClass: "input-group-prepend" }, [
+                    _c(
+                      "div",
+                      { staticClass: "input-group-text bg-transparent " },
+                      [_c("i", { staticClass: "fas fa-search" })]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.filter,
+                        expression: "filter"
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm",
                     attrs: {
-                      type: "search",
-                      id: "filterInput",
-                      placeholder: "Search...",
-                      size: "sm"
+                      type: "text",
+                      id: "inlineFormInputGroup",
+                      placeholder: "Search"
                     },
-                    model: {
-                      value: _vm.filter,
-                      callback: function($$v) {
-                        _vm.filter = $$v
-                      },
-                      expression: "filter"
+                    domProps: { value: _vm.filter },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.filter = $event.target.value
+                      }
                     }
                   })
-                ],
-                1
-              )
+                ])
+              ])
             ],
             1
           ),
@@ -83953,9 +84097,39 @@ var render = function() {
               fn: function() {
                 return [
                   _c(
-                    "h4",
-                    { staticClass: "mb-0" },
-                    [_c("b-icon-archive"), _vm._v(" Products")],
+                    "b-row",
+                    [
+                      _c("b-col", [
+                        _c(
+                          "h4",
+                          { staticClass: "mb-0" },
+                          [_c("b-icon-archive"), _vm._v(" Products")],
+                          1
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "b-col",
+                        [
+                          _vm.user_role == "main"
+                            ? _c(
+                                "b-button",
+                                {
+                                  staticClass: "float-right",
+                                  attrs: { id: "show-btn", variant: "primary" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.showModal(true, null)
+                                    }
+                                  }
+                                },
+                                [_vm._v("+ Add New Product")]
+                              )
+                            : _vm._e()
+                        ],
+                        1
+                      )
+                    ],
                     1
                   )
                 ]
@@ -83965,21 +84139,6 @@ var render = function() {
           ])
         },
         [
-          _vm._v(" "),
-          _vm.user_role == "main"
-            ? _c(
-                "b-button",
-                {
-                  attrs: { id: "show-btn", variant: "primary" },
-                  on: {
-                    click: function($event) {
-                      return _vm.showModal(true, null)
-                    }
-                  }
-                },
-                [_vm._v("+ Add New Product")]
-              )
-            : _vm._e(),
           _vm._v(" "),
           _c(
             "b-row",
@@ -84009,27 +84168,52 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c(
-                "b-col",
-                [
-                  _c("b-form-input", {
+              _c("b-col", [
+                _c(
+                  "label",
+                  {
+                    staticClass: "sr-only",
+                    attrs: { for: "inlineFormInputGroup" }
+                  },
+                  [_vm._v("Search")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "input-group mb-2" }, [
+                  _c("div", { staticClass: "input-group-prepend" }, [
+                    _c(
+                      "div",
+                      { staticClass: "input-group-text bg-transparent " },
+                      [_c("i", { staticClass: "fas fa-search" })]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.filter,
+                        expression: "filter"
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm",
                     attrs: {
-                      type: "search",
-                      id: "filterInput",
-                      placeholder: "Search...",
-                      size: "sm"
+                      type: "text",
+                      id: "inlineFormInputGroup",
+                      placeholder: "Search"
                     },
-                    model: {
-                      value: _vm.filter,
-                      callback: function($$v) {
-                        _vm.filter = $$v
-                      },
-                      expression: "filter"
+                    domProps: { value: _vm.filter },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.filter = $event.target.value
+                      }
                     }
                   })
-                ],
-                1
-              )
+                ])
+              ])
             ],
             1
           ),
@@ -84549,28 +84733,50 @@ var render = function() {
         [
           _c("b-col"),
           _vm._v(" "),
-          _c(
-            "b-col",
-            [
-              _c("b-form-input", {
-                staticClass: "mt-4",
+          _c("b-col", [
+            _c(
+              "label",
+              {
+                staticClass: "sr-only",
+                attrs: { for: "inlineFormInputGroup" }
+              },
+              [_vm._v("Search")]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "input-group mb-2  mt-4" }, [
+              _c("div", { staticClass: "input-group-prepend" }, [
+                _c("div", { staticClass: "input-group-text bg-transparent " }, [
+                  _c("i", { staticClass: "fas fa-search" })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.search,
+                    expression: "search"
+                  }
+                ],
+                staticClass: "form-control",
                 attrs: {
-                  type: "search",
-                  id: "filterInput",
-                  placeholder: "Search...",
-                  size: "sm"
+                  type: "text",
+                  id: "inlineFormInputGroup",
+                  placeholder: "Search"
                 },
-                model: {
-                  value: _vm.search,
-                  callback: function($$v) {
-                    _vm.search = $$v
-                  },
-                  expression: "search"
+                domProps: { value: _vm.search },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.search = $event.target.value
+                  }
                 }
               })
-            ],
-            1
-          )
+            ])
+          ])
         ],
         1
       ),
@@ -84739,22 +84945,35 @@ var render = function() {
               fn: function() {
                 return [
                   _c(
-                    "h4",
-                    { staticClass: "mb-0" },
+                    "b-row",
                     [
-                      _c("i", { staticClass: "fas fa-cog" }),
-                      _vm._v(" Store Settings "),
-                      _vm.user_role == "main"
-                        ? _c(
-                            "b-button",
-                            {
-                              staticClass: "float-right",
-                              attrs: { variant: "primary" },
-                              on: { click: _vm.saveChanges }
-                            },
-                            [_vm._v("Save Changes")]
-                          )
-                        : _vm._e()
+                      _c("b-col", [
+                        _c("h4", { staticClass: "mb-0" }, [
+                          _c("i", { staticClass: "fas fa-cog" }),
+                          _vm._v(" Store Settings  ")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "b-col",
+                        [
+                          _vm.user_role == "main"
+                            ? _c(
+                                "b-button",
+                                {
+                                  staticClass: "float-right",
+                                  attrs: { variant: "primary" },
+                                  on: { click: _vm.saveChanges }
+                                },
+                                [
+                                  _c("i", { staticClass: "far fa-save" }),
+                                  _vm._v(" Save Changes")
+                                ]
+                              )
+                            : _vm._e()
+                        ],
+                        1
+                      )
                     ],
                     1
                   )
@@ -84783,27 +85002,52 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c(
-                "b-col",
-                [
-                  _c("b-form-input", {
+              _c("b-col", [
+                _c(
+                  "label",
+                  {
+                    staticClass: "sr-only",
+                    attrs: { for: "inlineFormInputGroup" }
+                  },
+                  [_vm._v("Search")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "input-group mb-2" }, [
+                  _c("div", { staticClass: "input-group-prepend" }, [
+                    _c(
+                      "div",
+                      { staticClass: "input-group-text bg-transparent " },
+                      [_c("i", { staticClass: "fas fa-search" })]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.filter,
+                        expression: "filter"
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm",
                     attrs: {
-                      type: "search",
-                      id: "filterInput",
-                      placeholder: "Search...",
-                      size: "sm"
+                      type: "text",
+                      id: "inlineFormInputGroup",
+                      placeholder: "Search"
                     },
-                    model: {
-                      value: _vm.filter,
-                      callback: function($$v) {
-                        _vm.filter = $$v
-                      },
-                      expression: "filter"
+                    domProps: { value: _vm.filter },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.filter = $event.target.value
+                      }
                     }
                   })
-                ],
-                1
-              )
+                ])
+              ])
             ],
             1
           ),
@@ -97085,7 +97329,6 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 
- //import TotalStore from './components/Totalstore'
 
 /**
  * The following block of code may be used to automatically register your

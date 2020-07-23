@@ -5,7 +5,14 @@
     <b-card class="shadow-sm">
 
       <template v-slot:header>
-        <h4 class="mb-0"><b-icon-inbox></b-icon-inbox> Orders <b-button variant="dark" class="float-right" @click="refreshTable()"><b-icon-bootstrap-reboot></b-icon-bootstrap-reboot> Refresh</b-button> </h4> 
+        
+        
+     
+
+        <b-row>
+          <b-col> <h4 class="mb-0"><b-icon-inbox></b-icon-inbox> Orders </h4> </b-col>
+          <b-col><b-button variant="dark" class="float-right" @click="refreshTable()"><b-icon-bootstrap-reboot></b-icon-bootstrap-reboot> Refresh</b-button></b-col>
+        </b-row>
       </template>
     
       <b-row class="mt-2">
@@ -13,7 +20,13 @@
           Show <b-form-select class="form-control w-25" v-model="perPage" id="perPageSelect" size="sm" :options="pageOptions"></b-form-select> entries
         </b-col>
         <b-col>
-          <b-form-input v-model="filter" type="search" id="filterInput" placeholder="Search..." size="sm"></b-form-input>
+         <label class="sr-only" for="inlineFormInputGroup">Search</label>
+      <div class="input-group mb-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text bg-transparent "><i class="fas fa-search"></i></div>
+        </div>
+        <input type="text" v-model="filter" class="form-control form-control-sm" id="inlineFormInputGroup" placeholder="Search">
+      </div>
         </b-col>
       </b-row>
 

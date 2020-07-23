@@ -2,7 +2,6 @@
 * {font-family: 'roboto';}
 body {padding-top: 96px;}
 .btn{border-radius: 25px;}
-.form-control{border-radius: 25px;}
 html {
     scroll-behavior: smooth;
   }

@@ -5,10 +5,15 @@
     <b-card class="shadow-sm">
 
       <template v-slot:header>
-        <h4 class="mb-0"><b-icon-images></b-icon-images> Banners </h4> 
+        <b-row>
+          <b-col>        <h4 class="mb-0"><b-icon-images></b-icon-images> Banners </h4> 
+</b-col>
+          <b-col>      
+            <b-button id="show-btn" variant="primary" class="float-right" v-if="user_role == 'main'" @click="showModal()">+ Add Banner</b-button>
+          </b-col>
+        </b-row>
       </template>
 <!-- Button trigger modal -->
-      <b-button id="show-btn" variant="primary" v-if="user_role == 'main'" @click="showModal()">+ Add Banner</b-button>
 
       <b-table id="my-table" class="mt-2" :items="items" :per-page="perPage" :current-page="currentPage" :fields="fields" outlined bordered hover striped responsive>
         <template v-slot:cell(image)="row">
@@ -41,7 +46,7 @@
             <b-button variant="dark" class="mt-2 w-100" @click="resetImage">Reset image</b-button> 
               </b-col>
               <b-col>
-            <b-form-file  placeholder="Choose or Drop image here..." @change="openImage" @drop="openImage" drop-placeholder="Drop file here..." accept='image/*' required></b-form-file>
+            <b-form-file v-model="imagePath"  placeholder="Choose image..." @change="openImage" drop-placeholder="Drop file here..." accept='image/*' required></b-form-file>
               </b-col>
             </b-row>
 
@@ -71,7 +76,7 @@
         //show: true,
           items: [],
           fields: [
-            {key:'image', label:'Image', sortable: false, },
+            {key:'image', label:'Banner', sortable: false, },
             {key:'delete', label:'' }
           ],
           totalRows: 0,
@@ -82,6 +87,7 @@
           dataLoaded: false,
             imageUrl: 'images/banners/header_image.webp',
             imageProps: { width: 555, height: 235},
+            imagePath: null,
       }
     },
        
@@ -106,14 +112,6 @@ methods:{
           this.imageUrl = 'images/banners/header_image.webp';
           this.imagePath = null;
       },
-      resetForm(){
-         this.form.name = null;
-         this.form.price = null;
-         this.form.des = null;
-         this.form.category_id = null;
-         this.resetImage()
-      },
-      
       showModal() {
         
         this.$refs['banner-modal'].show()
@@ -179,9 +177,6 @@ methods:{
           })
             ;
         },
-        
-
-       
     },
      
     created: function(){

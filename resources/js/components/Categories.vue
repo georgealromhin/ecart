@@ -5,19 +5,27 @@
     <b-card class="shadow-sm">
 
       <template v-slot:header>
-        <h4 class="mb-0"><b-icon-tag-fill></b-icon-tag-fill> Categories</h4> 
-      </template>
+        
 
-      <!-- Button trigger modal -->
-      <b-button id="show-btn" variant="primary" v-if="user_role == 'main'" @click="showModal(true, null, null)">+ Add New Category</b-button>
+        <b-row>
+          <b-col><h4 class="mb-0"><b-icon-tag-fill></b-icon-tag-fill> Categories</h4> </b-col>
+          <b-col>      <b-button id="show-btn" variant="primary" class="float-right" v-if="user_role == 'main'" @click="showModal(true, null, null)">+ Add New Category</b-button>
+</b-col>
+        </b-row>
+      </template>
 
       <b-row class="mt-2">
         <b-col>
           Show <b-form-select class="form-control w-25" v-model="perPage" id="perPageSelect" size="sm" :options="pageOptions"></b-form-select> entries
         </b-col>
         <b-col>
-          <b-form-input v-model="filter" type="search" id="filterInput" placeholder="Search..." size="sm"></b-form-input>
-        </b-col>
+      <label class="sr-only" for="inlineFormInputGroup">Search</label>
+      <div class="input-group mb-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text bg-transparent "><i class="fas fa-search"></i></div>
+        </div>
+        <input type="text" v-model="filter" class="form-control form-control-sm" id="inlineFormInputGroup" placeholder="Search">
+      </div>        </b-col>
       </b-row>
 
       <b-table id="my-table" class="mt-2" :items="items" :per-page="perPage" :current-page="currentPage" :fields="fields" outlined bordered hover striped responsive  :filter="filter" @filtered="onFiltered">

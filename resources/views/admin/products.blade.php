@@ -12,7 +12,7 @@
 
         <div id="page-content-wrapper">
             @include('admin.navbar')
-            <div class="container mt-5 mb-5">
+            <div class="container-fluid mt-5 mb-5">
                 <products-component user_role="{{ Auth::user()->role }}"></products-component>
             </div>
         </div>
