@@ -10,13 +10,12 @@
         <b-col>
         </b-col>
         <b-col>
-          <b-form-input v-model="search" type="search" id="filterInput" placeholder="Search..." size="sm"></b-form-input>
+          <b-form-input v-model="search" type="search" class="mt-4" id="filterInput" placeholder="Search..." size="sm"></b-form-input>
         </b-col>
       </b-row>
 <div  v-for="category in categoryList"  v-bind:key="category.id">
 
-     <h3 class="mt-5" :id="category.id+category.name">{{category.name}}</h3>
-<hr>
+     <h3 class="mt-2" :id="category.id+category.name">{{category.name}}</h3>
 
 <div class="row">
        <div v-for="product in category.products" v-bind:key="product.id" class="col-md-4 d-flex align-items-stretch">
@@ -130,12 +129,15 @@ export default {
     },
     computed: {
     categoryList() {
-        
-    return this.categories.filter(category => {
-        return category.products.some(product => {
-            return product.name.toLowerCase().includes(this.search.toLowerCase())
-        })
-    })
+    const search = this.search.toLowerCase();
+    if (!search) return this.categories;        
+     return this.categories.map(category => {
+    return {
+      category, products: category.products.filter(product => {
+        return product.name.toLowerCase().includes(search);
+      }),
+    }
+  });
     }
   },
     

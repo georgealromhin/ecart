@@ -3290,7 +3290,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['currency'],
@@ -3360,12 +3359,15 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     categoryList: function categoryList() {
-      var _this3 = this;
-
-      return this.categories.filter(function (category) {
-        return category.products.some(function (product) {
-          return product.name.toLowerCase().includes(_this3.search.toLowerCase());
-        });
+      var search = this.search.toLowerCase();
+      if (!search) return this.categories;
+      return this.categories.map(function (category) {
+        return {
+          category: category,
+          products: category.products.filter(function (product) {
+            return product.name.toLowerCase().includes(search);
+          })
+        };
       });
     }
   }
@@ -84551,6 +84553,7 @@ var render = function() {
             "b-col",
             [
               _c("b-form-input", {
+                staticClass: "mt-4",
                 attrs: {
                   type: "search",
                   id: "filterInput",
@@ -84576,11 +84579,9 @@ var render = function() {
         return _c("div", { key: category.id }, [
           _c(
             "h3",
-            { staticClass: "mt-5", attrs: { id: category.id + category.name } },
+            { staticClass: "mt-2", attrs: { id: category.id + category.name } },
             [_vm._v(_vm._s(category.name))]
           ),
-          _vm._v(" "),
-          _c("hr"),
           _vm._v(" "),
           _c(
             "div",
