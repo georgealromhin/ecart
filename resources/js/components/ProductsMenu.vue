@@ -6,8 +6,14 @@
     <b-nav-item  v-for="category in categories"  v-bind:key="category.id"  :href="'#'+category.id+category.name"> <span class="text-light"> {{category.name}} </span> </b-nav-item>
   </b-nav>
 
- 
-<div  v-for="category in categories"  v-bind:key="category.id">
+ <b-row class="mt-2">
+        <b-col>
+        </b-col>
+        <b-col>
+          <b-form-input v-model="search" type="search" id="filterInput" placeholder="Search..." size="sm"></b-form-input>
+        </b-col>
+      </b-row>
+<div  v-for="category in categoryList"  v-bind:key="category.id">
 
      <h3 class="mt-5" :id="category.id+category.name">{{category.name}}</h3>
 <hr>
@@ -56,7 +62,7 @@ export default {
         return{
             categories:[],
             TotalStore,
-
+            search: '',
         }
     }, 
     methods:{
@@ -122,6 +128,16 @@ export default {
     created(){
         this.getCategories();
     },
+    computed: {
+    categoryList() {
+        
+    return this.categories.filter(category => {
+        return category.products.some(product => {
+            return product.name.toLowerCase().includes(this.search.toLowerCase())
+        })
+    })
+    }
+  },
     
 }
 </script>
