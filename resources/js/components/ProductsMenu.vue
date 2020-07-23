@@ -6,7 +6,7 @@
     <b-nav-item  v-for="category in categories"  v-bind:key="category.id"  :href="'#'+category.id+category.name"> <span class="text-light"> {{category.name}} </span> </b-nav-item>
   </b-nav>
 
- <b-row class="mt-2">
+ <b-row class="mt-2" v-if="categories.length > 0">
         <b-col></b-col>
         <b-col>
             <label class="sr-only" for="inlineFormInputGroup">Search</label>

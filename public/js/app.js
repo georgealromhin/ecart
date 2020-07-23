@@ -84727,59 +84727,63 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c(
-        "b-row",
-        { staticClass: "mt-2" },
-        [
-          _c("b-col"),
-          _vm._v(" "),
-          _c("b-col", [
-            _c(
-              "label",
-              {
-                staticClass: "sr-only",
-                attrs: { for: "inlineFormInputGroup" }
-              },
-              [_vm._v("Search")]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-group mb-2  mt-4" }, [
-              _c("div", { staticClass: "input-group-prepend" }, [
-                _c("div", { staticClass: "input-group-text bg-transparent " }, [
-                  _c("i", { staticClass: "fas fa-search" })
-                ])
-              ]),
+      _vm.categories.length > 0
+        ? _c(
+            "b-row",
+            { staticClass: "mt-2" },
+            [
+              _c("b-col"),
               _vm._v(" "),
-              _c("input", {
-                directives: [
+              _c("b-col", [
+                _c(
+                  "label",
                   {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.search,
-                    expression: "search"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: {
-                  type: "text",
-                  id: "inlineFormInputGroup",
-                  placeholder: "Search"
-                },
-                domProps: { value: _vm.search },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+                    staticClass: "sr-only",
+                    attrs: { for: "inlineFormInputGroup" }
+                  },
+                  [_vm._v("Search")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "input-group mb-2  mt-4" }, [
+                  _c("div", { staticClass: "input-group-prepend" }, [
+                    _c(
+                      "div",
+                      { staticClass: "input-group-text bg-transparent " },
+                      [_c("i", { staticClass: "fas fa-search" })]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.search,
+                        expression: "search"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      id: "inlineFormInputGroup",
+                      placeholder: "Search"
+                    },
+                    domProps: { value: _vm.search },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.search = $event.target.value
+                      }
                     }
-                    _vm.search = $event.target.value
-                  }
-                }
-              })
-            ])
-          ])
-        ],
-        1
-      ),
+                  })
+                ])
+              ])
+            ],
+            1
+          )
+        : _vm._e(),
       _vm._v(" "),
       _vm._l(_vm.categoryList, function(category) {
         return _c("div", { key: category.id }, [
