@@ -1,5 +1,12 @@
 @extends('layout')
 @section('title', $settings[12]->value)
+@section('header')
+  <style>
+.tableFixHead { overflow-y: scroll;height: 500px}
+.tableFixHead th { position: sticky; top: 0;background-color: #FFFFFF }
+  </style>
+@endsection
+
 @section('content')
 
 <div id="carouselControls" class="carousel slide mt-4 shadow" data-ride="carousel">
@@ -22,7 +29,7 @@
     </a>
   </div>
 
-
+ 
   <products-menu-component currency="{{ config('app.currency') }}"></products-menu-component>
 
 @endsection
