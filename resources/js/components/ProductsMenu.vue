@@ -14,7 +14,7 @@
       <b-col></b-col>
       <b-col>
         <label class="sr-only" for="inlineFormInputGroup">Search</label>
-        <div class="input-group mb-2 mt-4">
+        <div class="input-group mb-2 mt-4  w-100">
           <div class="input-group-prepend">
             <div class="input-group-text bg-transparent">
               <i class="fas fa-search"></i>
@@ -25,7 +25,7 @@
             v-model="search"
             class="form-control"
             id="inlineFormInputGroup"
-            placeholder="Search"
+            placeholder="Search..."
           />
         </div>
       </b-col>

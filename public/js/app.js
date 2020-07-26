@@ -85281,7 +85281,7 @@ var render = function() {
                   [_vm._v("Search")]
                 ),
                 _vm._v(" "),
-                _c("div", { staticClass: "input-group mb-2 mt-4" }, [
+                _c("div", { staticClass: "input-group mb-2 mt-4  w-100" }, [
                   _c("div", { staticClass: "input-group-prepend" }, [
                     _c(
                       "div",
@@ -85303,7 +85303,7 @@ var render = function() {
                     attrs: {
                       type: "text",
                       id: "inlineFormInputGroup",
-                      placeholder: "Search"
+                      placeholder: "Search..."
                     },
                     domProps: { value: _vm.search },
                     on: {
