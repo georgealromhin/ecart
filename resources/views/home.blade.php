@@ -28,3 +28,22 @@
     <products-menu-component currency="{{ config('app.currency') }}"></products-menu-component>
 
 @endsection
+
+@section('script')
+    <script>
+        window.onscroll = function() {
+            scrollOffset()
+        };
+
+        var header = document.getElementById("category-header");
+        var sticky = header.offsetTop;
+
+        function scrollOffset() {
+            if (window.pageYOffset > sticky) {
+                header.classList.add("fixed-top");
+            } else {
+                header.classList.remove("fixed-top");
+            }
+        }
+    </script>
+@endsection

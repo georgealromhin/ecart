@@ -10,16 +10,3 @@ function closeNav() {
     document.getElementById("main-sidebar").style.width = "0";
     document.getElementById("main").style.marginLeft = "0";
 }
-
-window.onscroll = function() { scrollOffset() };
-
-var header = document.getElementById("category-header");
-var sticky = header.offsetTop;
-
-function scrollOffset() {
-    if (window.pageYOffset > sticky) {
-        header.classList.add("fixed-top");
-    } else {
-        header.classList.remove("fixed-top");
-    }
-}
