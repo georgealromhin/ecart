@@ -14,14 +14,12 @@
             @include('admin.navbar')
             <div class="container-fluid mt-5 mb-5">
                 <settings-component user_role="{{ Auth::user()->role }}"></settings-component>
-                {{-- <a href="{{url('banners')}}">Banners</a> --}}
             </div>
         </div>
     </div>
-    
+
 @endsection
 @section('script')
-<script type="text/javascript" src="{{asset('js/easy_notify.js')}}"></script>   
-<script type="text/javascript" src="{{asset('js/notification.js')}}"></script>   
-
+    <script type="text/javascript" src="{{ asset('js/easy_notify.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/notification.js') }}"></script>
 @endsection

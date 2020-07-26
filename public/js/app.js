@@ -1977,19 +1977,53 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['user_role'],
+  props: ["user_role"],
   data: function data() {
     return {
       //show: true,
       items: [],
       fields: [{
-        key: 'image',
-        label: 'Banner',
+        key: "image",
+        label: "Banner",
         sortable: false
       }, {
-        key: 'delete',
-        label: ''
+        key: "delete",
+        label: ""
       }],
       totalRows: 0,
       currentPage: 1,
@@ -1997,7 +2031,7 @@ __webpack_require__.r(__webpack_exports__);
       pageOptions: [10, 25, 50, 100],
       filter: null,
       dataLoaded: false,
-      imageUrl: 'images/banners/header_image.webp',
+      imageUrl: "images/banners/header_image.webp",
       imageProps: {
         width: 555,
         height: 235
@@ -2020,26 +2054,26 @@ __webpack_require__.r(__webpack_exports__);
       this.imageUrl = URL.createObjectURL(this.imagePath);
     },
     resetImage: function resetImage() {
-      this.imageUrl = 'images/banners/header_image.webp';
+      this.imageUrl = "images/banners/header_image.webp";
       this.imagePath = null;
     },
     showModal: function showModal() {
-      this.$refs['banner-modal'].show();
+      this.$refs["banner-modal"].show();
     },
     hideModal: function hideModal() {
-      this.$refs['banner-modal'].hide();
+      this.$refs["banner-modal"].hide();
     },
-    // fetch data 
+    // fetch data
     getBanners: function getBanners() {
       var _this = this;
 
-      axios.get('banners/all').then(function (response) {
+      axios.get("banners/all").then(function (response) {
         _this.items = response.data.data; // Set the initial number of items
 
         _this.totalRows = _this.items.length;
         _this.dataLoaded = true;
       })["catch"](function (error) {
-        _this.makeToast('Error', 'Could not load images, error: ' + error.response.status, 'danger');
+        _this.makeToast("Error", "Could not load images, error: " + error.response.status, "danger");
       });
     },
     refreshTable: function refreshTable() {
@@ -2051,17 +2085,17 @@ __webpack_require__.r(__webpack_exports__);
 
       evt.preventDefault();
       var formData = new FormData();
-      formData.append('image', this.imagePath);
-      axios.post('banner/create', formData).then(function (response) {
+      formData.append("image", this.imagePath);
+      axios.post("banner/create", formData).then(function (response) {
         if (response.status == 200) {
-          _this2.makeToast('Added', 'New Banner Added', 'success');
+          _this2.makeToast("Added", "New Banner Added", "success");
 
           _this2.resetImage();
 
           _this2.getBanners();
         }
       })["catch"](function (error) {
-        _this2.makeToast('Error', 'Something went wrong, error: ' + error.response.status, 'danger');
+        _this2.makeToast("Error", "Something went wrong, error: " + error.response.status, "danger");
       });
     },
     // delete data
@@ -2069,26 +2103,26 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       Swal.fire({
-        title: 'Are you sure?',
+        title: "Are you sure?",
         text: "You won't be able to revert this!",
-        icon: 'warning',
+        icon: "warning",
         showCancelButton: true,
-        confirmButtonColor: '#0080FF',
-        cancelButtonColor: '#FF2645',
-        confirmButtonText: 'Yes',
+        confirmButtonColor: "#0080FF",
+        cancelButtonColor: "#FF2645",
+        confirmButtonText: "Yes",
         focusCancel: true
       }).then(function (result) {
         if (result.value) {
-          axios["delete"]('banner/delete/' + id).then(function (response) {
+          axios["delete"]("banner/delete/" + id).then(function (response) {
             if (response.status == 200) {
-              _this3.makeToast('Deleted', 'Banner Deleted', 'success');
+              _this3.makeToast("Deleted", "Banner Deleted", "success");
 
               _this3.getBanners();
 
               _this3.hideModal();
             }
           })["catch"](function (error) {
-            _this3.makeToast('Error', 'Something went wrong, error: ' + error.response.status, 'danger');
+            _this3.makeToast("Error", "Something went wrong, error: " + error.response.status, "danger");
           });
         }
       });
@@ -2164,27 +2198,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['currency'],
+  props: ["currency"],
   data: function data() {
     return {
       items: [],
       fields: [{
-        key: 'product.name',
-        label: 'Name',
+        key: "product.name",
+        label: "Name",
         sortable: true
       }, {
-        key: 'qty',
-        label: 'Quantity',
+        key: "qty",
+        label: "Quantity",
         sortable: true
       }, {
-        key: 'price',
-        label: 'Price',
+        key: "price",
+        label: "Price",
         sortable: false
       }, {
-        key: 'delete',
-        label: ''
+        key: "delete",
+        label: ""
       }],
       dataLoaded: false,
       totalRows: 0,
@@ -2193,11 +2234,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     makeToast: function makeToast(title, text, variant) {},
-    // fetch data 
+    // fetch data
     getCartItems: function getCartItems() {
       var _this = this;
 
-      axios.get('cart/all').then(function (response) {
+      axios.get("cart/all").then(function (response) {
         _this.items = response.data.data;
         _this.totalRows = _this.items.length;
         _this.dataLoaded = true;
@@ -2207,7 +2248,7 @@ __webpack_require__.r(__webpack_exports__);
     deleteItem: function deleteItem(id) {
       var _this2 = this;
 
-      axios["delete"]('cart/remove/' + id).then(function (response) {
+      axios["delete"]("cart/remove/" + id).then(function (response) {
         _this2.getCartItems();
 
         _this2.getTotal();
@@ -2219,7 +2260,7 @@ __webpack_require__.r(__webpack_exports__);
     addToCart: function addToCart(id, qty) {
       var _this3 = this;
 
-      axios.get('cart/store/' + id + '/' + qty).then(function (response) {
+      axios.get("cart/store/" + id + "/" + qty).then(function (response) {
         _this3.getCartItems();
 
         _this3.getTotal();
@@ -2227,7 +2268,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     getTotal: function getTotal() {
-      axios.get('total').then(function (response) {
+      axios.get("total").then(function (response) {
         _TotalStore__WEBPACK_IMPORTED_MODULE_0__["default"].data.total = response.data; //console.log('get total is working: '+TotalStore.data.total )
       })["catch"](function (error) {//this.makeToast('Error','Could not load categories, error: '+ error.response.status, 'danger')
       });
@@ -2331,31 +2372,101 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['user_role'],
+  props: ["user_role"],
   data: function data() {
     return {
       form: {
-        id: '',
-        name: ''
+        id: "",
+        name: ""
       },
       //show: true,
       items: [],
       fields: [{
-        key: 'name',
-        label: 'Name',
+        key: "name",
+        label: "Name",
         sortable: true
       }, //{key:'status', label:'Status', sortable:false },
       {
-        key: 'status_check',
-        label: 'Status',
+        key: "status_check",
+        label: "Status",
         sortable: false
       }, {
-        key: 'edit',
-        label: ''
+        key: "edit",
+        label: ""
       }, {
-        key: 'delete',
-        label: ''
+        key: "delete",
+        label: ""
       }],
       totalRows: 0,
       currentPage: 1,
@@ -2382,17 +2493,17 @@ __webpack_require__.r(__webpack_exports__);
       this.form.id = id;
 
       if (add) {
-        this.modalTitle = 'Add New Category';
+        this.modalTitle = "Add New Category";
         this.formEdit = false;
       } else {
-        this.modalTitle = 'Edit Category';
+        this.modalTitle = "Edit Category";
         this.formEdit = true;
       }
 
-      this.$refs['category-modal'].show();
+      this.$refs["category-modal"].show();
     },
     hideModal: function hideModal() {
-      this.$refs['category-modal'].hide();
+      this.$refs["category-modal"].hide();
     },
     // submit form (add data)
     onSubmit: function onSubmit(evt) {
@@ -2402,49 +2513,49 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.formEdit) {
         var obj = {
-          'name': this.form.name
+          name: this.form.name
         }; //var strngObj = qs.stringify(obj)
 
-        axios.put('category/update/' + this.form.id, obj).then(function (response) {
+        axios.put("category/update/" + this.form.id, obj).then(function (response) {
           if (response.status == 200) {
-            _this.makeToast('Updated', 'Category Updated', 'success');
+            _this.makeToast("Updated", "Category Updated", "success");
 
             _this.hideModal();
 
             _this.getCategories();
           }
         })["catch"](function (error) {
-          _this.makeToast('Error', 'Something went wrong, error: ' + error.response.status, 'danger');
+          _this.makeToast("Error", "Something went wrong, error: " + error.response.status, "danger");
         });
       } else {
         var formData = new FormData();
-        formData.append('name', this.form.name);
-        axios.post('category/create', {
+        formData.append("name", this.form.name);
+        axios.post("category/create", {
           name: this.form.name
         }).then(function (response) {
           if (response.status == 200) {
-            _this.makeToast('Added', 'New Category Added', 'success');
+            _this.makeToast("Added", "New Category Added", "success");
 
             _this.hideModal();
 
             _this.getCategories();
           }
         })["catch"](function (error) {
-          _this.makeToast('Error', 'Something went wrong, error: ' + error.response.status, 'danger');
+          _this.makeToast("Error", "Something went wrong, error: " + error.response.status, "danger");
         });
       }
     },
-    // fetch data 
+    // fetch data
     getCategories: function getCategories() {
       var _this2 = this;
 
-      axios.get('categories/all').then(function (response) {
+      axios.get("categories/all").then(function (response) {
         _this2.items = response.data.data; // Set the initial number of items
 
         _this2.totalRows = _this2.items.length;
         _this2.dataLoaded = true;
       })["catch"](function (error) {
-        _this2.makeToast('Error', 'Could not load categories, error: ' + error.response.status, 'danger');
+        _this2.makeToast("Error", "Could not load categories, error: " + error.response.status, "danger");
       });
     },
     // delete data
@@ -2452,24 +2563,24 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       Swal.fire({
-        title: 'Are you sure?',
+        title: "Are you sure?",
         text: "You won't be able to revert this!",
-        icon: 'warning',
+        icon: "warning",
         showCancelButton: true,
-        confirmButtonColor: '#0080FF',
-        cancelButtonColor: '#FF2645',
-        confirmButtonText: 'Yes',
+        confirmButtonColor: "#0080FF",
+        cancelButtonColor: "#FF2645",
+        confirmButtonText: "Yes",
         focusCancel: true
       }).then(function (result) {
         if (result.value) {
-          axios["delete"]('category/delete/' + id).then(function (response) {
+          axios["delete"]("category/delete/" + id).then(function (response) {
             if (response.status == 200) {
-              _this3.makeToast('Deleted', 'Category deleted', 'success');
+              _this3.makeToast("Deleted", "Category deleted", "success");
 
               _this3.getCategories();
             }
           })["catch"](function (error) {
-            _this3.makeToast('Error', 'Something went wrong, error: ' + error.response.status, 'danger');
+            _this3.makeToast("Error", "Something went wrong, error: " + error.response.status, "danger");
           });
         }
       });
@@ -2478,20 +2589,20 @@ __webpack_require__.r(__webpack_exports__);
     updateStatus: function updateStatus(id, status) {
       var _this4 = this;
 
-      var _status = 'visible';
+      var _status = "visible";
 
-      if (status == 'visible') {
-        _status = 'hidden';
+      if (status == "visible") {
+        _status = "hidden";
       }
 
-      axios.put('category_status/update/' + _status + '/' + id).then(function (response) {
+      axios.put("category_status/update/" + _status + "/" + id).then(function (response) {
         if (response.status == 200) {
-          _this4.makeToast('Status changed', 'Category status has been changed', 'success');
+          _this4.makeToast("Status changed", "Category status has been changed", "success");
 
           _this4.getCategories();
         }
       })["catch"](function (error) {
-        _this4.makeToast('Error', 'Something went wrong, error: ' + error.response.status, 'danger');
+        _this4.makeToast("Error", "Something went wrong, error: " + error.response.status, "danger");
       });
     },
     // Trigger pagination to update the number of buttons/pages due to filtering
@@ -2573,18 +2684,44 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       form: {
-        name: '',
-        email: '',
-        phone: '',
-        delivery_address: '',
-        comments: '',
-        selected: 'Delivery'
+        name: "",
+        email: "",
+        phone: "",
+        delivery_address: "",
+        comments: "",
+        selected: "Delivery"
       },
-      order_type: ['Delivery', 'Pickup'],
+      order_type: ["Delivery", "Pickup"],
       checkout: false,
       order_number: null,
       email_address: null
@@ -2597,20 +2734,20 @@ __webpack_require__.r(__webpack_exports__);
 
       evt.preventDefault();
       Swal.fire({
-        title: '',
-        text: 'Loading...',
+        title: "",
+        text: "Loading...",
         allowEscapeKey: false,
         allowOutsideClick: false
       });
       Swal.showLoading();
       var formData = new FormData();
-      formData.append('name', this.form.name);
-      formData.append('email', this.form.email);
-      formData.append('phone', this.form.phone);
-      formData.append('delivery_address', this.form.delivery_address);
-      formData.append('comments', this.form.comments);
-      formData.append('order_type', this.form.selected);
-      axios.post('order/create', formData).then(function (response) {
+      formData.append("name", this.form.name);
+      formData.append("email", this.form.email);
+      formData.append("phone", this.form.phone);
+      formData.append("delivery_address", this.form.delivery_address);
+      formData.append("comments", this.form.comments);
+      formData.append("order_type", this.form.selected);
+      axios.post("order/create", formData).then(function (response) {
         if (response.status == 200) {
           _this.order_number = response.data.order_number;
           _this.email_address = response.data.email;
@@ -2618,7 +2755,7 @@ __webpack_require__.r(__webpack_exports__);
           Swal.close();
         }
       })["catch"](function (error) {
-        Swal.fire('Error', error.response.data.message, 'error');
+        Swal.fire("Error", error.response.data.message, "error");
       });
     }
   },
@@ -2661,13 +2798,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       form: {
-        name: '',
-        email: '',
-        message: ''
+        name: "",
+        email: "",
+        message: ""
       }
     };
   },
@@ -2678,30 +2824,30 @@ __webpack_require__.r(__webpack_exports__);
 
       evt.preventDefault();
       Swal.fire({
-        title: '',
-        text: 'Sending...',
+        title: "",
+        text: "Sending...",
         allowEscapeKey: false,
         allowOutsideClick: false
       });
       Swal.showLoading();
       var formData = new FormData();
-      formData.append('name', this.form.name);
-      formData.append('email', this.form.email);
-      formData.append('message', this.form.message);
-      axios.post('send_mail', formData).then(function (response) {
+      formData.append("name", this.form.name);
+      formData.append("email", this.form.email);
+      formData.append("message", this.form.message);
+      axios.post("send_mail", formData).then(function (response) {
         if (response.status == 200) {
-          Swal.fire('Success', response.data.msg, 'success');
+          Swal.fire("Success", response.data.msg, "success");
 
           _this.resetForm();
         }
       })["catch"](function (error) {
-        Swal.fire('Error', error.response.data.message, 'error');
+        Swal.fire("Error", error.response.data.message, "error");
       });
     },
     resetForm: function resetForm() {
-      this.form.name = '';
-      this.form.email = '';
-      this.form.message = '';
+      this.form.name = "";
+      this.form.email = "";
+      this.form.message = "";
     }
   },
   created: function created() {},
@@ -2782,42 +2928,94 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['user_role'],
+  props: ["user_role"],
   data: function data() {
     return {
       //show: true,
       items: [],
       fields: [{
-        key: 'order_number',
-        label: 'Order №',
+        key: "order_number",
+        label: "Order №",
         sortable: true
       }, {
-        key: 'customer.name',
-        label: 'Customer',
+        key: "customer.name",
+        label: "Customer",
         sortable: true
       }, {
-        key: 'created_at',
-        label: 'Date',
+        key: "created_at",
+        label: "Date",
         sortable: true
       }, {
-        key: 'total',
-        label: 'Total',
+        key: "total",
+        label: "Total",
         sortable: true
       }, {
-        key: 'order_type',
-        label: 'Type',
+        key: "order_type",
+        label: "Type",
         sortable: true
       }, {
-        key: 'status',
-        label: 'Status',
+        key: "status",
+        label: "Status",
         sortable: true
       }, {
-        key: 'view',
-        label: ''
+        key: "view",
+        label: ""
       }, {
-        key: 'delete',
-        label: ''
+        key: "delete",
+        label: ""
       }],
       totalRows: 0,
       currentPage: 1,
@@ -2837,17 +3035,17 @@ __webpack_require__.r(__webpack_exports__);
         solid: true
       });
     },
-    // fetch data 
+    // fetch data
     getOrders: function getOrders() {
       var _this = this;
 
-      axios.get('orders/all').then(function (response) {
+      axios.get("orders/all").then(function (response) {
         _this.items = response.data.data; // Set the initial number of items
 
         _this.totalRows = _this.items.length;
         _this.dataLoaded = true;
       })["catch"](function (error) {
-        _this.makeToast('Error', 'Could not load orders, error: ' + error.response.status, 'danger');
+        _this.makeToast("Error", "Could not load orders, error: " + error.response.status, "danger");
       });
     },
     refreshTable: function refreshTable() {
@@ -2858,24 +3056,24 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       Swal.fire({
-        title: 'Are you sure?',
+        title: "Are you sure?",
         text: "You won't be able to revert this!",
-        icon: 'warning',
+        icon: "warning",
         showCancelButton: true,
-        confirmButtonColor: '#0080FF',
-        cancelButtonColor: '#FF2645',
-        confirmButtonText: 'Yes',
+        confirmButtonColor: "#0080FF",
+        cancelButtonColor: "#FF2645",
+        confirmButtonText: "Yes",
         focusCancel: true
       }).then(function (result) {
         if (result.value) {
-          axios["delete"]('order/delete/' + id).then(function (response) {
+          axios["delete"]("order/delete/" + id).then(function (response) {
             if (response.status == 200) {
-              _this2.makeToast('Deleted', 'Order Deleted', 'success');
+              _this2.makeToast("Deleted", "Order Deleted", "success");
 
               _this2.getOrders();
             }
           })["catch"](function (error) {
-            _this2.makeToast('Error', 'Something went wrong, error: ' + error.response.status, 'danger');
+            _this2.makeToast("Error", "Something went wrong, error: " + error.response.status, "danger");
           });
         }
       });
@@ -3016,8 +3214,138 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['user_role'],
+  props: ["user_role"],
   data: function data() {
     return {
       imageProps: {
@@ -3040,31 +3368,31 @@ __webpack_require__.r(__webpack_exports__);
       items: [],
       categories: [],
       fields: [{
-        key: 'image',
-        label: 'Image',
+        key: "image",
+        label: "Image",
         sortable: false
       }, {
-        key: 'name',
-        label: 'Product',
+        key: "name",
+        label: "Product",
         sortable: true
       }, {
-        key: 'price',
-        label: 'Price',
+        key: "price",
+        label: "Price",
         sortable: true
       }, {
-        key: 'category.name',
-        label: 'Category',
+        key: "category.name",
+        label: "Category",
         sortable: true
       }, {
-        key: 'status_check',
-        label: 'Status',
+        key: "status_check",
+        label: "Status",
         sortable: false
       }, {
-        key: 'edit',
-        label: ''
+        key: "edit",
+        label: ""
       }, {
-        key: 'delete',
-        label: ''
+        key: "delete",
+        label: ""
       }],
       totalRows: 0,
       currentPage: 1,
@@ -3073,9 +3401,11 @@ __webpack_require__.r(__webpack_exports__);
       filter: null,
       modalTitle: null,
       formEdit: false,
-      imageUrl: 'images/thumbnail_image.jpg',
+      imageUrl: "images/thumbnail_image.jpg",
       imagePath: null,
-      dataLoaded: false
+      dataLoaded: false,
+      desTextLength: 0,
+      nameTextLength: 0
     };
   },
   mounted: function mounted() {},
@@ -3093,7 +3423,7 @@ __webpack_require__.r(__webpack_exports__);
       this.imageUrl = URL.createObjectURL(this.imagePath);
     },
     resetImage: function resetImage() {
-      this.imageUrl = 'images/thumbnail_image.jpg';
+      this.imageUrl = "images/thumbnail_image.jpg";
       this.imagePath = null;
       this.form.image = null;
     },
@@ -3107,8 +3437,10 @@ __webpack_require__.r(__webpack_exports__);
     showModal: function showModal(add, item) {
       if (add) {
         this.resetForm();
-        this.modalTitle = 'Add New Peoduct';
+        this.modalTitle = "Add New Peoduct";
         this.formEdit = false;
+        this.desTextLength = 0;
+        this.nameTextLength = 0;
       } else {
         this.form.id = item.id;
         this.imageUrl = item.image;
@@ -3116,14 +3448,16 @@ __webpack_require__.r(__webpack_exports__);
         this.form.price = item.price;
         this.form.des = item.des;
         this.form.category_id = item.category_id;
-        this.modalTitle = 'Edit Product';
+        this.modalTitle = "Edit Product";
         this.formEdit = true;
+        this.form.des != null ? this.desTextLength = this.form.des.length : this.desTextLength = 0;
+        this.form.name != null ? this.nameTextLength = this.form.name.length : this.nameTextLength = 0;
       }
 
-      this.$refs['product-modal'].show();
+      this.$refs["product-modal"].show();
     },
     hideModal: function hideModal() {
-      this.$refs['product-modal'].hide();
+      this.$refs["product-modal"].hide();
     },
     // submit form (add data)
     onSubmit: function onSubmit(evt) {
@@ -3131,30 +3465,30 @@ __webpack_require__.r(__webpack_exports__);
 
       evt.preventDefault();
       var formData = new FormData();
-      formData.append('id', this.form.id);
-      formData.append('image', this.imagePath);
-      formData.append('name', this.form.name);
-      formData.append('price', this.form.price);
-      formData.append('des', this.form.des);
-      formData.append('category_id', this.form.category_id);
-      formData.append('current_image', this.imageUrl);
+      formData.append("id", this.form.id);
+      formData.append("image", this.imagePath);
+      formData.append("name", this.form.name);
+      formData.append("price", this.form.price);
+      formData.append("des", this.form.des);
+      formData.append("category_id", this.form.category_id);
+      formData.append("current_image", this.imageUrl);
 
       if (this.formEdit) {
-        axios.post('product/update', formData).then(function (response) {
+        axios.post("product/update", formData).then(function (response) {
           if (response.status == 200) {
-            _this.makeToast('Updated', 'Product Updated', 'success');
+            _this.makeToast("Updated", "Product Updated", "success");
 
             _this.hideModal();
 
             _this.getProducts();
           }
         })["catch"](function (error) {
-          _this.makeToast('Error', 'Something went wrong, error: ' + error.response.status, 'danger');
+          _this.makeToast("Error", "Something went wrong, error: " + error.response.status, "danger");
         });
       } else {
-        axios.post('product/create', formData).then(function (response) {
+        axios.post("product/create", formData).then(function (response) {
           if (response.status == 200) {
-            _this.makeToast('Added', 'New Product Added', 'success');
+            _this.makeToast("Added", "New Product Added", "success");
 
             _this.hideModal();
 
@@ -3166,31 +3500,31 @@ __webpack_require__.r(__webpack_exports__);
             evt.target.reset();
           }
         })["catch"](function (error) {
-          _this.makeToast('Error', 'Something went wrong, error: ' + error.response.status, 'danger');
+          _this.makeToast("Error", "Something went wrong, error: " + error.response.status, "danger");
         });
       }
     },
-    // fetch data 
+    // fetch data
     getProducts: function getProducts() {
       var _this2 = this;
 
-      axios.get('products/all').then(function (response) {
+      axios.get("products/all").then(function (response) {
         _this2.items = response.data.data; // Set the initial number of items
 
         _this2.totalRows = _this2.items.length;
         _this2.dataLoaded = true;
       })["catch"](function (error) {
-        _this2.makeToast('Error', 'Could not load products, error: ' + error.response.status, 'danger');
+        _this2.makeToast("Error", "Could not load products, error: " + error.response.status, "danger");
       });
     },
-    // fetch categories 
+    // fetch categories
     getCategories: function getCategories() {
       var _this3 = this;
 
-      axios.get('categories/all').then(function (response) {
+      axios.get("categories/all").then(function (response) {
         _this3.categories = response.data.data;
       })["catch"](function (error) {
-        _this3.makeToast('Error', 'Could not load categories, error: ' + error.response.status, 'danger');
+        _this3.makeToast("Error", "Could not load categories, error: " + error.response.status, "danger");
       });
     },
     // delete data
@@ -3198,24 +3532,24 @@ __webpack_require__.r(__webpack_exports__);
       var _this4 = this;
 
       Swal.fire({
-        title: 'Are you sure?',
+        title: "Are you sure?",
         text: "You won't be able to revert this!",
-        icon: 'warning',
+        icon: "warning",
         showCancelButton: true,
-        confirmButtonColor: '#0080FF',
-        cancelButtonColor: '#FF2645',
-        confirmButtonText: 'Yes',
+        confirmButtonColor: "#0080FF",
+        cancelButtonColor: "#FF2645",
+        confirmButtonText: "Yes",
         focusCancel: true
       }).then(function (result) {
         if (result.value) {
-          axios["delete"]('product/delete/' + id).then(function (response) {
+          axios["delete"]("product/delete/" + id).then(function (response) {
             if (response.status == 200) {
-              _this4.makeToast('Deleted', 'Product Deleted', 'success');
+              _this4.makeToast("Deleted", "Product Deleted", "success");
 
               _this4.getProducts();
             }
           })["catch"](function (error) {
-            _this4.makeToast('Error', 'Something went wrong, error: ' + error.response.status, 'danger');
+            _this4.makeToast("Error", "Something went wrong, error: " + error.response.status, "danger");
           });
         }
       });
@@ -3224,20 +3558,20 @@ __webpack_require__.r(__webpack_exports__);
     updateStatus: function updateStatus(id, status) {
       var _this5 = this;
 
-      var _status = 'visible';
+      var _status = "visible";
 
-      if (status == 'visible') {
-        _status = 'hidden';
+      if (status == "visible") {
+        _status = "hidden";
       }
 
-      axios.put('product_status/update/' + _status + '/' + id).then(function (response) {
+      axios.put("product_status/update/" + _status + "/" + id).then(function (response) {
         if (response.status == 200) {
-          _this5.makeToast('Status Changed', 'Product Status has been changed', 'success');
+          _this5.makeToast("Status Changed", "Product Status has been changed", "success");
 
           _this5.getProducts();
         }
       })["catch"](function (error) {
-        _this5.makeToast('Error', 'Something went wrong, error: ' + error.response.status, 'danger');
+        _this5.makeToast("Error", "Something went wrong, error: " + error.response.status, "danger");
       });
     },
     // Trigger pagination to update the number of buttons/pages due to filtering
@@ -3324,22 +3658,128 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['currency'],
+  props: ["currency"],
   data: function data() {
     return {
       categories: [],
       TotalStore: _TotalStore__WEBPACK_IMPORTED_MODULE_0__["default"],
-      search: ''
+      search: "",
+      productlist: "",
+      prodcutId: "",
+      prodcutName: "",
+      prodcutPrice: "",
+      prodcutDes: "",
+      prodcutImage: ""
     };
   },
   methods: {
     makeToast: function makeToast() {
-      this.$bvToast.toast('added to cart', {
+      this.$bvToast.toast("added to cart", {
         noCloseButton: true,
-        toaster: 'b-toaster-bottom-center',
-        variant: 'success',
+        toaster: "b-toaster-bottom-center",
+        variant: "success",
         autoHideDelay: 200,
         solid: true,
         appendToast: true
@@ -3348,16 +3788,21 @@ __webpack_require__.r(__webpack_exports__);
     getCategories: function getCategories() {
       var _this = this;
 
-      axios.get('menu/products').then(function (response) {
+      axios.get("menu/products").then(function (response) {
         _this.categories = response.data.data;
       })["catch"](function (error) {//this.makeToast('Error','Could not load categories, error: '+ error.response.status, 'danger')
       });
     },
-    addToCart: function addToCart(product) {
+    addToCart: function addToCart(product, isModal) {
       var _this2 = this;
 
-      var qtyInput = document.getElementById('qty' + product.id);
-      axios.get('cart/store/' + product.id + '/' + qtyInput.value).then(function (response) {
+      var qtyInput = document.getElementById("qty" + product.id);
+
+      if (isModal) {
+        qtyInput = document.getElementById("qty-modal" + product.id);
+      }
+
+      axios.get("cart/store/" + product.id + "/" + qtyInput.value).then(function (response) {
         if (response.status == 200) {
           _this2.makeToast();
 
@@ -3366,15 +3811,38 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {//this.makeToast('Error','Could not load categories, error: '+ error.response.status, 'danger')
       });
     },
-    increment: function increment(product) {
-      var qtyInput = document.getElementById('qty' + product.id);
-      var priceText = document.getElementById('price' + product.id);
+    showModal: function showModal(product) {
+      this.productlist = product;
+      this.prodcutId = product.id;
+      this.prodcutName = product.name;
+      this.prodcutPrice = product.price;
+      this.prodcutDes = product.des;
+      this.prodcutImage = product.image;
+      this.$refs["product-modal"].show();
+    },
+    hideModal: function hideModal() {
+      this.$refs["product-modal"].hide();
+    },
+    increment: function increment(product, isModal) {
+      var qtyInput = document.getElementById("qty" + product.id);
+      var priceText = document.getElementById("price" + product.id);
+
+      if (isModal) {
+        qtyInput = document.getElementById("qty-modal" + product.id);
+        priceText = document.getElementById("price-modal" + product.id);
+      }
+
       qtyInput.value++;
       priceText.innerHTML = parseFloat(product.price) * parseInt(qtyInput.value);
     },
-    decrement: function decrement(product) {
-      var qtyInput = document.getElementById('qty' + product.id);
-      var priceText = document.getElementById('price' + product.id);
+    decrement: function decrement(product, isModal) {
+      var qtyInput = document.getElementById("qty" + product.id);
+      var priceText = document.getElementById("price" + product.id);
+
+      if (isModal) {
+        qtyInput = document.getElementById("qty-modal" + product.id);
+        priceText = document.getElementById("price-modal" + product.id);
+      }
 
       if (qtyInput.value >= 2) {
         qtyInput.value--;
@@ -3382,7 +3850,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     getTotal: function getTotal() {
-      axios.get('total').then(function (response) {
+      axios.get("total").then(function (response) {
         _TotalStore__WEBPACK_IMPORTED_MODULE_0__["default"].data.total = response.data;
       })["catch"](function (error) {//this.makeToast('Error','Could not load categories, error: '+ error.response.status, 'danger')
       });
@@ -3472,19 +3940,39 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['user_role'],
+  props: ["user_role"],
   data: function data() {
     return {
       form: {},
       items: [],
       fields: [{
-        key: 'name',
-        label: '',
+        key: "name",
+        label: "",
         sortable: false
       }, {
-        key: 'input',
-        label: '',
+        key: "input",
+        label: "",
         sortable: false
       }],
       totalRows: 0,
@@ -3508,17 +3996,17 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var jsonData = this.form;
-      axios.put('settings/update', jsonData).then(function (response) {
+      axios.put("settings/update", jsonData).then(function (response) {
         if (response.status == 200) {
-          _this.makeToast('Changes saved', 'Saved', 'success');
+          _this.makeToast("Changes saved", "Saved", "success");
         }
       })["catch"](function (error) {
-        _this.makeToast('Error', 'Something went wrong, error: ' + error.response.status, 'danger');
+        _this.makeToast("Error", "Something went wrong, error: " + error.response.status, "danger");
       });
     },
-    // fetch data 
+    // fetch data
     getSettings: function getSettings() {
-      axios.get('settings/all').then(function (response) {
+      axios.get("settings/all").then(function (response) {
         var _this2 = this;
 
         this.items = response.data.data;
@@ -3531,7 +4019,7 @@ __webpack_require__.r(__webpack_exports__);
       }.bind(this));
     },
     capitalizeFirstLetter: function capitalizeFirstLetter(string) {
-      return string.charAt(0).toUpperCase() + string.slice(1).replace('_', ' ');
+      return string.charAt(0).toUpperCase() + string.slice(1).replace("_", " ");
     },
     // Trigger pagination to update the number of buttons/pages due to filtering
     onFiltered: function onFiltered(filteredItems) {
@@ -3569,7 +4057,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     getTotal: function getTotal() {
-      axios.get('total').then(function (response) {
+      axios.get("total").then(function (response) {
         _TotalStore__WEBPACK_IMPORTED_MODULE_0__["default"].data.total = response.data;
       })["catch"](function (error) {//this.makeToast('Error','Could not load categories, error: '+ error.response.status, 'danger')
       });
@@ -82510,7 +82998,7 @@ var render = function() {
                         _c(
                           "h4",
                           { staticClass: "mb-0" },
-                          [_c("b-icon-images"), _vm._v(" Banners ")],
+                          [_c("b-icon-images"), _vm._v("Banners\n          ")],
                           1
                         )
                       ]),
@@ -82594,7 +83082,7 @@ var render = function() {
                               }
                             }
                           },
-                          [_c("b-icon-trash"), _vm._v(" Delete")],
+                          [_c("b-icon-trash"), _vm._v("Delete\n        ")],
                           1
                         )
                       : _vm._e()
@@ -82799,7 +83287,7 @@ var render = function() {
       ? _c(
           "div",
           [
-            _c("h3", [_vm._v(" Your Order")]),
+            _c("h3", [_vm._v("Your Order")]),
             _vm._v(" "),
             _c("b-table", {
               attrs: {
@@ -82905,7 +83393,7 @@ var render = function() {
                               }
                             }
                           },
-                          [_c("b-icon-trash"), _vm._v(" Remove")],
+                          [_c("b-icon-trash"), _vm._v("Remove\n        ")],
                           1
                         )
                       ]
@@ -82914,7 +83402,7 @@ var render = function() {
                 ],
                 null,
                 false,
-                3351851150
+                2899896988
               )
             }),
             _vm._v(" "),
@@ -82932,7 +83420,10 @@ var render = function() {
                         staticClass: "btn btn-danger btn-lg w-100",
                         attrs: { href: "checkout" }
                       },
-                      [_vm._v("Checkout "), _c("b-icon-arrow-right-circle")],
+                      [
+                        _vm._v("\n          Checkout\n          "),
+                        _c("b-icon-arrow-right-circle")
+                      ],
                       1
                     )
                   ],
@@ -83005,7 +83496,10 @@ var render = function() {
                         _c(
                           "h4",
                           { staticClass: "mb-0" },
-                          [_c("b-icon-tag-fill"), _vm._v(" Categories")],
+                          [
+                            _c("b-icon-tag-fill"),
+                            _vm._v("Categories\n          ")
+                          ],
                           1
                         )
                       ]),
@@ -83049,7 +83543,7 @@ var render = function() {
               _c(
                 "b-col",
                 [
-                  _vm._v("\n          Show "),
+                  _vm._v("\n        Show\n        "),
                   _c("b-form-select", {
                     staticClass: "form-control w-25",
                     attrs: {
@@ -83065,7 +83559,7 @@ var render = function() {
                       expression: "perPage"
                     }
                   }),
-                  _vm._v(" entries\n        ")
+                  _vm._v("entries\n      ")
                 ],
                 1
               ),
@@ -83084,7 +83578,7 @@ var render = function() {
                   _c("div", { staticClass: "input-group-prepend" }, [
                     _c(
                       "div",
-                      { staticClass: "input-group-text bg-transparent " },
+                      { staticClass: "input-group-text bg-transparent" },
                       [_c("i", { staticClass: "fas fa-search" })]
                     )
                   ]),
@@ -83156,7 +83650,7 @@ var render = function() {
                               }
                             }
                           },
-                          [_c("b-icon-play-fill"), _vm._v(" Paused")],
+                          [_c("b-icon-play-fill"), _vm._v("Paused\n        ")],
                           1
                         )
                       : _vm._e(),
@@ -83176,7 +83670,7 @@ var render = function() {
                               }
                             }
                           },
-                          [_c("b-icon-pause-fill"), _vm._v(" Pause")],
+                          [_c("b-icon-pause-fill"), _vm._v("Pause\n        ")],
                           1
                         )
                       : _vm._e()
@@ -83203,7 +83697,10 @@ var render = function() {
                               }
                             }
                           },
-                          [_c("b-icon-pencil-square"), _vm._v(" Edit")],
+                          [
+                            _c("b-icon-pencil-square"),
+                            _vm._v("Edit\n        ")
+                          ],
                           1
                         )
                       : _vm._e()
@@ -83226,7 +83723,7 @@ var render = function() {
                               }
                             }
                           },
-                          [_c("b-icon-trash"), _vm._v(" Delete")],
+                          [_c("b-icon-trash"), _vm._v("Delete\n        ")],
                           1
                         )
                       : _vm._e()
@@ -83809,7 +84306,7 @@ var render = function() {
                         _c(
                           "h4",
                           { staticClass: "mb-0" },
-                          [_c("b-icon-inbox"), _vm._v(" Orders ")],
+                          [_c("b-icon-inbox"), _vm._v("Orders\n          ")],
                           1
                         )
                       ]),
@@ -83828,7 +84325,10 @@ var render = function() {
                                 }
                               }
                             },
-                            [_c("b-icon-bootstrap-reboot"), _vm._v(" Refresh")],
+                            [
+                              _c("b-icon-bootstrap-reboot"),
+                              _vm._v("Refresh\n          ")
+                            ],
                             1
                           )
                         ],
@@ -83852,7 +84352,7 @@ var render = function() {
               _c(
                 "b-col",
                 [
-                  _vm._v("\n        Show "),
+                  _vm._v("\n        Show\n        "),
                   _c("b-form-select", {
                     staticClass: "form-control w-25",
                     attrs: {
@@ -83868,7 +84368,7 @@ var render = function() {
                       expression: "perPage"
                     }
                   }),
-                  _vm._v(" entries\n      ")
+                  _vm._v("entries\n      ")
                 ],
                 1
               ),
@@ -83887,7 +84387,7 @@ var render = function() {
                   _c("div", { staticClass: "input-group-prepend" }, [
                     _c(
                       "div",
-                      { staticClass: "input-group-text bg-transparent " },
+                      { staticClass: "input-group-text bg-transparent" },
                       [_c("i", { staticClass: "fas fa-search" })]
                     )
                   ]),
@@ -83950,7 +84450,11 @@ var render = function() {
                           { attrs: { variant: "warning" } },
                           [
                             _c("b-icon-stopwatch"),
-                            _vm._v(" " + _vm._s(row.item.order_status))
+                            _vm._v(
+                              "\n          " +
+                                _vm._s(row.item.order_status) +
+                                "\n        "
+                            )
                           ],
                           1
                         )
@@ -83960,7 +84464,11 @@ var render = function() {
                           { attrs: { variant: "success" } },
                           [
                             _c("b-icon-check-circle"),
-                            _vm._v(" " + _vm._s(row.item.order_status))
+                            _vm._v(
+                              "\n          " +
+                                _vm._s(row.item.order_status) +
+                                "\n        "
+                            )
                           ],
                           1
                         )
@@ -83969,7 +84477,11 @@ var render = function() {
                           { attrs: { variant: "danger" } },
                           [
                             _c("b-icon-x-circle"),
-                            _vm._v(" " + _vm._s(row.item.order_status))
+                            _vm._v(
+                              "\n          " +
+                                _vm._s(row.item.order_status) +
+                                "\n        "
+                            )
                           ],
                           1
                         )
@@ -83989,7 +84501,7 @@ var render = function() {
                           target: "_blank"
                         }
                       },
-                      [_c("b-icon-eye"), _vm._v(" View")],
+                      [_c("b-icon-eye"), _vm._v("View\n        ")],
                       1
                     )
                   ]
@@ -84011,7 +84523,7 @@ var render = function() {
                               }
                             }
                           },
-                          [_c("b-icon-trash"), _vm._v(" Delete")],
+                          [_c("b-icon-trash"), _vm._v("Delete\n        ")],
                           1
                         )
                       : _vm._e()
@@ -84103,7 +84615,10 @@ var render = function() {
                         _c(
                           "h4",
                           { staticClass: "mb-0" },
-                          [_c("b-icon-archive"), _vm._v(" Products")],
+                          [
+                            _c("b-icon-archive"),
+                            _vm._v("Products\n          ")
+                          ],
                           1
                         )
                       ]),
@@ -84147,7 +84662,7 @@ var render = function() {
               _c(
                 "b-col",
                 [
-                  _vm._v("\n        Show "),
+                  _vm._v("\n        Show\n        "),
                   _c("b-form-select", {
                     staticClass: "form-control w-25",
                     attrs: {
@@ -84163,7 +84678,7 @@ var render = function() {
                       expression: "perPage"
                     }
                   }),
-                  _vm._v(" entries\n      ")
+                  _vm._v("entries\n      ")
                 ],
                 1
               ),
@@ -84182,7 +84697,7 @@ var render = function() {
                   _c("div", { staticClass: "input-group-prepend" }, [
                     _c(
                       "div",
-                      { staticClass: "input-group-text bg-transparent " },
+                      { staticClass: "input-group-text bg-transparent" },
                       [_c("i", { staticClass: "fas fa-search" })]
                     )
                   ]),
@@ -84278,7 +84793,7 @@ var render = function() {
                               }
                             }
                           },
-                          [_c("b-icon-play-fill"), _vm._v(" Paused")],
+                          [_c("b-icon-play-fill"), _vm._v("Paused\n        ")],
                           1
                         )
                       : _vm._e(),
@@ -84298,7 +84813,7 @@ var render = function() {
                               }
                             }
                           },
-                          [_c("b-icon-pause-fill"), _vm._v(" Pause")],
+                          [_c("b-icon-pause-fill"), _vm._v("Pause\n        ")],
                           1
                         )
                       : _vm._e()
@@ -84321,7 +84836,10 @@ var render = function() {
                               }
                             }
                           },
-                          [_c("b-icon-pencil-square"), _vm._v(" Edit")],
+                          [
+                            _c("b-icon-pencil-square"),
+                            _vm._v("Edit\n        ")
+                          ],
                           1
                         )
                       : _vm._e()
@@ -84344,7 +84862,7 @@ var render = function() {
                               }
                             }
                           },
-                          [_c("b-icon-trash"), _vm._v(" Delete")],
+                          [_c("b-icon-trash"), _vm._v("Delete\n        ")],
                           1
                         )
                       : _vm._e()
@@ -84536,13 +85054,23 @@ var render = function() {
                           staticClass: "mt-3",
                           attrs: {
                             id: "input-group-2",
-                            label: "Product name:",
+                            label:
+                              "Product Name: " + _vm.nameTextLength + "/255",
                             "label-for": "input-name"
                           }
                         },
                         [
                           _c("b-form-input", {
-                            attrs: { id: "input-name", required: "" },
+                            attrs: {
+                              id: "input-name",
+                              maxlength: "255",
+                              required: ""
+                            },
+                            on: {
+                              keyup: function($event) {
+                                _vm.nameTextLength = _vm.form.name.length
+                              }
+                            },
                             model: {
                               value: _vm.form.name,
                               callback: function($$v) {
@@ -84591,13 +85119,22 @@ var render = function() {
                         {
                           attrs: {
                             id: "input-group-2",
-                            label: "Description",
+                            label: "Description: " + _vm.desTextLength + "/255",
                             "label-for": "input-des"
                           }
                         },
                         [
                           _c("b-form-textarea", {
-                            attrs: { id: "input-des", rows: "2" },
+                            attrs: {
+                              id: "input-des",
+                              rows: "4",
+                              maxlength: "255"
+                            },
+                            on: {
+                              keyup: function($event) {
+                                _vm.desTextLength = _vm.form.des.length
+                              }
+                            },
                             model: {
                               value: _vm.form.des,
                               callback: function($$v) {
@@ -84719,7 +85256,7 @@ var render = function() {
             },
             [
               _c("span", { staticClass: "text-light" }, [
-                _vm._v(" " + _vm._s(category.name) + " ")
+                _vm._v(_vm._s(category.name))
               ])
             ]
           )
@@ -84744,11 +85281,11 @@ var render = function() {
                   [_vm._v("Search")]
                 ),
                 _vm._v(" "),
-                _c("div", { staticClass: "input-group mb-2  mt-4" }, [
+                _c("div", { staticClass: "input-group mb-2 mt-4" }, [
                   _c("div", { staticClass: "input-group-prepend" }, [
                     _c(
                       "div",
-                      { staticClass: "input-group-text bg-transparent " },
+                      { staticClass: "input-group-text bg-transparent" },
                       [_c("i", { staticClass: "fas fa-search" })]
                     )
                   ]),
@@ -84805,12 +85342,26 @@ var render = function() {
                 },
                 [
                   _c("div", { staticClass: "card product-card shadow-sm" }, [
-                    _c("a", { attrs: { href: "product/" + product.id } }, [
-                      _c("img", {
-                        staticClass: "card-img-top product-img",
-                        attrs: { src: product.image, alt: "image" }
-                      })
-                    ]),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "img-container",
+                        on: {
+                          click: function($event) {
+                            return _vm.showModal(product)
+                          }
+                        }
+                      },
+                      [
+                        _c("img", {
+                          staticClass:
+                            "card-img-top product-img img-hover cursor-pointer",
+                          attrs: { src: product.image, alt: "image" }
+                        }),
+                        _vm._v(" "),
+                        _vm._m(0, true)
+                      ]
+                    ),
                     _vm._v(" "),
                     _c("div", { staticClass: "card-body" }, [
                       _c("h5", { staticClass: "card-title" }, [
@@ -84834,7 +85385,7 @@ var render = function() {
                                 staticClass: "btn btn-primary btn-circle p-0",
                                 on: {
                                   click: function($event) {
-                                    return _vm.decrement(product)
+                                    return _vm.decrement(product, false)
                                   }
                                 }
                               },
@@ -84862,7 +85413,7 @@ var render = function() {
                                 staticClass: "btn btn-primary btn-circle p-0",
                                 on: {
                                   click: function($event) {
-                                    return _vm.increment(product)
+                                    return _vm.increment(product, false)
                                   }
                                 }
                               },
@@ -84879,7 +85430,11 @@ var render = function() {
                                 { attrs: { id: "price" + product.id } },
                                 [_vm._v(_vm._s(product.price))]
                               ),
-                              _vm._v(" " + _vm._s(_vm.currency))
+                              _vm._v(
+                                "\n                  " +
+                                  _vm._s(_vm.currency) +
+                                  "\n                "
+                              )
                             ])
                           ]),
                           _vm._v(" "),
@@ -84892,11 +85447,11 @@ var render = function() {
                                 attrs: { id: product.id },
                                 on: {
                                   click: function($event) {
-                                    return _vm.addToCart(product)
+                                    return _vm.addToCart(product, false)
                                   }
                                 }
                               },
-                              [_vm._v("Add to cart ")]
+                              [_vm._v("Add to cart")]
                             )
                           ])
                         ])
@@ -84909,12 +85464,138 @@ var render = function() {
             0
           )
         ])
-      })
+      }),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          ref: "product-modal",
+          attrs: {
+            size: "lg",
+            centered: "",
+            "hide-footer": "",
+            title: _vm.prodcutName
+          }
+        },
+        [
+          _c(
+            "b-row",
+            [
+              _c("b-col", { attrs: { cols: "5" } }, [
+                _c("img", {
+                  staticClass: "product-img shadow",
+                  attrs: { src: _vm.prodcutImage, alt: _vm.prodcutName }
+                })
+              ]),
+              _vm._v(" "),
+              _c("b-col", { attrs: { cols: "7" } }, [
+                _c("p", [_vm._v(_vm._s(_vm.prodcutDes))]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticStyle: { position: "absolute", bottom: "0" } },
+                  [
+                    _c("div", { staticClass: "row text-center" }, [
+                      _c("div", { staticClass: "col" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary btn-circle p-0",
+                            on: {
+                              click: function($event) {
+                                return _vm.decrement(_vm.productlist, true)
+                              }
+                            }
+                          },
+                          [_c("i", { staticClass: "fas fa-minus" })]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col" }, [
+                        _c("input", {
+                          staticClass: "count h4 qty-input text-center",
+                          attrs: {
+                            type: "number",
+                            min: "1",
+                            value: "1",
+                            id: "qty-modal" + _vm.prodcutId,
+                            disabled: ""
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary btn-circle p-0",
+                            on: {
+                              click: function($event) {
+                                return _vm.increment(_vm.productlist, true)
+                              }
+                            }
+                          },
+                          [_c("i", { staticClass: "fas fa-plus" })]
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-4" }, [
+                        _c("p", { staticClass: "h5 mt-4" }, [
+                          _c(
+                            "span",
+                            { attrs: { id: "price-modal" + _vm.prodcutId } },
+                            [_vm._v(_vm._s(_vm.prodcutPrice))]
+                          ),
+                          _vm._v(
+                            "\n                " +
+                              _vm._s(_vm.currency) +
+                              "\n              "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-8" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass:
+                              "btn btn-danger w-100 mt-3 border-0 add-to-cart",
+                            attrs: { id: _vm.prodcutId },
+                            on: {
+                              click: function($event) {
+                                return _vm.addToCart(_vm.productlist, true)
+                              }
+                            }
+                          },
+                          [_vm._v("Add to cart")]
+                        )
+                      ])
+                    ])
+                  ]
+                )
+              ])
+            ],
+            1
+          )
+        ],
+        1
+      )
     ],
     2
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "img-icon" }, [
+      _c("i", { staticClass: "fas fa-search-plus fa-2x" })
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -84954,7 +85635,7 @@ var render = function() {
                       _c("b-col", [
                         _c("h4", { staticClass: "mb-0" }, [
                           _c("i", { staticClass: "fas fa-cog" }),
-                          _vm._v(" Store Settings  ")
+                          _vm._v(" Store Settings\n          ")
                         ])
                       ]),
                       _vm._v(" "),
@@ -84971,7 +85652,7 @@ var render = function() {
                                 },
                                 [
                                   _c("i", { staticClass: "far fa-save" }),
-                                  _vm._v(" Save Changes")
+                                  _vm._v(" Save Changes\n          ")
                                 ]
                               )
                             : _vm._e()
@@ -84999,7 +85680,7 @@ var render = function() {
                   _c(
                     "b-link",
                     { staticClass: "text-primary", attrs: { href: "banners" } },
-                    [_c("b-icon-images"), _vm._v(" Banners Manager")],
+                    [_c("b-icon-images"), _vm._v("Banners Manager\n        ")],
                     1
                   )
                 ],
@@ -85020,7 +85701,7 @@ var render = function() {
                   _c("div", { staticClass: "input-group-prepend" }, [
                     _c(
                       "div",
-                      { staticClass: "input-group-text bg-transparent " },
+                      { staticClass: "input-group-text bg-transparent" },
                       [_c("i", { staticClass: "fas fa-search" })]
                     )
                   ]),
@@ -85076,8 +85757,7 @@ var render = function() {
                   return [
                     _c("p", [
                       _vm._v(
-                        "\n\n    " +
-                          _vm._s(row.item.id) +
+                        _vm._s(row.item.id) +
                           " - " +
                           _vm._s(_vm.capitalizeFirstLetter(row.item.name))
                       )

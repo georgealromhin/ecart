@@ -1,10 +1,6 @@
 @extends('admin.layout')
 @section('title', 'Banners')
 
-@section('header')
-
-@endsection
-
 @section('content')
 
     <div class="d-flex" id="wrapper">
@@ -16,11 +12,10 @@
             </div>
         </div>
     </div>
-    
+
 @endsection
 
 @section('script')
-<script type="text/javascript" src="{{asset('js/easy_notify.js')}}"></script>   
-<script type="text/javascript" src="{{asset('js/notification.js')}}"></script>   
-
+    <script type="text/javascript" src="{{ asset('js/easy_notify.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/notification.js') }}"></script>
 @endsection
